@@ -1,0 +1,11 @@
+.my-card{
+    background: red;
+}
+.spinner{
+    height: 20px;
+    width: 20px;
+    border: 2px solid;
+    border-color: black transparent black transparent;
+    border-radius: 50%;
+    animation: spin 1.4s linear infinite;
+  }

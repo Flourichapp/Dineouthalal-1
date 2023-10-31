@@ -1,0 +1,67 @@
+.filter {
+  margin: 10px 0px;
+  font-size: 14px;
+}
+
+.filter select {
+  padding: 5px;
+  font-size: 14px;
+}
+
+.timefilter {
+  display: inline-block;
+  background-color: #6aa84f;
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin-left: 10px;
+}
+
+.timefilter a.remove {
+  display: inline-block;
+  margin-left: 15px;
+  font-weight: bold;
+  text-decoration: none;
+  color: white;
+}
+
+.calendar-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.calendar-section .navigator {
+  width: 190px;
+}
+
+.calendar-section .content {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.booking-status {
+  padding: 3px 10px;
+  margin: 2px;
+  border-radius: 4px;
+  color: white;
+  font-weight: 700;
+}
+
+.booking_status-pending {
+  background-color: #ef7b7b;
+}
+
+.booking_status-approved {
+  background-color: #5b59ff;
+}
+
+.booking_status-closed {
+  background-color: gray;
+}
+/*# sourceMappingURL=booking.component.css.map */

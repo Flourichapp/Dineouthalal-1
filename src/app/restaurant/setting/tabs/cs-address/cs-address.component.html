@@ -1,0 +1,67 @@
+<p class="p-3">Please Type main city, and drag <b>Marker</b> for more detail.
+    this will give other info for your address.You can refine by typing detail</p>
+<div class="p-3">
+    <form [formGroup]="infoForm">
+        <div class="row">
+            <div class="col-lg-4 col-md-4">
+                <div>
+                    <div class="form-group">
+                        <label for="venue">City</label>
+                        <input type="text" class="form-control" placeholder="Location" aria-label="Location" matInput
+                            [matAutocomplete]="auto" [formControl]="city">
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
+                            (optionSelected)="onSelectionChange($event)">
+                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                {{option}}
+                            </mat-option>
+                        </mat-autocomplete>
+                    </div>
+                    <div class="form-group">
+                        <label for="address1">Address 1</label>
+                        <input type="text" formControlName="address1" class="form-control"  (change)="findLatLongByAddress($event.target.value)"  />
+                    </div>
+                    <div class="form-group">
+                        <label for="address2">Address 2</label>
+                        <input type="text" formControlName="address2" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="postalcode">Postal Code</label>
+                        <input type="text" formControlName="postalcode" class="form-control" (change)="findLatLongByAddress($event.target.value)"  />
+                    </div>
+                    <div class="form-group">
+                        <label for="lat">Latitude</label>
+                        <input type="text" formControlName="lat" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label for="lon">Longitude</label>
+                        <input type="text" formControlName="lng" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <agm-map [latitude]="f.lat.value" [longitude]="f.lng.value" [zoom]="zoom"
+                    (mapClick)="mapClicked($event)" (mapReady)="mapReady($event)" [fullscreenControl]='true' [mapTypeControl]='true'>
+
+                    <agm-marker (markerClick)="clickedMarker()" [latitude]="f.lat.value" [longitude]="f.lng.value"
+                        [markerDraggable]="true" (dragEnd)="markerDragEnd($event)">
+
+                        <agm-info-window>
+                            <strong>InfoWindow content</strong>
+                        </agm-info-window>
+
+                    </agm-marker>
+                    <!-- <agm-circle [latitude]="marker.lat + 0.3" [longitude]="marker.lng" 
+                        [radius]="5000"
+                        [fillColor]="'red'"
+                        [circleDraggable]="true"
+                        [editable]="true">
+                    </agm-circle> -->
+
+                </agm-map>
+            </div>
+        </div>
+        <div class="">
+            <button class="btn btn-primary rounded-pill float-right" (click)="onSubmit()">Save</button>
+        </div>
+    </form>
+</div>

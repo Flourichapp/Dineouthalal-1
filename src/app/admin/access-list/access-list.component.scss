@@ -1,0 +1,30 @@
+.inputContaienr{
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 0px;
+}
+a:focus, input:focus {
+    border-color: transparent;
+    outline: 1px solid;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    height: 200px;
+    overflow: auto;
+  }
+  
+  li {
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  li:hover {
+    background-color: #f0f0f0;
+  }
+  
+  li.active {
+    background-color: #007bff;
+    color: #fff;
+  }

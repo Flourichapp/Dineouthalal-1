@@ -1,0 +1,63 @@
+.user_type {
+  width: 50%;
+  text-align: center;
+}
+
+.signupFormBanner {
+  position: absolute;
+}
+
+.signupContainer {
+  margin: 100px 0px;
+  background: white;
+}
+
+.signupContainer h1 {
+  font-size: 38px;
+}
+
+.signupContainer p {
+  font-size: 16px;
+}
+
+.signupContainer .loginText {
+  color: #EF2F24;
+}
+
+.signupContainer .loginText:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.signupContainer .bottomText {
+  font-size: 1rem;
+}
+
+.signupContainer .bottomLabel {
+  color: #EF2F24;
+}
+
+.signupContainer .bottomLabel:hover {
+  cursor: pointer;
+  opacity: 0.9;
+}
+
+@media (max-width: 992px) {
+  .signupContainer {
+    margin: 1px 0px;
+    border-top: 1px solid;
+  }
+  .signupContainer .bottomText {
+    font-size: 14px;
+  }
+  .signupContainer h1 {
+    font-size: 30px;
+  }
+  .signupContainer p {
+    font-size: 14px;
+  }
+  .signupFormBanner {
+    display: none;
+  }
+}
+/*# sourceMappingURL=register.component.css.map */

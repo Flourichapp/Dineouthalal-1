@@ -1,0 +1,192 @@
+<div class="row w-100 mx-0">
+    <div class="col-lg-12 mx-auto bg-light p-3 subscribtionsContainer">
+        <h3>Subscription</h3>
+
+        <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="blogSlides" (init)="slickInit($event)"
+        (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
+        
+            <div ngxSlickItem   *ngFor="let product of products |slice:0:4 let i = index"
+            
+            
+            class="col-lg-12 my-3">
+          <div 
+          [ngClass]="[stripe_customer_id ? 'packageCardBlur' : 'packageCard',   MyProductId === product.product_id ? 'packageCard packageCardActive' : 'packageCard']"
+          >
+          
+                    <div class="packageTop">
+                        <h1>{{ product.title }}</h1>
+                        <h2>
+                            <span>&pound;</span>
+                            {{ (product.selectedPriceOption === 'monthly' ? product.price_monthly :
+                            product.price_yearly)?.unit_amount_decimal / 100 || 0 }}
+                            /
+                            <label>{{ (product.selectedPriceOption === 'monthly' ? product.price_monthly :
+                                product.price_yearly)?.recurring.interval || '' }}</label>
+                        </h2>
+                    
+
+                        <h3>+<span>&pound;</span> 1 per head per booking</h3>
+                        <h3>billed annually save 15%</h3>
+                        <div class="priceBtnContainer">
+                            <button 
+                              [ngClass]="product.selectedPriceOption === 'monthly' ? 'PriceBtn' : 'PriceBtn1'"
+                              (click)="updateSelectedPrice(product, 'monthly')" (click)="changePriceMonthly()">Monthly
+                            </button>
+                            <button 
+                            [ngClass]="product.selectedPriceOption === 'yearly' ? 'PriceBtn' : 'PriceBtn1'"
+                            (click)="updateSelectedPrice(product, 'yearly')" (click)="changePriceYearly()">Yearly</button>
+                        </div>
+                    </div>
+                    <h4>{{ product.description }}</h4>
+                    <div *ngFor="let feature of product.features">
+                        <label class="custom-checkbox">
+                            <input type="checkbox" [checked]="true" disabled>
+                            <span class="checkmark"></span>
+                            {{ feature }}
+                        </label><br>
+                    </div>
+                 
+                    <!-- Display the metadata list -->
+                    <div *ngIf="product?.features_not_include">
+                        <div *ngFor="let nofeature of product.features_not_include">
+
+
+                        <label class="custom-checkbox">
+                            <input type="checkbox"  disabled>
+                            <span class="checkmark"></span>
+                            {{ nofeature }}
+                        </label><br>
+                        </div>
+                      </div>
+                        <button class="cancelBtn" *ngIf="MyProductId === product.product_id" (click)="openDeleteModal(cancelModal)">Cancel
+                            subscribtions</button>
+
+                    <button *ngIf="MyProductId !== product.product_id" class="SubscriptionBtn" (click)="getSubscription(product,paymentForm)">GET A FREE {{product.price_monthly?.recurring.trial_period_days}}-DAY TRIAL</button>
+                </div>
+
+            </div>
+        </ngx-slick-carousel>
+
+            <div class="col-lg-6 my-3">
+
+
+
+
+
+        </div>
+        <!-- <div class="card-terms-conditon">
+            <h3>Terms and Condition</h3>
+            <ul>
+                <li>Restaurants are required to subscribe to DineOutHalal in order to have their restaurant approved.
+                    The initial 6 months of subscription will be provided free of charge. After this period,
+                    DineOutHalal will apply a monthly fee of <b>{{stripeMonthAmount/100}} GBP</b> or an annual fee of
+                    <b>{{stripeYearAmount/100}} GBP</b>.</li>
+                <li>A charge of <b>1 GBP </b> per user per booking will be deducted from your connected account starting from
+                    the first day after approval. The amount will be deducted automatically.</li>
+
+
+            </ul>
+
+
+        </div> -->
+        <!-- <mat-radio-group [(ngModel)]="monthly_flag" (change)="changePricePlan($event)">
+            <mat-radio-button [disabled]="disableRadio" class="mr-1" color="primary" value="monthly">Monthly
+                (<span>&pound;</span>{{stripeMonthAmount/100}}/month)</mat-radio-button>
+            <mat-radio-button [disabled]="disableRadio" class="ml-1" color="primary" value="yearly">Yearly
+                (<span>&pound;</span>{{stripeYearAmount/100}}/year)
+            </mat-radio-button>
+        </mat-radio-group>
+        <div class="mb-4">
+            <div class="form-check">
+                <label class="form-check-label poppins_regular text-muted">
+                    <input type="checkbox" class="form-check-input">
+                    <i class="input-helper"></i>
+                    I agree to all <label class="termsandConditon">Terms & Conditions</label>
+
+                </label>
+
+            </div>
+            <div *ngIf="!stripe_subscription_id" class="text-right">
+                <h2>Total Amount </h2>
+                <h4> (<span>&pound;</span>{{totalAmount}}/{{duration}})</h4>
+                <button class="btn btn-outline-primary btn__payment pull-right"
+                    (click)="showPaymentForm(paymentForm)">&nbsp;&pound;&nbsp; Pay Now</button>
+            </div>
+            <div class="text-right">
+                <button class="cancelBtn" *ngIf="stripe_subscription_id" (click)="openDeleteModal(cancelModal)">Cancel
+                    subscribtions</button>
+
+            </div>
+        </div>
+    </div> -->
+        <div *ngIf="cardDetails" class="col-lg-12 mx-auto p-3 mt-3">
+            <h2 class="poppins_medium">Payment Method</h2>
+            <div class="col-md-6 col-lg-4 cardDetail mt-3" *ngFor="let item of cardDetails ">
+                <div class="d-flex">
+                    <img *ngIf="item.brand == 'MasterCard'" class="cardIcon" src="/assets/images/icon/mastercard.jpg">
+                    <img *ngIf="item.brand == 'Visa'" class="cardIcon" src="/assets/images/icon/visacard.jpg">
+
+                    <p>**** **** **** {{item.last4}}</p>
+                </div>
+
+                <p>brand: {{item.brand}}</p>
+
+                <p class="mb-0">expire date: {{item.exp_year}}</p>
+
+
+                <!--
+            <p>card no **** **** **** ****{{item.last4}}</p> -->
+
+            </div>
+
+        </div>
+    </div>
+    <ng-template #paymentForm let-modal>
+        <div class="modal-header">
+            <h4 class="modal-title">Stripe Payment</h4>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+<div class="col-12">
+    <div class="row">
+        <div class="col-6">
+            <h1 class="packageName">{{packageName}}</h1>
+            <h3 class="packageTrial">free {{this.trialMonth}} month trial </h3>
+        </div>
+        <div class="col-6 text-right">
+            <h1 class="packageName"><span>&pound;</span> {{amount/100}}</h1>
+            <h3  class="packageTrial">{{subscriptionFlag}} subscribtions </h3>
+            <h4  class="packageDiscount"*ngIf="subscriptionFlag === 'yearly'">15 % discount</h4>
+        </div>
+    </div>
+</div>
+            <app-pay (onUpdate)="stripePaymentCallback($event)"></app-pay>
+        </div>
+    </ng-template>
+    <ng-template #cancelModal let-modal>
+        <div class="modal-header">
+            <h3>Cancel subscribtions</h3>
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body w-100 mx-auto">
+            <div class="text-center">
+                <h2 class="mb-4">Do you want to cancel your subscribtions </h2>
+                <p>Do you realy want to cancel these your subscribtions? This process cannot be undone</p>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" [disabled]="isLoading" class="btn btn-light"
+                (click)="modal.close('Close click')">No</button>
+            <button type="button" [disabled]="isLoading" class="btn  btn-primary" (click)="removeSubscription()">
+                <div *ngIf="isLoading" class="spinner"></div>
+                <div *ngIf="!isLoading">Yes</div>
+            </button>
+
+
+        </div>
+    </ng-template>

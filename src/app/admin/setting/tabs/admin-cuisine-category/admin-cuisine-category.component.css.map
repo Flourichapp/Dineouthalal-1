@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,WAAW,CAAC,GAAG,CAAA;EACX,KAAK,EAAE,GAAG;EACV,WAAW,EAAE,EAAE;CAClB;;AACD,AAAA,MAAM,CAAC,EAAE,CAAC,GAAG,EAAE,MAAM,CAAC,EAAE,CAAC,GAAG,CAAC;EACzB,KAAK,EAAE,KAAK;EACZ,MAAM,EAAE,KAAK;EACb,aAAa,EAAE,GAAG;CACrB",
+    "sources": [
+        "admin-cuisine-category.component.scss"
+    ],
+    "names": [],
+    "file": "admin-cuisine-category.component.css"
+}

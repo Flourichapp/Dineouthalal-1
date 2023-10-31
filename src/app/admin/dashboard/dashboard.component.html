@@ -1,0 +1,133 @@
+<div class="row">  
+  <div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="d-flex flex-row justify-content-between">
+          <h4 class="card-title mb-1">Finance Balance</h4>
+          <mat-button-toggle-group #group="matButtonToggleGroup" appearance="legacy" value="daily" (change)="selectDisplayFlag($event)" class="float-right">
+            <mat-button-toggle value="daily">Daily</mat-button-toggle>
+            <mat-button-toggle value="monthly">Monthly</mat-button-toggle>
+            <mat-button-toggle value="yearly">Yearly</mat-button-toggle>
+          </mat-button-toggle-group>
+        </div>
+       
+        <div class="row">
+          <canvas baseChart 
+          [chartType]="'line'" 
+          [datasets]="areaChartData" 
+          [labels]="areaChartLabels" 
+          [options]="areaChartOptions" 
+          [colors]="areaChartColors"
+          height="100"
+          ></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-4 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h5>Need Approving</h5>
+        <div class="row">
+          <div class="col-8 col-sm-12 col-xl-8 my-auto">
+            <div class="d-flex d-sm-block d-md-flex align-items-center">
+              <h2 class="mb-0">{{total_approving}}</h2>
+              <!-- <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p> -->
+            </div>
+            <!-- <h6 class="text-muted font-weight-normal">11.38% Since last month</h6> -->
+          </div>
+          <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+            <i class="icon-lg mdi mdi-codepen text-primary ml-auto"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h5>Total Restaurants</h5>
+        <div class="row">
+          <div class="col-8 col-sm-12 col-xl-8 my-auto">
+            <div class="d-flex d-sm-block d-md-flex align-items-center">
+              <h2 class="mb-0">{{total_rests}}</h2>
+              <!-- <p class="text-success ml-2 mb-0 font-weight-medium">+8.3%</p> -->
+            </div>
+            <!-- <h6 class="text-muted font-weight-normal"> 9.61% Since last month</h6> -->
+          </div>
+          <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+            <i class="icon-lg mdi mdi-wallet-travel text-danger ml-auto"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-4 grid-margin">
+    <div class="card">
+      <div class="card-body">
+        <h5>Earning</h5>
+        <div class="row">
+          <div class="col-8 col-sm-12 col-xl-8 my-auto">
+            <div class="d-flex d-sm-block d-md-flex align-items-center">
+              <h2 class="mb-0">£&nbsp;{{total_finances}}</h2>
+              <!-- <p class="text-danger ml-2 mb-0 font-weight-medium">-2.1% </p> -->
+            </div>
+            <!-- <h6 class="text-muted font-weight-normal">2.27% Since last month</h6> -->
+          </div>
+          <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+            <i class="icon-lg mdi mdi-monitor text-success ml-auto"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row ">
+  <div class="col-12 grid-margin">
+    <div class="card">
+      <div class="card-body">        
+        <h4 class="card-title">Restaurants Need Approving  
+          <a routerLink="/admin/restaurants" class="float-right">View All</a>
+        </h4>
+        <div class="table-responsive">
+          <table class="table" id="dt1">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th></th>
+                <th>Owner</th>
+                <th>Restaurant Name</th>
+                <th>Paid At</th>
+                <th>Plan</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let r of need_approving; let i = index;">
+                <td class="position-relative">
+                  <div class="my-ribbon" *ngIf="r.new_flag == 1"><span>NEW</span></div>
+                  <span>{{i + 1}}</span>
+                </td>
+                <td>
+                  <img src="{{imageURL}}/{{r.main_logo}}" alt="image" />
+                </td>
+                <td>{{r.first_name}}&nbsp;{{r.last_name}}<br>{{r.email}}<br>{{r.login_type}}</td>
+                <td>
+                  <span>{{r.title}}</span>
+                </td>
+                <td>{{r.paid_date | date}}</td>
+                <td>{{r.plan_flag}}</td>
+                <td>created at:{{r.created_at | date}}<br>updated at:{{r.updated_at | date}}</td>
+               
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

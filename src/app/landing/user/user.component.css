@@ -1,0 +1,475 @@
+::ng-deep .mat-datepicker-panel {
+  z-index: 10000 !important;
+}
+
+.avatar-div {
+  width: 250px;
+  height: 250px;
+  margin-left: auto;
+}
+
+.avatar {
+  border-radius: 50%;
+  border: 1px solid gray;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.image-picker {
+  border-radius: 50%;
+  padding: 8px 10px;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+}
+
+.img-cropper {
+  min-height: 300px !important;
+}
+
+.proBtn {
+  background: -webkit-gradient(linear, left top, left bottom, from(rgba(79, 37, 133, 0.98)), to(rgba(203, 29, 35, 0.99)));
+  background: linear-gradient(rgba(79, 37, 133, 0.98) 0%, rgba(203, 29, 35, 0.99) 100%);
+  height: 56px;
+  position: absolute;
+  top: 264px;
+  border: navajowhite;
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 12px;
+  padding: 0px 30px;
+  color: white;
+  z-index: 2;
+}
+
+.md-datepicker-calendar-pane {
+  z-index: 1200;
+}
+
+.passed-booking {
+  background: #fdff8e;
+}
+
+a.restaurant-item__horizontal {
+  color: gray;
+  -webkit-transition: all 0.3 ease-in-out;
+  transition: all 0.3 ease-in-out;
+}
+
+a.restaurant-item__horizontal:hover {
+  color: rebeccapurple;
+  text-decoration: none;
+}
+
+.delete-btn {
+  position: absolute;
+  z-index: 123;
+  top: 0;
+  right: 0;
+}
+
+.all-bookings {
+  max-height: calc(100vh - 400px);
+  overflow: scroll;
+}
+
+.myProfile {
+  padding: 20px 20px 85px;
+}
+
+.profileHeader {
+  text-align: center;
+  padding: 20px 0px;
+  border-bottom: 1px solid #707070;
+}
+
+.profileHeader h1 {
+  font-size: 38px;
+  margin: 0px;
+}
+
+.profileHeader p {
+  font-size: 28px;
+  margin: 0px;
+}
+
+.profileHeader label {
+  color: #EF2F24;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.bookingCard h1 {
+  font-size: 25px;
+}
+
+.bookingCard {
+  -webkit-box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+          box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  padding: 20px 30px !important;
+  margin: 10px !important;
+}
+
+.myBookingCard {
+  -webkit-box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+          box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  margin: 25px !important;
+}
+
+.myBookingCard .restImg {
+  height: 176px;
+}
+
+.myBookingCard .circle {
+  height: 20px;
+  width: 20px;
+}
+
+.myBookingCard .guest {
+  height: 22px;
+  width: 17px;
+}
+
+.myBookingCard h2 {
+  color: #EF2F24;
+  font-size: 16px;
+}
+
+.myBookingCard p {
+  font-size: 16px;
+}
+
+.myBookingCard .calendar {
+  margin-left: 26px;
+  height: 22px;
+  width: 21px;
+}
+
+.myBookingCard h3 {
+  font-size: 16px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.myBookingCard h4 {
+  font-size: 16px;
+  cursor: pointer;
+  color: #EF2F24;
+}
+
+.myBookingCard .compeltedclr {
+  color: #EF2F24;
+}
+
+.myBookingCard .confirmclr {
+  color: #42B210;
+}
+
+.myBookingCard .pendingClr {
+  color: #B2B912;
+}
+
+.paymentCard {
+  -webkit-box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+          box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  margin: 20px auto !important;
+  padding: 30px;
+  width: 80%;
+  text-align: center;
+}
+
+.paymentCard h1 {
+  font-size: 25px;
+}
+
+.paymentCard p {
+  font-size: 16px;
+}
+
+.paymentCard button {
+  background: #EF2F24;
+  color: white;
+  font-size: 16px;
+  height: 50px;
+  width: 250px;
+  border: none;
+  border-radius: 12px;
+  margin: 24px 0px;
+}
+
+.mybookingDetail {
+  margin: 25px !important;
+}
+
+.mybookingDetail .restImg {
+  height: 176px;
+}
+
+.mybookingDetail .circle {
+  height: 20px;
+  width: 20px;
+}
+
+.mybookingDetail .guest {
+  height: 22px;
+  width: 17px;
+}
+
+.mybookingDetail h2 {
+  color: #EF2F24;
+  font-size: 16px;
+}
+
+.mybookingDetail p {
+  font-size: 16px;
+}
+
+.mybookingDetail .calendar {
+  margin-left: 26px;
+  height: 22px;
+  width: 21px;
+}
+
+.mybookingDetail h3 {
+  font-size: 16px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.mybookingDetail h4 {
+  font-size: 16px;
+  cursor: pointer;
+  color: #EF2F24;
+}
+
+.mybookingDetail .compeltedclr {
+  color: #EF2F24;
+}
+
+.mybookingDetail .confirmclr {
+  color: #42B210;
+}
+
+.mybookingDetail .pendingClr {
+  color: #B2B912;
+}
+
+.mybookingDetail .profileName {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  background: #EF2F24;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 32px;
+  font-family: 'Poppins';
+  font-weight: 900;
+  color: white;
+  margin: auto;
+}
+
+.mybookingDetail button {
+  height: 60px;
+  padding: 0px 45px;
+  background: none;
+  border: none;
+  -webkit-box-shadow: 1px;
+          box-shadow: 1px;
+  -webkit-box-shadow: 0px 0px 2px 2px #e3e3e3;
+          box-shadow: 0px 0px 2px 2px #e3e3e3;
+  font-size: 16px;
+  font-family: 'Poppins';
+  font-weight: 300;
+}
+
+.mybookingDetail .peopleIcon {
+  margin-right: 10px;
+  width: 20px;
+}
+
+.mybookingDetail .innerContainer {
+  width: 80%;
+}
+
+.mybookingDetail textarea {
+  height: 170px;
+  width: 100%;
+  padding: 20px;
+}
+
+.mybookingDetail .sendbutton {
+  background: #EF2F24;
+  color: white;
+  font-size: 16px;
+  height: 50px;
+  width: 250px;
+  border: none;
+  border-radius: 12px;
+  margin: 24px 0px;
+}
+
+.topRatedResturantCard {
+  -webkit-box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.07);
+          box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.07);
+  margin: 20px 10px;
+}
+
+.saveicon {
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
+  cursor: pointer;
+}
+
+.saveiconText {
+  position: absolute;
+  bottom: 15px;
+  left: 30px;
+  color: white;
+  font-size: 14px;
+  margin: 0px;
+}
+
+.photosicon {
+  position: absolute;
+  bottom: 20px;
+  right: 86px;
+}
+
+.photosiconText {
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+  color: white;
+  font-size: 14px;
+  margin: 0px;
+}
+
+.resturantName {
+  font-size: 18px;
+}
+
+.RestaurantDetails {
+  padding: 10px;
+  height: 185px;
+  overflow: hidden;
+}
+
+.RestaurantDetails .ratingbadge {
+  height: 24px;
+  width: 40px;
+  background-color: #5BB638;
+  margin: 0px;
+  text-align: center;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.RestaurantDetails span {
+  color: white;
+  font-size: 11px;
+}
+
+.RestaurantDetails .totalRating {
+  font-size: 11px;
+  color: #727272;
+  margin: 0px 10px;
+}
+
+.RestaurantDetails p {
+  font-size: 13px;
+  color: #727272;
+}
+
+.booknowBtn {
+  background: #F9F9F9;
+  height: 55px;
+  border: none;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px;
+}
+
+.buttonText {
+  font-size: 11px;
+  color: #C23616;
+  margin: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 71%;
+}
+
+.booknow {
+  font-size: 13px;
+  color: #4A9F29;
+  margin: 0px;
+  cursor: pointer;
+}
+
+.markConatiner {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 35%;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.profileDetailContainer {
+  width: 90%;
+  margin: auto;
+}
+
+.profileDetailContainer label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: 15px;
+  font-family: 'Poppins';
+  font-weight: 400;
+}
+
+.profileDetailContainer input {
+  height: 42px;
+  display: block;
+}
+
+.profileDetailContainer span {
+  color: #EF2F24;
+  text-decoration: underline;
+}
+
+@media (max-width: 992px) {
+  .proBtn {
+    display: none;
+  }
+}
+/*# sourceMappingURL=user.component.css.map */

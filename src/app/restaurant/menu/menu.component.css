@@ -1,0 +1,22 @@
+.is-128x128 img {
+  width: 90%;
+  margin-left: 5%;
+}
+
+.table th img, .table td img {
+  width: 70px;
+  height: 70px;
+  border-radius: 10%;
+}
+
+.description {
+  white-space: break-spaces;
+}
+
+h1 {
+  margin: 20px;
+  text-align: center;
+  font-family: poppins;
+  font-weight: 600;
+}
+/*# sourceMappingURL=menu.component.css.map */

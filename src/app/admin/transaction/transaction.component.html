@@ -1,0 +1,30 @@
+<div class="row w-100 mx-0">
+    <div class="col-lg-12 mx-auto bg-light p-3">
+        <h3>All Transacrtions
+            <span class="pull-right mr-1">Total Earning: &pound;{{total}}</span>
+        </h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>User Name</th>
+                    <th>Restuarant Name</th>
+                    <th>Amount</th>
+                    <th>Paid at</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let r of allTrans; let i = index;">
+                    <td><span>{{i + 1}}</span></td>
+                    <td>{{r.user_name}}</td>
+                    <td>{{r.r_name}}</td>
+                    <td>{{r.amount}}</td>
+                    <td>{{r.paid_at | date}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <mat-paginator (page)="handlePageEvent($event)" [length]="all_total" [pageSize]="params.all_pageSize"
+            [pageSizeOptions]="[5, 10, 25, 100]">
+        </mat-paginator>
+    </div>
+</div>

@@ -1,0 +1,191 @@
+<!-- <div class="row">
+
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex flex-row justify-content-between">
+                    <h4 class="card-title mb-1">Diagram for Creators and Customers</h4>
+                </div>
+                <div class="row">
+                    <canvas baseChart [chartType]="'line'" [datasets]="areaChartData" [labels]="areaChartLabels"
+                        height="100"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+
+<div class="row">
+    <div class="col-sm-4 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <!-- <h5>Revenue</h5> -->
+                <div class="row">
+                    <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                            <h2 class="mb-0">{{today_booking}}</h2>
+                        </div>
+                        <h6 class="text-muted font-weight-normal">Booking Recieved</h6>
+                    </div>
+                    <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-food text-primary ml-auto"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                            <h2 class="mb-0">{{today_customer}}</h2>
+                            <!-- <p class="text-success ml-2 mb-0 font-weight-medium">+8.3%</p> -->
+                        </div>
+                        <h6 class="text-muted font-weight-normal">Customers</h6>
+                    </div>
+                    <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-account text-danger ml-auto"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-8 col-sm-12 col-xl-8 my-auto">
+                        <div class="d-flex d-sm-block d-md-flex align-items-center">
+                            <h2 class="mb-0">{{today_review}}</h2>
+                        </div>
+                        <h6 class="text-muted font-weight-normal">Total Reviews</h6>
+                    </div>
+                    <div class="col-4 col-sm-12 col-xl-4 text-center text-xl-right">
+                        <i class="icon-lg mdi mdi-star-outline text-success ml-auto"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex flex-row justify-content-between">
+                    <h4 class="card-title">Reviews</h4>
+                    <p class="text-muted mb-1 small"><a routerLink="/rest/reviews">View all</a></p>
+                </div>
+                <div class="preview-list">
+                    <div class="preview-item border-bottom" *ngFor="let r of reviews">
+                        <div class="preview-thumbnail">
+                            <img src="assets/images/dummy.jpg" alt="image" class="rounded-circle" />
+                        </div>
+                        <div class="preview-item-content d-flex flex-grow">
+                            <div class="flex-grow">
+                                <div class="d-flex d-md-block d-xl-flex justify-content-between">
+                                    <h6 class="preview-subject">{{r.c_name}} ({{r.mark}})</h6>
+                                </div>
+                                <p class="text-muted text-small text-right">
+                                    <span *ngIf="r.diff_day !=0">{{r.diff_day}} days</span>
+                                    <span *ngIf="r.diff_hour !=0">{{r.diff_hour}} hours</span>
+                                    <span>{{r.diff_minute}} minutes</span> ago
+                                </p>
+                                <p class="text-muted">{{r.content.substring(0,25)}}
+                                    <span *ngIf="r.content.length > 25">...</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex flex-row justify-content-between">
+                    <h4 class="card-title">Bookings</h4>
+                    <p class="text-muted mb-1 small"><a routerLink="/rest/booking">View all</a></p>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th> Client Name </th>
+                                <th> Date/Time </th>
+                                <th> Table No </th>
+                                <th> Persons </th>
+                                <th> Seat Option </th>
+                                <th> Booked At </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let b of bookings">                               
+                                <td class="text-center">
+                                    <span>{{b.c_name}}</span>
+                                </td>
+                                <td> {{b.booking_date}}<br>{{b.booking_time}}</td>
+                                <td> Table {{b.table_no}} </td>
+                                <td><i class="fa fa-user"></i>&nbsp;{{b.person_no}}</td>
+                                <td> {{b.option}} </td>
+                                <td> {{b.created}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    
+    <div class="col-md-8 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex flex-row justify-content-between">
+                    <h4 class="card-title">Gallery</h4>
+                    <p class="text-muted mb-1 small"><a routerLink="/rest/detail">View all</a></p>
+                </div>
+                <div class="container">
+                    <div class="gallery">
+                        <figure class="gallery__item gallery__item--{{ i + 1 }}" *ngFor="let g of gallary; let i = index">
+                            <img src="{{imageUrl}}/{{g.url}}" alt="Gallery image {{i + 1}}" class="gallery__img">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex flex-row justify-content-between">
+                    <h4 class="card-title">Offer Menus</h4>
+                    <p class="text-muted mb-1 small"><a routerLink="/rest/detail">View all</a></p>
+                </div>
+                <div class="preview-list">
+                    <div class="preview-item border-bottom" *ngFor="let m of offerMenu">
+                        <div class="preview-thumbnail">
+                            <i class="icon-md mdi mdi-food-variant text-primary ml-auto"></i>
+                            <!-- <img src="assets/images/faces/face6.jpg" alt="image" class="rounded-circle" /> -->
+                        </div>
+                        <div class="preview-item-content d-flex flex-grow align-self-center">
+                            <div class="flex-grow">
+                                <div class="d-flex d-md-block d-xl-flex justify-content-between">
+                                    <h6 class="preview-subject">{{m.content}}</h6>
+                                    <p class="text-muted text-small">&pound;{{m.price}}</p>
+                                </div>
+                                <!-- <p class="text-muted">Well, it seems to be working now.</p> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

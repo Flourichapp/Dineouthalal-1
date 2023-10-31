@@ -1,0 +1,12 @@
+<form novalidate (ngSubmit)="createToken()" [formGroup]="stripeTest">
+    <ngx-stripe-card class="d-block mt-2 mb-2" [options]="cardOptions" [elementsOptions]="elementsOptions">
+    </ngx-stripe-card>
+    <div class="text-right">
+
+        <button type="submit" class="btn btn-outline-primary">
+            <div *ngIf="isLoading" class="spinner"></div>
+                <div *ngIf="!isLoading">&pound;&nbsp;Pay Now</div>
+            
+        </button>
+    </div>
+</form>

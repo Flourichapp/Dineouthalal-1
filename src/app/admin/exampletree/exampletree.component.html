@@ -1,0 +1,43 @@
+<mat-tree [dataSource]="dataSource" [treeControl]="flatTreeControl" class="example-tree">
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+    <div style="display: flex; align-items: center;">
+      <!-- Toggle button for expanding/collapsing (only show if node has children) -->
+      <button mat-icon-button matTreeNodePadding *ngIf="node.expandable"
+              [attr.aria-label]="'toggle ' + node.screen_name"
+              (click)="flatTreeControl.toggle(node)">
+        <mat-icon class="mat-icon-rtl-mirror">
+          {{ flatTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+        </mat-icon>
+      </button>
+      <!-- Checkbox and label -->
+      <button mat-icon-button [attr.aria-label]="'toggle ' + node.screen_name"
+              (click)="toggleNodeSelection(node)">
+        <mat-icon class="mat-icon-rtl-mirror">
+          {{ !node.isSelected ? 'check_box_outline_blank' : 'check_box' }}
+        </mat-icon>
+      </button>
+      {{ node.screen_name }}
+    </div>
+  </mat-tree-node>
+</mat-tree>
+
+
+
+<mat-tree [dataSource]="dataSource" [treeControl]="flatTreeControl" class="example-tree">
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+    <div style="display: flex; align-items: center;">
+      <!-- Toggle button for expanding/collapsing (only show if node has children) -->
+      <button mat-icon-button matTreeNodePadding *ngIf="node.expandable"
+              [attr.aria-label]="'toggle ' + node.screen_name"
+              (click)="flatTreeControl.toggle(node)">
+        <mat-icon class="mat-icon-rtl-mirror">
+          {{ flatTreeControl.isExpanded(node) ? 'expand_more' : 'chevron_right' }}
+        </mat-icon>
+      </button>
+      <!-- Checkbox and label using mat-checkbox -->
+  
+     <mat-checkbox [checked]="node.isSelected" (change)="toggleNodeSelection(node)">{{ node.screen_name }}</mat-checkbox>
+
+    </div>
+  </mat-tree-node>
+</mat-tree>

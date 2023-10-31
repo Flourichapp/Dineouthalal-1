@@ -1,0 +1,45 @@
+.promo__figure .promo__photo img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.aboutusContainer {
+  max-width: 1250px;
+  margin: auto;
+}
+
+.aboutusContainer .aboutusImg {
+  float: right;
+  width: 80% !important;
+  margin-right: 24px;
+}
+
+.aboutusContainer h2 {
+  font-size: 32px;
+  padding-bottom: 30px;
+}
+
+.aboutusContainer p {
+  font-size: 22px;
+  color: #727272;
+  width: 80%;
+  margin-left: 24px;
+  margin-top: -9px;
+}
+
+@media (max-width: 992px) {
+  .aboutusContainer {
+    border-top: 1px solid;
+    padding-top: 30px;
+  }
+  .aboutusContainer h2 {
+    font-size: 30px;
+  }
+  .aboutusContainer p {
+    font-size: 16px;
+    width: 100%;
+    margin: 20px auto 20px;
+  }
+}
+/*# sourceMappingURL=aboutus.component.css.map */

@@ -1,0 +1,67 @@
+<div class="p-5">
+    <div class="row">
+        <div class="col-lg-8">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="dataList?.length != 0">
+                  <tr *ngFor="let item of dataList">
+                    <td>{{ item.id }}</td>                  
+                    <td>{{ item.title }}</td>
+                    <td>
+                        
+                        <button class="btn btn-primary" *ngIf="item.deleted_at == null">Enabled</button>
+                        <button class="btn btn-danger" *ngIf="item.deleted_at != null">Deleted</button>
+                    </td>
+                    <td >
+                        <div class="d-flex" *ngIf="item.deleted_at == null">
+                            <button class="btn btn-primary btn-icon" (click)="onEdit(item)" title="edit"><i class="mdi mdi-lead-pencil"></i></button>
+                            <button class="btn btn-danger btn-icon" (click)="onDelete(item.id)" title="delete"><i class="mdi mdi-window-close"></i></button>
+                        </div>
+                        <div *ngIf="item.deleted_at != null">
+                            <button class="btn btn-info btn-icon" (click)="onRestore(item.id)" title="restore"><i class="mdi mdi-restore"></i></button>
+                        </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+        <div class="col-lg-4">
+            <div style="display: flow-root;" class="pb-4">
+                <button class="btn btn-primary btn-icon btn-rounded float-right" (click)="onNew()"><i class="mdi mdi-plus"></i></button>
+            </div>
+            <form [formGroup]="dataForm" *ngIf="isNew || isEdit">
+                <div class="card p-3">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" formControlName="title" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
+                        placeholder="Title" id="title" >
+                        <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                            <div *ngIf="f.title.errors.required">Title is Required</div>
+                        </div>
+                    </div>                    
+                    
+                    <!-- Progress Bar -->
+                    <div class="progress form-group" *ngIf="progress > 0">
+                        <div class="progress-bar progress-bar-striped bg-success" role="progressbar" [style.width.%]="progress">
+                        </div>
+                    </div>
+                 
+                    <div class="form-group">
+                        <button type="button" class="btn btn-primary" (click)="onAdd()" *ngIf="isNew" title="add new item">Add Item</button>
+                        <button type="button" class="btn btn-primary" (click)="onUpdate()" *ngIf="isEdit" title="update item">Update Item</button>
+                        <button type="button" class="btn btn-danger float-right" (click)="isNew = false; isEdit = false;" title="cancel">Cancel</button>
+                    </div>
+    
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

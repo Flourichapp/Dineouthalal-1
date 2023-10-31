@@ -1,0 +1,218 @@
+<!-- <div class="row w-100 mx-0">
+    <div class="col-lg-12 mx-auto bg-light p-3">
+
+        <full-calendar #calendar defaultView="dayGridMonth"  [plugins]="calendarPlugins" [weekends]="true" 
+            deepChangeDetection="true" [events]="calendarEvents" (dateClick)="handleDateClick($event)" (eventClick)="func($event)"></full-calendar>
+    </div>
+</div> -->
+
+<ng-template #gallaryModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Booking Detail</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <table class="m-auto">
+            <tbody>
+                <tr>
+                    <td>User Name:</td>
+                    <td>{{booking_detail.customer_name}}</td>
+                </tr>
+                <tr>
+                    <td>Booking Date:</td>
+                    <td>{{booking_detail.booking_date | date}}</td>
+                </tr>
+                <tr>
+                    <td>Booking Time:</td>
+                    <td>{{booking_detail.booking_time}}</td>
+                </tr>
+                <tr>
+                    <td>Persons:</td>
+                    <td>{{booking_detail.person_no}}</td>
+                </tr>
+                <tr>
+                    <td>Booking Status:</td>
+                    <td>
+                        <span class="booking-status booking_status-{{booking_detail.status}}">
+                            {{booking_detail.status}}
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div class="btn-group m-2" *ngIf="booking_detail.status == 'pending'">
+        <button type="button" class="btn btn-primary"
+            (click)="handleBooking(booking_detail.booking_id, 'approved')">Accept</button>
+        <button type="button" class="btn btn-danger"
+            (click)="handleBooking(booking_detail.booking_id, 'closed')">Decline</button>
+    </div>
+</ng-template>
+<div class="RestBookingContainer">
+
+    <mat-tab-group class="vertical" [selectedIndex]="0">
+
+        <mat-tab label="All Booking">
+            <div class="row w-100 mx-0">
+                <div class="col-lg-12 mx-auto bg-light p-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h3>All Booking</h3>
+                        </div>
+                        <div class="col-md-6 text-right">
+                            <button  (click)="openRunSheetModal(runSheetModal)" class="btn btn-success">generate run sheet</button>
+
+                        </div>
+                    </div>
+                    <div class="filterRow">
+                        <div class=" ">
+                            <mat-form-field>
+                                <input matInput [matDatepicker]="myDatepicker" [(ngModel)]="fromDate"
+                                    placeholder="from Date" (ngModelChange)="onDateChange($event)">
+                                <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+                                <mat-datepicker #myDatepicker></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div class=" ">
+                            <mat-form-field>
+                                <input matInput [matDatepicker]="myDatepicker2" [(ngModel)]="toDate"
+                                    placeholder="To Date" (ngModelChange)="onToDateChange($event)">
+                                <mat-datepicker-toggle matSuffix [for]="myDatepicker2"></mat-datepicker-toggle>
+                                <mat-datepicker #myDatepicker2></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                       
+                        <div class=" ">
+                            <select  #mySelect2  [(ngModel)]="bookingStatus" (change)="changeQueryStatus(mySelect2.value)" class="form-control">
+                                <option [ngValue]="null" [disabled]="true" >search by status</option>
+
+                                <option value="pending">Pending</option>
+                                <option value="approved">Approved</option>
+                                <option value="closed">Reject </option>
+                              </select>
+                        </div>
+                        <div class=" ">
+                            <button (click)="filterBooking()" class="btn btn-primary">Filter</button>
+                            <button  (click)="reset()" class="btn btn-primary">Reset</button>
+
+                         
+                        </div>
+                    </div>
+
+
+                    <div>
+                        <table class="table" id="dt1">
+                            <thead>
+                                <tr>
+                                    <th> Client Name </th>
+                                    <th> Booking Date </th>
+                                    <th> Booking Time </th>
+
+                                    <th> Persons </th>
+                                    <th> Status </th>
+                                    <th> Booked At </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let b of allBookings">
+                                    <td class="">
+                                        <span>{{b.customer_name}}</span>
+                                    </td>
+                                    <td> {{b.booking_date | date}}</td>
+                                    <td>{{b.booking_time}}</td>
+
+                                    <td><i class="fa fa-user"></i>&nbsp;{{b.person_no}}</td>
+                                    <td>
+                                        <select #mySelect (change)="changeStatus(mySelect.value, b.booking_id,b)"
+                                            [(ngModel)]="b.status">
+                                            <option *ngFor="let status of statusOptions" [value]="status">{{status}}
+                                            </option>
+                                        </select>
+                                    </td>
+                                    <td> {{b.booking_date | date}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <mat-paginator (page)="handlePageEvent2($event)" [length]="bookingCount" [pageSize]="pageSize"
+                            [pageSizeOptions]="[5, 10, 25, 100]">
+                        </mat-paginator>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+
+        </mat-tab>
+
+
+        <!-- <mat-tab label="Booking Approval">
+
+            <div class="row w-100 mx-0">
+
+
+
+                <div class="col-lg-12 mx-auto bg-light p-3 position-relative">
+                    <div class="filter">
+                        Seat Filter:
+                        <select (change)="seatFilterChange($event);" [(ngModel)]="seatFilter">
+                            <option *ngFor="let it of seats" [ngValue]="it.value">{{it.name}}</option>
+                        </select>
+
+                        <span *ngIf="timeFilter" class="timefilter">
+                            {{timeFilter?.start.toString("d/M/yyyy")}}
+                            {{timeFilter?.start.toString("h:mm tt")}} - {{timeFilter?.end.toString("h:mm tt")}}
+                            <a href="#" (click)="clearTimeFilter()" class="remove">&times;</a>
+                        </span>
+
+                    </div>
+                    <div class="calendar-section">
+                        <div class="navigator">
+                            <daypilot-navigator [config]="navigatorConfig" (dateChange)="dateChange()" #navigator>
+                            </daypilot-navigator>
+                        </div>
+                        <div class="content">
+                            <daypilot-scheduler [config]="config" [events]="bookingDateEvent"
+                                #scheduler></daypilot-scheduler>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </mat-tab> -->
+
+    </mat-tab-group>
+</div>
+<ng-template #runSheetModal let-modal>
+    <div class="modal-header">
+        <h3>Export Run Sheet</h3>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body w-100 mx-auto">
+        <div class="text-center">
+                <div class="col-md-12">
+                    <p>Please select a date for which you would want to download the booking details in a PDF format.</p>
+                
+
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="myDatepicker2" [(ngModel)]="toDate"
+                            placeholder="To Date" (ngModelChange)="onToDateChange($event)">
+                        <mat-datepicker-toggle matSuffix [for]="myDatepicker2"></mat-datepicker-toggle>
+                        <mat-datepicker #myDatepicker2></mat-datepicker>
+                    </mat-form-field>
+                </div>
+             
+          
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" [disabled]="isLoading"  class="btn btn-primary closeBtn" (click)="generatePDF()"><div *ngIf="isLoading" class="spinner"></div><div *ngIf="!isLoading">download pdf</div></button>
+    </div>
+</ng-template>

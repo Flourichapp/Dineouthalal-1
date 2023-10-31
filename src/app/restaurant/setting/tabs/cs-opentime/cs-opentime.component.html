@@ -1,0 +1,31 @@
+<div class="container">
+  <section>
+    <h3>Take-Off Date Shows Here</h3>
+      <button mat-raised-button color="primary" (click)="openTime()">Open Time&nbsp;<i class="fa fa-clock-o"></i>&nbsp;<b>{{open_time}}</b></button>
+    
+      <button mat-raised-button color="accent" (click)="closeTime()">Close Time&nbsp;<i class="fa fa-clock-o"></i>&nbsp;<b>{{close_time}}</b></button>
+      
+    <button mat-raised-button color="primary" (click)="save()" class="pull-right">&nbsp;<i class="fa fa-save"></i>&nbsp;<b>Save</b></button>
+  </section>
+
+  <section>
+    <h3>Take-Off Date Shows Here</h3>
+    <p>Please click take-off date on the calendar</p>
+    <p>If you click again, it will be unchosen</p>
+
+    <div class="calendar-section">
+      <div class="navigator">
+        <daypilot-navigator [config]="configNavigator" [(date)]="date" (dateChange)="changeDate($event)" #navigator>
+        </daypilot-navigator>
+        <h5 class="mt-3">Dates</h5>
+        <div class="date-section">
+          <label class="form-control border-0" *ngFor="let b of breaksdates">{{b}}</label>
+        </div>
+      </div>
+      <div class="content">
+        <daypilot-month [config]="configMonth" #month></daypilot-month>
+      </div>
+    </div>
+  </section>
+
+</div>

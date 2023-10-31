@@ -1,0 +1,142 @@
+.footerContainer {
+  background: #1b1b25;
+  color: #fff;
+  padding: 100px 0px;
+}
+
+.footerContainer ul {
+  padding-left: 0px;
+}
+
+.footerContainer ul div {
+  height: 14px;
+  width: 9px;
+  border: 1px solid #EF2F24;
+  position: absolute;
+  left: 11px;
+  margin-top: 5px;
+}
+
+.footerContainer ul li {
+  color: white;
+  list-style: none;
+}
+
+.footerContainer .text-container {
+  width: 80%;
+}
+
+.footerContainer p {
+  font-size: 14px;
+  font-family: poppins;
+  font-weight: 400;
+  line-height: 2;
+  margin: 0px;
+}
+
+.footerContainer h2 {
+  font-size: 16px;
+  padding-bottom: 15px;
+}
+
+.footerContainer input {
+  height: 40px;
+  width: 93%;
+  margin: 30px 0px 10px;
+  border-radius: 51px;
+  font-size: 14px;
+  text-align: center;
+  border: none;
+}
+
+.footerContainer button {
+  background-color: #EF2F24;
+  height: 40px;
+  width: 93%;
+  margin: 10px 0px;
+  border-radius: 51px;
+  font-size: 14px;
+  text-align: center;
+  border: none;
+  font-family: poppins;
+  font-weight: 600;
+  color: white;
+}
+
+.socialmediaContainer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 38px;
+  width: 38px;
+  margin: 5px;
+  border-radius: 50%;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+}
+
+.fb {
+  background: #45629F;
+}
+
+.google {
+  background: #DF5443;
+}
+
+.twitter {
+  background: #5EB2EF;
+}
+
+.youtube {
+  background: #C61D23;
+}
+
+.tiktok {
+  background: #000;
+}
+
+.insta {
+  background: #125D8F;
+}
+
+.footerbottom {
+  background: #0F0F0F;
+  background: #0F0F0F;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 30px;
+}
+
+.footerbottom p {
+  color: #CFCFCF;
+  font-size: 12px;
+  margin: 0px;
+}
+
+.footerbottom label {
+  color: #ffffff;
+  margin: 0px;
+}
+
+@media (max-width: 992px) {
+  .footerbottom {
+    text-align: center;
+  }
+}
+/*# sourceMappingURL=frontfooter.component.css.map */

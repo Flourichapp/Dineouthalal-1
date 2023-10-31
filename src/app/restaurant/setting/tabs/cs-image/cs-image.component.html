@@ -1,0 +1,157 @@
+<div *ngIf="isLoading">
+    <div class="loading-spinner-overlay">
+        <span class="spinner-border"></span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-4 col-md-4 col-sm-12">
+
+        <ng-template #mainLogoModal let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title">Main Logo</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p> this images is for the main logo for the restaurant summary, image size will be (375&times;300)</p>
+                <button mat-raised-button color="primary" (click)="fileInput.click()" class="mb-2"><i
+                        class="fa fa-upload"></i>Upload
+                    <input #fileInput type="file" (change)="fileChangeEvent($event);" style="display:none;" />
+                </button>
+
+                <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="5/4"
+                    [resizeToHeight]="300" format="png" (imageCropped)="imageCropped($event)"
+                    (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+                    class="img-cropper">
+                </image-cropper>
+                <div class="mt-2">
+                    cropped image
+                </div>
+                <img [src]="croppedImage" height="100" class="img-border-dotted" />
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+                <button type="button" class="btn btn-light" (click)="uploadImage('mainlogo')">OK</button>
+            </div>
+        </ng-template>
+
+        <button class="btn btn-outline-primary mb-2 mr-2" (click)="openCropModal(mainLogoModal)">Upload
+            Main Logo</button>
+
+        <div class="slide image-container">
+            <img class="slick-img main-logo" src="{{imageURL}}/{{mainlogo}}" alt="" width="auto" height="250">
+            <div class="overlay">
+                <div class="button-container">
+                    <div class="row">
+                        <div class="col-12 text-center p-0">
+                            <button class="btn btn-danger" (click)="onDeleteThumbnail('mainlogo')">
+                                <i class="delete-icon mdi mdi-close-circle-outline"></i>Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-lg-8 col-md-8 col-sm-12">
+        <ng-template #thumbnailModal let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title">Thmubnail</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p> this image is for the thumbnail for the restaurant, image size will be (1200&times;300)</p>
+                <button mat-raised-button color="primary" (click)="fileInput.click()" class="mb-2"><i
+                        class="fa fa-upload"></i>Upload
+                    <input #fileInput type="file" (change)="fileChangeEvent($event);" style="display:none;" />
+                </button>
+
+                <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4/1"
+                    [resizeToHeight]="300" format="png" (imageCropped)="imageCropped($event)"
+                    (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+                    class="img-cropper">
+                </image-cropper>
+                <div class="mt-2">
+                    cropped image
+                </div>
+
+                <img [src]="croppedImage" height="100" class="img-border-dotted" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+                <button type="button" class="btn btn-light" (click)="uploadImage('thumbnail')">OK</button>
+            </div>
+        </ng-template>
+
+        <button class="btn btn-outline-primary mb-2 mr-2" (click)="openCropModal(thumbnailModal)">Upload
+            Thumbnail</button>
+
+        <div class="image-container">
+            <img src="{{imageURL}}/{{thumbnail}}" class="thumbnail-preview" />
+            <div class="overlay">
+                <div class="button-container">
+                    <div class="row">
+                        <div class="col-12 text-center p-0">
+                            <button class="btn btn-danger" (click)="onDeleteThumbnail('thumbnail')">
+                                <i class="delete-icon mdi mdi-close-circle-outline"></i>Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    
+
+</div>
+
+<div class="mt-3">
+    
+<h3>Gallery</h3>
+
+<form [formGroup]="form" (ngSubmit)="uploadGalleries()">
+
+    <!-- Progress Bar -->
+    <div class="progress form-group" *ngIf="progress > 0">
+        <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+            [style.width.%]="progress">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <input type="file" accept="image/x-png,image/gif,image/jpeg" name="media"
+            (change)="uploadFile($event)" multiple required>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-outline-primary mb-2 mr-2"><i class="fa fa-upload"></i> Upload Gallery</button>
+    </div>
+</form>
+
+
+    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig">
+        <div ngxSlickItem *ngFor="let item of _images" class="slide image-container">
+            <img class="slick-img" src="{{imageURL}}/{{ item.url }}" alt="" width="100%">
+            <div class="overlay">
+                <div class="button-container">
+                    <div class="row">
+                        <div class="col-12 text-center p-0">
+                            <button class="btn btn-danger" (click)="onDelete(item.id)">
+                                <i class="delete-icon mdi mdi-close-circle-outline"></i>Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </ngx-slick-carousel>
+</div>

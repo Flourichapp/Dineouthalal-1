@@ -1,0 +1,149 @@
+<div *ngIf="loading">
+    <div class="loading-spinner-overlay">
+        <!-- <i class="fa fa-spinner fa-spin" aria-hidden="true"></i> -->
+        <span class="spinner-border"></span>
+    </div>
+</div>
+<div class="row w-100 mx-0">
+    <div class="col-lg-12 mx-auto bg-light p-3">
+        <div class="col-12">
+            <h3>Access List</h3>
+
+        </div>
+        <div class="col-12 text-right">
+            <button (click)="openScreen(AddScreens)">Add Screen</button>
+        </div>
+    
+
+
+        <table class="table">
+            <thead>
+                <th>Id </th>
+
+                <th>Screen Name </th>
+                <th>Url </th>
+                <th>Slug </th>
+                <th>Sub screen</th>
+                <th>Parent Screen</th>
+                <th>Actions</th>
+
+
+            </thead>
+            <tbody>
+
+                <tr *ngFor="let b of AllAccessList">
+                    <td>{{b.id}} </td>
+
+                    <td>{{b.screen_name}} </td>
+                    <td>{{b.url}}</td>
+                    <td>{{b.slug}} </td>
+                    <td>{{b.subscreen}} </td>
+                    <td>{{b.parent_screen}}</td>
+                    <td> <span class="pe-auto"><i class="mdi mdi-pencil icon"
+                                (click)="openEditModal(AddScreens, b)"></i></span>
+
+                        <span class="pe-auto" (click)="openDeleteModal(DeleteModal ,b.id)"><i
+                                class="mdi mdi-delete icon "></i></span>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+        <div *ngIf="loading">
+            <div class="loading-spinner-overlay">
+                <span class="spinner-border"></span>
+            </div>
+        </div>
+
+        <div class="pull-right">
+            <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                (page)="changePage($event)">
+            </mat-paginator>
+        </div>
+
+    </div>
+
+</div>
+<ng-template #AddScreens let-modal>
+    <div class="modal-header">
+        <h3 *ngIf="IsAdd">Add Screens</h3>
+        <h3 *ngIf="IsEdit">Edit Screens</h3>
+
+    </div>
+    <div class="modal-body w-100 p-3 mx-auto">
+
+        <div class="inputContaienr">
+            <label for="screen_name">Screen Name:</label>
+            <input type="text" id="screen_name" name="screen_name" [(ngModel)]="formData.screen_name">
+        </div>
+
+        <div class="inputContaienr">
+            <label for="url">URL:</label>
+
+            <input type="text" id="url" name="url" [(ngModel)]="formData.url">
+
+        </div>
+
+
+
+        <div class="inputContaienr1">
+            <label for="subscreen">Subscreen:</label>
+
+            <input class="ml-2" type="checkbox" id="subscreen" name="subscreen" [(ngModel)]="formData.subscreen">
+        </div>
+
+        <div class="inputContaienr">
+            <label for="parent_screen">Parent Screen:</label>
+            <div class="dropdown">
+                <input type="text" [(ngModel)]="selectedScreenName" (input)="filterScreenNames()" (click)="toggleDropdown()" [disabled]="!formData.subscreen"  />
+                <ul *ngIf="dropdownVisible">
+                  <li *ngFor="let screen of filteredScreenNames" (click)="selectScreen(screen)">
+                    {{ screen.screen_name }}
+                  </li>
+                </ul>
+              </div>
+        </div>
+
+
+    </div>
+
+
+
+
+    <div class="modal-footer">
+        <div class="text-right m-2">
+            <button type="button" [disabled]="isLoading" class="btn btn-light"
+                (click)="modal.close('Close click')">cancel</button>
+            <button class="btn btn-primary " *ngIf="IsAdd" (click)="createScreen()">Add Screen</button>
+            <button class="btn btn-primary " *ngIf="IsEdit" (click)="EditScreen()">Edit Screen</button>
+
+        </div>
+    </div>
+</ng-template>
+<ng-template #DeleteModal let-modal>
+    <div class="modal-header">
+        <h3>Delete screens</h3>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body w-100 mx-auto">
+        <div class="text-center">
+            <h2 class="mb-4">Do you want to delete this </h2>
+            <p>Do you realy want to delete these? This process cannot be undone</p>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" [disabled]="loading" class="btn btn-light"
+            (click)="modal.close('Close click')">No</button>
+        <button type="button" [disabled]="loading" class="btn  btn-primary" (click)="openDeleteScreen()">
+            <div *ngIf="loading" class="spinner"></div>
+            <div *ngIf="!loading">Yes</div>
+        </button>
+
+
+    </div>
+</ng-template>

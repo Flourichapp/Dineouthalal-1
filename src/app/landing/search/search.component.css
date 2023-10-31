@@ -1,0 +1,302 @@
+.allRestContainer {
+  padding: 1.5rem !important;
+}
+
+.topRatedResturantCard {
+  margin: 20px 10px;
+  -webkit-box-shadow: 1.5px 2.6px 11px rgba(0, 0, 0, 0.07);
+          box-shadow: 1.5px 2.6px 11px rgba(0, 0, 0, 0.07);
+  border: 1px solid #DDDDDD;
+}
+
+.saveicon {
+  position: absolute;
+  bottom: 20px;
+  left: 10px;
+  cursor: pointer;
+}
+
+.saveiconText {
+  position: absolute;
+  bottom: 15px;
+  left: 30px;
+  color: white;
+  font-size: 14px;
+  margin: 0px;
+}
+
+.photosicon {
+  position: absolute;
+  bottom: 20px;
+  right: 86px;
+}
+
+.photosiconText {
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+  color: white;
+  font-size: 14px;
+  margin: 0px;
+}
+
+.resturantName {
+  font-size: 18px;
+}
+
+.RestaurantDetails {
+  padding: 16px;
+  height: 200px;
+  overflow: hidden;
+}
+
+.RestaurantDetails .ratingbadge {
+  height: 24px;
+  width: 40px;
+  background-color: #5BB638;
+  margin: 0px;
+  text-align: center;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.RestaurantDetails span {
+  color: white;
+  font-size: 11px;
+}
+
+.RestaurantDetails .totalRating {
+  font-size: 11px;
+  color: #727272;
+  margin: 0px 10px;
+}
+
+.RestaurantDetails p {
+  color: #727272;
+  text-align: left;
+  display: block;
+  display: -webkit-box;
+  max-width: 100%;
+  height: 38px;
+  margin: 3px auto;
+  font-size: 13px;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
+}
+
+.booknowBtn {
+  background: #F9F9F9;
+  height: 55px;
+  border: none;
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 10px;
+}
+
+.buttonText {
+  font-size: 11px;
+  color: #C23616;
+  margin: 0px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 71%;
+}
+
+.booknow {
+  font-size: 13px;
+  color: #4A9F29;
+  margin: 0px;
+  cursor: pointer;
+}
+
+.search-result {
+  padding: 1rem;
+  margin: 15px 0px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.marker-window img {
+  width: 80px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 5px;
+}
+
+.marker-window .marker-window__description {
+  width: 180px;
+  padding-left: 3px;
+}
+
+a.restaurant-item__horizontal {
+  color: #505050;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+a.restaurant-item__horizontal h4 {
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+a.restaurant-item__horizontal:hover {
+  text-decoration: none !important;
+}
+
+a.restaurant-item__horizontal:hover h4 {
+  color: #9d00ff;
+}
+
+.sebm-google-map-container {
+  height: 300px;
+}
+
+.filter-section {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+
+.main-filter {
+  text-align: center;
+}
+
+.main-filter .search-group {
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 8px;
+  opacity: 0.8;
+}
+
+.main-filter .search-group .marker-location {
+  color: gray;
+  position: absolute;
+  left: -9px;
+  top: 25%;
+}
+
+.main-filter .mat-datepicker-toggle {
+  top: -4px;
+  position: absolute;
+  left: 0;
+}
+
+.main-filter .mat-datepicker-input {
+  text-align: center;
+}
+
+.main-filter mat-checkbox {
+  padding: 5px;
+}
+
+.result-card-img {
+  height: 150px;
+  background-size: cover;
+  border-radius: 5px;
+  background-repeat: no-repeat;
+}
+
+mat-card-content {
+  margin-bottom: 0px;
+}
+
+.searchfilterContainer {
+  border: 1px solid #d5d2d2;
+  padding: 20px;
+  font-family: 'Poppins';
+  font-size: 20px;
+  color: #000000;
+}
+
+.searchfilterContainer h2 {
+  font-size: 20px;
+  font-family: 'Poppins';
+  font-weight: 500;
+}
+
+.card-header:not(.collapsed) .rotate-icon {
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg);
+}
+
+.accordion .card {
+  margin-bottom: 0px;
+  border-radius: 0.25rem;
+  border: 1px solid #d5d2d2;
+}
+
+.card-header .accicon {
+  float: right;
+  font-size: 20px;
+  width: 1.2em;
+}
+
+.card-header {
+  cursor: pointer;
+  border-bottom: none;
+}
+
+.accordion .card .card-header {
+  background-color: transparent;
+  border: none;
+  padding: 2rem;
+  padding: 12px 20px;
+}
+
+.card-header .title {
+  font-size: 17px;
+  font-family: 'Poppins';
+  font-weight: 500;
+}
+
+.accordion .card .card-body {
+  font-size: 14px;
+  padding: 0 2rem 0rem 2rem;
+  font-weight: 400;
+  line-height: 1.5;
+  padding: 10px 20px;
+}
+
+.accordion .card .card-header button {
+  height: 50px;
+  text-align: center;
+  background: #EF2F24;
+  border: none;
+  border-radius: 54px;
+  color: white;
+  font-size: 12px;
+  font-family: 'Poppins';
+  font-weight: 600;
+  margin: 10px 0px;
+}
+
+.distanceCard {
+  height: 200px;
+  overflow: auto;
+}
+
+.locationRadio {
+  display: block;
+}
+/*# sourceMappingURL=search.component.css.map */

@@ -1,0 +1,618 @@
+<!-- <div class="">
+    <div class="thumbnail">
+        <img src="/assets/images/cities/london.jpg" alt="">
+        <div class="slogan">My Pages</div>
+    </div>
+    <div class="container p-2 bg-inverse-warning">
+
+        <div class="row p-3">
+            <div class="col-sm-4">
+                <mat-card>
+                    <mat-card-content class="all-">
+                        <h3>All Bookings</h3>
+                        <div class="border-bottom row p-2 " *ngFor="let b of bookings">
+                            <i class="mdi mdi-food icon-md text-success"></i>
+                            <div class="pl-2">
+                                <h4>{{b.rest_name}}</h4>
+                                <label>{{b.status}}</label>
+
+                                <i class="fa fa-clock-o"></i> &nbsp;
+                                <label>{{b._datetime}}</label>
+
+                            </div>
+                            <div class="avc">
+
+                                <div class="align-self-center pl-2">
+
+                                    <button type="button" class="btn btn-primary" *ngIf="!b.mark && b._diff_v == 'true'"
+                                        (click)="openReviewModal(reviewModal, b.restaurant_id, b.id)">Review</button>
+                                    <div *ngIf="b.mark && b._diff_v == 'true'">
+                                        <i class="fa fa-star text-danger"></i>&nbsp;{{b.mark}}
+                                    </div>
+                                </div>
+
+                                <div *ngIf="b.mark && b._diff_v == 'true' && favoriteRestIds.indexOf(b.restaurant_id) == -1"
+                                    class="align-self-center pl-2">
+                                    <button type="button" class="btn btn-outline-info" title="add favorite"
+                                        (click)="addFavroite( b.restaurant_id)">
+                                        <i class="fa fa-heart text-danger"></i></button>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </mat-card-content>
+                </mat-card>
+
+            </div>
+            <div class="col-sm-4">
+                <mat-card>
+                    <mat-card-content class="all">
+                        <h3>My Favorite</h3>
+                        <div *ngFor="let r of favorites" class="border-bottom m-2 position-relative">
+                            <a class="restaurant-item__horizontal row"
+                                [routerLink]="'/rest/' + r.title + '?'+ r.restaurant_id + '&d=&t=&s='" target="_blank">
+                                <div class="col-sm-4">
+                                    <div class="strip mb-0">
+                                        <figure class="ssm-figure">
+                                            <img src="{{r.main_logo?r.main_logo:'/assets/images/no-img.png'}}"
+                                                data-src="img/location_4.jpg" class="owl-lazy" alt=""
+                                                style="opacity: 1;">
+                                        </figure>
+                                        <span class="bottom-ribbon sm-bottom-ribbon">
+                                            <i class="fa fa-star"></i>
+                                            {{r.sum_mark?r.sum_mark.toFixed(2):0}}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <h5>{{r.title}}</h5>
+                                    <span><i class="fa fa-money"></i>&nbsp;Average
+                                        Price&nbsp;<span>&pound;{{r.average_price}}</span></span><br>
+                                    <span><i
+                                            class="fa fa-map-marker"></i>&nbsp;<span>{{r.address1}}&nbsp;{{r.address2}}&nbsp;{{r.city}}</span></span><br>
+                                    <span><i class="fa fa-heart"></i>&nbsp;{{r.count_review?r.count_review:0}}
+                                        reviews</span>
+                                </div>
+                            </a>
+                            <button type="button" class="btn btn-outline-info delete-btn" title="remove from favorite"
+                                (click)="removeFavorite(r.restaurant_id)">
+                                <i class="fa fa-trash text-danger"></i></button>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <div class="col-sm-4">
+                <mat-card>
+                    <mat-card-content>
+                        <h3>Personal Info</h3>
+                        <div>
+                            <h4><i class="fa fa-user"></i>&nbsp;
+                                {{currentUser.first_name}}&nbsp;{{currentUser.last_name}}
+                            </h4>
+                            <h4><i class="fa fa-envelope"></i>&nbsp;{{currentUser.email}}</h4>
+                            <button class="btn btn-block btn-primary btn-md font-weight-medium auth-form-btn"
+                                *ngIf="!changeablepwd" [disabled]="loading"
+                                (click)="changeablepwd = !changeablepwd">Change Password</button>
+
+                            <form class="pt-3" [formGroup]="signinForm" *ngIf="changeablepwd">
+                                <div class="form-group">
+                                    <input type="password" formControlName="oldpwd" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.oldpwd.errors }"
+                                        placeholder="Current Password" />
+                                    <div *ngIf="submitted && f.oldpwd.errors" class="invalid-feedback">
+                                        <div *ngIf="f.oldpwd.errors.required">Current Password is required</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="password" formControlName="password" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                                        placeholder="New Password" />
+                                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                        <div *ngIf="f.password.errors.required">Password is required</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="password" formControlName="confirm_password" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.confirm_password.errors }"
+                                        placeholder="Confirm Password" />
+                                    <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
+                                        <div *ngIf="f.confirm_password.errors.required">Confirm Password is required
+                                        </div>
+                                        <div *ngIf="f.confirm_password.errors.confirmedValidator">Password and Confirm
+                                            Password must be match.</div>
+                                    </div>
+                                </div>
+                                <div class="text-center">
+                                    <button class="btn btn-primary font-weight-medium auth-form-btn"
+                                        [disabled]="loading" (click)="onSubmit()" type="button">
+                                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                        Update
+                                    </button>
+                                    <button class="btn btn-outline-danger font-weight-medium auth-form-btn"
+                                        [disabled]="loading" (click)="changeablepwd = !changeablepwd">Cancel</button>
+                                </div>
+                                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                            </form>
+                        </div>
+
+                    </mat-card-content>
+                </mat-card>
+            </div>
+
+        </div>
+    </div>
+</div> -->
+
+<div class="headerNav"></div>
+<div class="profileHeader">
+    <h1 class="poppins_regular">Hello <label class="poppins_bold"> {{currentUser.first_name}}
+            {{currentUser.last_name}}</label></h1>
+    <p>Welcome back</p>
+</div>
+<div class="container-fluid">
+    <div class="myProfile col-md-12">
+        <mat-tab-group class="vertical" [selectedIndex]="activeTabValue" (selectedIndexChange)="updateUrl($event)">
+            <mat-tab label="Bookings" (click)="isEdit = false">
+                <mat-card class="bookingCard myBooking" *ngIf="!isEdit">
+                    <mat-tab-group class="vertical" [selectedIndex]="0">
+                        <mat-tab label="pending">
+                            <div *ngIf="pendingBooking && pendingBooking.length > 0" class="pastbooking">
+                                <!-- <h1 class="poppins_bold text-center mt-3 mb-4">Pending bookings</h1> -->
+                                <mat-card-content>
+                                    <div class="myBookingCard" *ngFor="let b of pendingBooking">
+                                        <div class="row">
+                                            <div class="col-5 col-md-3">
+                                                <img class="w-100 restImg"
+                                                    src="{{b.main_logo ? (imageURL + '/' + b.main_logo) : 'assets/images/icon/FRfz1cLXMAADNaZ.png'}}">
+                                            </div>
+                                            <div class="col-7 col-md-9 pt-3 ">
+                                                <h1 class="poppins_regular">{{b.rest_name}} </h1>
+                                                <h2 class="poppins_regular pendingClr"> <img class="circle"
+                                                        src="/assets/images/icon/pendingcircle.png"> Booking pending
+                                                </h2>
+
+                                                <p class="poppins_regular"> <img class="guest"
+                                                        src="/assets/images/icon/guest.png">
+                                                    {{b.person_no}}
+                                                    <img class="calendar" src="/assets/images/icon/calendar.png">
+                                                    {{b._datetime}}
+                                                </p>
+                                                <h4 class="poppins_semibold"><label
+                                                        (click)="openEditModal(editModal, b)">Edit</label> <label
+                                                        class="ml-3 mr-3">|</label>
+                                                    <label (click)="openDeleteModal(deleteModal, b.id)">Cancel</label>
+                                                </h4>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </mat-card-content>
+
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="confirm">
+                            <div *ngIf="upcommingBooking && upcommingBooking.length > 0" class="pastbooking">
+                                <!-- <h1 class="poppins_bold text-center mt-3 mb-4">Upcoming bookings</h1> -->
+                                <mat-card-content>
+                                    <div class="myBookingCard" *ngFor="let b of upcommingBooking">
+                                        <div class="row">
+                                            <div class="col-5 col-md-3">
+                                                <img class="w-100 restImg"
+                                                    src="{{b.main_logo ? (imageURL + '/' + b.main_logo) : 'assets/images/icon/FRfz1cLXMAADNaZ.png'}}">
+                                            </div>
+                                            <div class="col-7 col-md-9 pt-3 ">
+                                                <h1 class="poppins_regular">{{b.rest_name}} </h1>
+                                                <h2 class="poppins_regular confirmclr"> <img class="circle"
+                                                        src="/assets/images/icon/greencheck.png"> Booking confirmed</h2>
+
+                                                <p class="poppins_regular"> <img class="guest"
+                                                        src="/assets/images/icon/guest.png">
+                                                    {{b.person_no}}
+                                                    <img class="calendar" src="/assets/images/icon/calendar.png">
+                                                    {{b._datetime}}
+                                                </p>
+                                                <h3 class="poppins_regular mb-0 confirmclr" (click)="onEdit(b)"
+                                                    (click)="isEdit = true">View booking </h3>
+                                                <h3 class="poppins_regular mb-0 compeltedclr mt-3"
+                                                    *ngIf="!b.mark && b._diff_v == 'true'"
+                                                    (click)="openReviewModal(reviewModal, b.restaurant_id, b.id)">Leave
+                                                    a review
+                                                </h3>
+                                                <div class="markConatiner mt-3">
+                                                    <div *ngIf="b.mark && b._diff_v == 'true'" class="mx-auto">
+                                                        <i class="fa fa-star text-danger"></i>&nbsp;{{b.mark}}
+                                                    </div>
+                                                    <div *ngIf="b.mark && b._diff_v == 'true' && favoriteRestIds.indexOf(b.restaurant_id) == -1"
+                                                        class="align-self-center pl-2">
+                                                        <button type="button" class="btn btn-outline-info"
+                                                            title="add favorite"
+                                                            (click)="addFavroite( b.restaurant_id)">
+                                                            <i class="fa fa-heart text-danger"></i></button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </mat-card-content>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="close">
+                            <div *ngIf="pastBooking && pastBooking.length > 0" class="pastbooking">
+                                <!-- <h1 class="poppins_bold text-center mt-3 mb-4">Past bookings</h1> -->
+                                <mat-card-content>
+                                    <div class="myBookingCard" *ngFor="let b of pastBooking">
+                                        <div class="row">
+                                            <div class="col-5 col-md-3">
+                                                <img class="w-100 restImg"
+                                                    src="{{b.main_logo ? (imageURL + '/' + b.main_logo) : 'assets/images/icon/FRfz1cLXMAADNaZ.png'}}">
+                                            </div>
+                                            <div class="col-7 col-md-9 pt-3 ">
+                                                <h1 class="poppins_regular">{{b.rest_name}} </h1>
+                                                <h2 class="poppins_regular compeltedclr"> <img class="circle"
+                                                        src="/assets/images/icon/redcheck.png"> Booking completed</h2>
+
+                                                <p class="poppins_regular"> <img class="guest"
+                                                        src="/assets/images/icon/guest.png">
+                                                    {{b.person_no}}
+                                                    <img class="calendar" src="/assets/images/icon/calendar.png">
+                                                    {{b._datetime}}
+                                                </p>
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </mat-card-content>
+                            </div>
+                        </mat-tab>
+                    </mat-tab-group>
+                </mat-card>
+                <mat-card class="bookingCard" *ngIf="isEdit">
+                    <div class="pastbooking">
+                        <mat-card-content>
+                            <div class="mybookingDetail">
+                                <div class="row">
+                                    <div class="col-5 col-md-3">
+                                        <img class="w-100 restImg"
+                                            src="{{bookingDetail.main_logo ? (imageURL + '/' + bookingDetail.main_logo) : 'assets/images/icon/FRfz1cLXMAADNaZ.png'}}">
+                                    </div>
+                                    <div class="col-7 col-md-9 pt-3 ">
+                                        <h1 class="poppins_regular">{{bookingDetail.rest_name}} </h1>
+                                        <h2 *ngIf="bookingDetail.status === 'pending'"
+                                            class="poppins_regular pendingClr">
+                                            <img class="circle" src="/assets/images/icon/pendingcircle.png">
+                                            Booking pending
+                                        </h2>
+
+                                        <h2 *ngIf="bookingDetail.status === 'approved'"
+                                            class="poppins_regular compeltedclr"> <img class="circle"
+                                                src="/assets/images/icon/redcheck.png"> Booking completed</h2>
+
+                                        <p class="poppins_regular"> <img class="guest"
+                                                src="/assets/images/icon/guest.png">
+                                            {{bookingDetail.person_no}}
+                                            <img class="calendar" src="/assets/images/icon/calendar.png">
+                                            {{bookingDetail._datetime}}
+                                        </p>
+
+                                        <!-- <add-to-calendar-button [attr.name]="bookingDetail.rest_name"
+                                            options="'Apple','Google','iCal', 'Microsoft365', 'MicrosoftTeams', 'Outlook.com', 'Yahoo'"
+                                            [attr.location]="bookingDetail.city"
+                                            [attr.startDate]="bookingDetail.booking_date | date: 'yyyy-MM-dd'"
+                                            [attr.endDate]="bookingDetail.booking_date | date: 'yyyy-MM-dd'"
+                                            [attr.startTime]="bookingDetail.booking_time" [attr.endTime]="endTime"
+                                            timeZone="Europe/London"></add-to-calendar-button> -->
+                                        
+                                    </div>
+                                </div>
+                                <!-- <h1 class="mt-3 mb-3">Who’s going?</h1>
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div class="profileName">
+                                            <span>G</span>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-10">
+                                        <button><img class="peopleIcon" src="/assets/images/icon/people.png"> Invite
+                                            your
+                                            friends</button>
+                                    </div>
+                                </div> -->
+
+
+                                <div class="my-5 innerContainer">
+                                    <h1 class="poppins_regular my-3">Booking Reference: B-{{bookingDetail.id}} </h1>
+                                    <h1 class="poppins_bold my-3">Information about your booking:</h1>
+                                    <p class="poppins_regular my-3">This text here can be edited and written by the
+                                        restaurant themselves about their terms and conditions similar to the example I
+                                        had given. They can edit and change it anytime when confirming the booking.
+                                    </p>
+                                    <h1 class="poppins_bold my-3">Any special requests?</h1>
+                                    <textarea class="poppins_regular" [(ngModel)]="message"
+                                        placeholder="Contact the restaurant here "></textarea>
+                                    <button class="sendbutton poppins_bold" (click)="sendEmail()">SEND MESSAGE
+                                    </button>
+
+                                </div>
+                            </div>
+
+                        </mat-card-content>
+
+                    </div>
+                </mat-card>
+
+            </mat-tab>
+            <mat-tab label="Saved restaurants">
+                <div class="row">
+
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" *ngFor="let r of favorites">
+
+                        <div class="topRatedResturantCard">
+                            <div class="col-md-12 p-0">
+                                <!-- <img src="{{imageUrl}}/{{r.main_logo ?  r.main_logo  : 'assets/images/dashboard/resturant1.png'}}" alt="line" class="w-100" style="height:200px"> -->
+                                <img src="{{r.main_logo ? (imageURL + '/' + r.main_logo) : 'assets/images/dashboard/resturant1.png'}}"
+                                    class="w-100" style="height:200px">
+
+                                <img src="/assets/images/dashboard/saveicon.png" alt="line"
+                                    (click)="removeFavorite(r.restaurant_id)" class="saveicon">
+                                <p class="saveiconText poppins_regular">Save</p>
+                                <!-- <img src="/assets/images/dashboard/photosicon.png" alt="line" class="photosicon">
+                                <p class="photosiconText poppins_regular">4 photos</p> -->
+                            </div>
+                            <div class="RestaurantDetails">
+                                <p class="poppins_semibold resturantName">{{r.title}} </p>
+                                <p>
+                                    <label class="ratingbadge"><span>{{r.sum_mark?r.sum_mark.toFixed(2):'0.00'}}</span>
+                                    </label> <label class="totalRating">{{r.count_review}} Ratings</label>
+                                </p>
+                                <p>{{r.address1}}&nbsp;{{r.address2}},&nbsp;{{r.city}}</p>
+                                <p>{{r.shortdescription}}</p>
+
+                            </div>
+                            <div class="booknowBtn"><label class="buttonText poppins_regular"> <img
+                                        src="/assets/images/dashboard/Icon-wine.png" alt="line" style="height:15px"
+                                        class="mr-1">
+                                    {{r.food_types.split(',').join(', ')}}</label><label class="poppins_regular booknow"
+                                    [routerLink]="'/rest/' + r.title + '?'+ r.restaurant_id + '&d=&t=&s='">Book
+                                    Now</label></div>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Profile details">
+                <div class="col-md-12">
+                    <div class="row profileDetailRow">
+                        <div class="col-md-6">
+                            <div class="profileDetailContainer">
+                                <label>First Name</label>
+                                <input class="col-md-12" value={{currentUser.first_name}} disabled>
+                                <label>Last Name</label>
+                                <input class="col-md-12" value={{currentUser.last_name}} disabled>
+                                <label>Email address </label>
+                                <input class="col-md-12" value={{currentUser.email}} disabled>
+                                <label>Phone number </label>
+                                <input class="col-md-12" value={{currentUser.phone}}>
+
+                                <label>Read our <a routerLink="/privacy-policy" target="_blank"><span
+                                            class="poppins_bold">Privacy Policy</span></a> </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="position-relative avatar-div">
+
+                                <input hidden type="file" accept="image/*" (change)="uploadFile($event)" #file>
+                                <button class="btn btn-info image-picker mb-2 mr-2" (click)="file.click()">
+                                    <i class="mdi mdi-camera"></i>
+                                </button>
+                                <div class="slide image-container">
+                                    <!-- <img class="avatar" src="assets/images/dummy.jpg" alt="avatar" width="250" height="250"> -->
+                                    <img class="avatar"
+                                        src="{{currentUser.avatar ? (imageURL + '/' + currentUser.avatar) : imageUrl}}"
+                                        width="250" height="250" />
+
+                                </div>
+                            </div>
+                            <!-- <div class="form-group">
+                            
+                            </div>
+                            <div class="column" *ngIf="imageUrl">
+                                <figure class="image is-128x128">
+                                    <img [src]="imageUrl" />
+                                </figure>
+                            </div> -->
+                            <button class="float-right btn btn-primary rounded-pill" (click)="onProfileSubmit()"
+                                type="button">save</button>
+
+                        </div>
+                    </div>
+                </div>
+
+            </mat-tab>
+            <mat-tab label="Change Password">
+                <div class="profileDetailContainer">
+                    <form class="pt-3" [formGroup]="signinForm">
+                        <div class="form-group">
+                            <label>Current Password</label>
+
+                            <input type="password" formControlName="oldpwd" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.oldpwd.errors }"
+                                placeholder="Current Password" />
+                            <div *ngIf="submitted && f.oldpwd.errors" class="invalid-feedback">
+                                <div *ngIf="f.oldpwd.errors.required">Current Password is required</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>New Password</label>
+
+                            <input type="password" formControlName="password" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                                placeholder="New Password" />
+                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                <div *ngIf="f.password.errors.required">Password is required</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+
+                            <input type="password" formControlName="confirm_password" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.confirm_password.errors }"
+                                placeholder="Confirm Password" />
+                            <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
+                                <div *ngIf="f.confirm_password.errors.required">Confirm Password is required
+                                </div>
+                                <div *ngIf="f.confirm_password.errors.confirmedValidator">Password and Confirm
+                                    Password must be match.</div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <button class="btn btn-primary font-weight-medium auth-form-btn" [disabled]="loading"
+                                (click)="onSubmit()" type="button">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                Update
+                            </button>
+                            <button class="btn btn-outline-danger font-weight-medium auth-form-btn" [disabled]="loading"
+                                (click)="changeablepwd = !changeablepwd">Cancel</button>
+                        </div>
+                        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                    </form>
+                </div>
+            </mat-tab>
+            <mat-tab label="Payment detail">
+                <mat-card class="paymentCard">
+                    <h1 class="poppins_bold">You have no payment details added</h1>
+                    <p class="poppins_light">Add cards to your account for faster checkouts with booking holds and much
+                        more.</p>
+
+                    <button class="poppins_semibold">ADD CARD</button>
+
+
+                </mat-card>
+            </mat-tab>
+            <button class="proBtn">UPGRADE TO PRO MEMBERSHIPs</button>
+
+
+
+
+
+
+
+        </mat-tab-group>
+        <button class="proBtn"><img style="margin-right: 4px; height: 15px; margin-top: -5px;"
+                src="/assets/images/icon/crown.png">UPGRADE TO PRO MEMBERSHIP</button>
+
+    </div>
+</div>
+
+<ng-template #reviewModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Review</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <ng-template #t let-fill="fill">
+            <span class="star" [class.full]="fill === 100">
+                <span class="half" [style.width.%]="fill">
+                    <i class="fa fa-star icon-md"></i>
+                </span>
+                <i class="fa fa-star icon-md"></i>
+            </span>
+        </ng-template>
+        <div>
+            <div>
+                <h5>Food Marks</h5>
+                <ngb-rating [(rate)]="food_mark" [starTemplate]="t" [readonly]="false" [max]="5" class="pl-2">
+                </ngb-rating>
+                <label class="pull-right">{{food_mark}}</label>
+            </div>
+
+            <div>
+                <h5>Service Marks</h5>
+                <ngb-rating [(rate)]="service_mark" [starTemplate]="t" [readonly]="false" [max]="5" class="pl-2">
+                </ngb-rating>
+                <label class="pull-right">{{service_mark}}</label>
+            </div>
+
+            <div>
+                <h5>Ambience Marks</h5>
+                <ngb-rating [(rate)]="ambience_mark" [starTemplate]="t" [readonly]="false" [max]="5" class="pl-2">
+                </ngb-rating>
+                <label class="pull-right">{{ambience_mark}}</label>
+            </div>
+        </div>
+
+        <div>
+            <h5>Contents</h5>
+            <textarea name="" id="" class="w-100" rows="5" [(ngModel)]="review_content"
+                [ngClass]="{'border-danger':isInvalid}"></textarea>
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        <button type="button" class="btn btn-light" (click)="saveReview()">OK</button>
+    </div>
+</ng-template>
+
+<ng-template #editModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">Edit Booking</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+
+        <select class="w-100" [(ngModel)]="seat_type" #seatSelect (change)="onSeatChange(seatSelect.value)">
+            <option *ngFor="let item of seatOptions" [value]="item.id">{{ item.name }}</option>
+        </select>
+        <select class="w-100" [(ngModel)]="person" #selectPerson (change)="onPersonChange(selectPerson.value)">>
+            <option *ngFor="let item of persons" [value]="item">{{ item }}</option>
+        </select>
+        <select class="w-100" [(ngModel)]="time" #selectTime (change)="onTimeChange(selectTime.value)">
+            <option *ngFor="let v of Times" [value]="v.id">{{ v.value }}</option>
+        </select>
+
+
+        <mat-form-field>
+            <input matInput [matDatepicker]="myDatepicker" [(ngModel)]="dateValue"
+                (ngModelChange)="onDateChange($event)">
+            <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+            <mat-datepicker #myDatepicker></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+        <button type="button" class="btn btn-light" (click)="editCurrentBooking()">OK</button>
+    </div>
+</ng-template>
+<ng-template #deleteModal let-modal>
+    <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body w-75 mx-auto">
+        <div class="text-center">
+            <h2 class="mb-4">Are you sure you want to cancel this booking</h2>
+            <p>Do you realy want to cancel these booking? This process cannot be undone</p>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">No</button>
+        <button type="button" class="btn btn-light" (click)="cancelBooking()">Yes</button>
+    </div>
+</ng-template>

@@ -1,0 +1,95 @@
+<div class="">
+  <div class="headerNav">
+    <div>
+      <p class="poppins_medium"><label class="m-0">Home</label> - <label class="m-0">blog</label> </p>
+    </div>
+    <div>
+      <input placeholder="search in blog">
+      <img src="assets/images/about/Icon.png" alt="search" class="">
+    </div>
+  </div>
+  <div class="allBlogContainer mt-3 mb-5">
+    <div class="col-md-12 mb-5">
+      <div class="text-center pb-30">
+        <h1 class="poppins_regular">Blog & <label class="poppins_bold">News</label> </h1>
+        <p class="poppins_regular">Read our articles </p>
+      </div>
+      <div class="row">
+        <div class="col-md-12 col-lg-8">
+          <div>
+            <div class="row">
+              <div class="col-md-6 col-lg-4" *ngFor="let blog of blogs">
+                <div class="blogCard">
+                  <div class="col-md-12 p-0">
+                    <div class="blogimgContainer">
+
+                      <img src="{{imageUrl}}/{{ blog.thumbnail?blog.thumbnail:'/assets/images/about/image.png' }}"
+                        alt="line" class="w-100 blogimg">
+                      <div class="overlayy">
+                        <a [routerLink]="'/blog/' + blog.slug" class="d-flex blog-item-cont"
+                          >
+                          <div class="text poppins_semibold">READ THIS ARTICLE</div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="p-3">
+                    <h2 class="poppins_medium resturantName">In {{blog.created_at | date}}</h2>
+                    <h4 class="poppins_semibold resturantName">{{blog.title}} </h4>
+
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+          <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+            (page)="changePage($event)">
+          </mat-paginator>
+
+
+        </div>
+        <div class="col-md-12 col-lg-4">
+          <div class="latestpostBlog">
+            <h1 class="poppins_regular">Latest
+              <label class="poppins_bold">posts</label>
+            </h1>
+            <div class="latestblogcard" *ngFor="let blog of topblogs">
+              <div class="col-12 p-0">
+                <div class="row m-0">
+                  <div class="col-4 p-0">
+                    <div class="blogimgContainer latestblogcontainer">
+                      <img src="{{imageUrl}}/{{ blog.thumbnail}}" alt="blog thumbnail" class="w-100 h-100 latestblogimg">
+                      <div class="overlayy">
+                        <a [routerLink]="'/blog/' + blog.slug" class="d-flex blog-item-cont"
+                          >
+                          <div class="text poppins_semibold">READ THIS ARTICLE</div>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-8 pt-2 ">
+
+                    <label class="poppins_medium">In {{blog.created_at | date}}</label> <br>
+                    <h4 class="poppins_semibold resturantName">{{blog.title}} </h4>
+
+                    <!-- <h4 class="poppins_semibold">{{blog.content}}</h4> -->
+                  </div>
+
+                </div>
+              </div>
+            </div>
+       
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+ 
+</div>

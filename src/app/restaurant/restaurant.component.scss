@@ -1,0 +1,23 @@
+.subscriptionContainer{
+    background: #e42121;
+    color: white;
+    padding: 8px;
+    text-align: center;
+    margin-bottom: 1.875rem;
+    p{
+        margin: 0px;
+        font-size: 16px;
+        font-weight: 400;
+    }
+    b{
+        color: white;
+        font-size: 17px;
+        margin-left: 5px;
+
+    }
+    b:hover{
+        cursor: pointer;
+        opacity: 0.8;
+        
+    }
+}

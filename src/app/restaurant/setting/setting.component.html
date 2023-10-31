@@ -1,0 +1,50 @@
+<div class="row w-100 mx-0">
+    <div class="col-lg-12 mx-auto bg-light p-3">
+        <nav ngbNav #nav="ngbNav" class="nav-tabs" [(activeId)]="activeTab">
+            <ng-container [ngbNavItem]="1">
+                <a ngbNavLink class="user_type" >Summary</a>
+                <ng-template ngbNavContent>
+                    <app-cs-description [firsttab]="settings.firsttab" (onUpdate)="onSubComponentUpdate($event)"></app-cs-description>
+                </ng-template>
+            </ng-container>
+            <ng-container [ngbNavItem]="2">
+                <a ngbNavLink class="user_type" >Gallery</a>
+                <ng-template ngbNavContent>
+                    <app-cs-image [images]="settings.images" [thumbnail]="settings.firsttab.thumbnail" [mainlogo]="settings.firsttab.mainlogo" (onUpdate)="onSubComponentUpdate($event)"></app-cs-image>
+                </ng-template>
+            </ng-container>
+            <ng-container [ngbNavItem]="3">
+                <a ngbNavLink class="user_type" >Address</a>
+                <ng-template ngbNavContent>
+                    <app-cs-address [data]="settings.address" (onUpdate)="onSubComponentUpdate($event)"></app-cs-address>
+                </ng-template>
+            </ng-container>
+            <!-- <ng-container [ngbNavItem]="4">
+                <a ngbNavLink class="user_type" >Menu</a>
+                <ng-template ngbNavContent>
+                    <app-cs-menu [menu]="settings.menu" (onUpdate)="onSubComponentUpdate($event)"></app-cs-menu>
+                </ng-template>
+            </ng-container> -->
+            <ng-container [ngbNavItem]="5">
+                <a ngbNavLink class="user_type" >Time Info</a>
+                <ng-template ngbNavContent>
+                    <app-cs-opentime [timeinfo]="settings.timeinfo" (onUpdate)="onSubComponentUpdate($event)"></app-cs-opentime>
+                </ng-template>
+            </ng-container>
+            <!-- <ng-container [ngbNavItem]="3">
+                <a ngbNavLink class="user_type" >Information</a>
+                <ng-template ngbNavContent>
+                    <app-cs-information [data]="settings.information" (onUpdate)="onSubComponentUpdate($event)"></app-cs-information>
+                </ng-template>
+            </ng-container> -->
+            
+            <!-- <ng-container [ngbNavItem]="7">
+                <a ngbNavLink class="user_type" >Offer</a>
+                <ng-template ngbNavContent>
+                    <app-cs-offer></app-cs-offer>
+                </ng-template>
+            </ng-container> -->
+        </nav>
+        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    </div>
+</div>

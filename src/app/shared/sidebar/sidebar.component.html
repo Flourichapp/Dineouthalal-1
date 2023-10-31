@@ -1,0 +1,168 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <div class="sidebar-brand-wrapper d-none d-lg-flex align-items-center justify-content-center fixed-top">
+    <a class="" routerLink="/rest/welcome" *ngIf="isRestaurant">
+      <img src="assets/images/logo2.png" alt="" class="Logo" />
+    
+    </a>
+    <a class="" routerLink="/rest/dashboard" *ngIf="isAdmin">
+      
+      <img src="assets/images/logo2.png" alt=""   class="Logo"  />
+    </a>
+  </div>
+
+  <!-- for restuaurant business menu -->
+  <ul class="nav" *ngIf="isRestaurant">
+
+    <li class="nav-item menu-items" [ngClass]="{ 'active': dashboard.isActive, 'disabled-menu-item': isItemDisabled(r.url) }" *ngFor="let r of menuItems">
+      <a class="nav-link"  routerLinkActive #dashboard="routerLinkActive" (click)="changeRoute(r.url)" >
+          <span class="menu-icon">
+            <i class="mdi mdi-speedometer"></i> 
+          </span>
+          <span class="menu-title" translate>{{r.screen_name}}</span>
+        </a>
+      </li>
+      
+    
+   
+    <li class="nav-item menu-items" [ngClass]="{ 'active': subscription.isActive }">
+      <a class="nav-link" routerLink="/rest/subscription"  routerLinkActive #subscription="routerLinkActive" (click)="changeRoute('/rest/subscription')" >
+        <span class="menu-icon">
+          <i class="mdi mdi-cash"></i> 
+        </span>
+        <span class="menu-title" translate>Subscription</span>
+      </a>
+    </li> 
+  
+    <li class="nav-item menu-items" [ngClass]="{ 'active': profile.isActive }">
+      <a class="nav-link"  routerLink="/rest/profile"  routerLinkActive #profile="routerLinkActive"  >
+        <span class="menu-icon">
+          <i class="mdi mdi-account-box"></i> 
+        </span>
+        <span class="menu-title" translate>Manager Setting</span>
+      </a>
+    </li>
+   
+  </ul>
+
+  <!-- for super admin menu -->
+  <ul class="nav" *ngIf="isAdmin">
+    <li class="nav-item nav-category">
+      <span class="nav-link" translate>Navigation</span>
+    </li>
+    <li class="nav-item menu-items" [ngClass]="{ 'active': dashboard.isActive }">
+      <a class="nav-link" routerLink="/admin/dashboard" routerLinkActive #dashboard="routerLinkActive">
+        <span class="menu-icon">
+          <i class="mdi mdi-speedometer"></i> 
+        </span>
+        <span class="menu-title" translate>Dashboard</span>
+      </a>
+    </li>
+
+    
+    <li class="nav-item menu-items" [ngClass]="{ 'active': restaurants.isActive }">
+      <a class="nav-link" routerLink="/admin/restaurants" routerLinkActive #restaurants="routerLinkActive">
+        <span class="menu-icon">
+          <i class="mdi mdi-speedometer"></i> 
+        </span>
+        <span class="menu-title" translate>Restaurants</span>
+      </a>
+    </li>
+
+    <li class="nav-item menu-items" [ngClass]="{ 'active': blogs.isActive }">
+      <a class="nav-link" routerLink="/admin/blogs" routerLinkActive #blogs="routerLinkActive">
+        <span class="menu-icon">
+          <i class="mdi mdi-speedometer"></i> 
+        </span>
+        <span class="menu-title" translate>Blogs</span>
+      </a>
+    </li>
+
+    <li class="nav-item menu-items">
+      <div class="dropdown-nav" (click)="toggleTabs()">
+        <a class="nav-link" >
+          <span class="menu-title" translate>Transaction</span>
+        </a>
+        <span class="menu-icon">
+          <i class="mdi mdi-chevron-down" [ngClass]="{'mdi-chevron-up': showTabs, 'mdi-chevron-down': !showTabs}"></i>
+        </span>
+      </div>
+      
+    </li>
+    <ng-container *ngIf="showTabs">
+      <div>
+
+      <li class="nav-item menu-items" [ngClass]="{ 'active': bookings.isActive }">
+        <a class="nav-link" routerLink="/admin/bookings" routerLinkActive #bookings="routerLinkActive">
+          <span class="menu-icon">
+            <i class="mdi mdi-cash"></i> 
+          </span>
+          <span class="menu-title" translate>bookings</span>
+        </a>
+      </li>
+
+      <li class="nav-item menu-items" [ngClass]="{ 'active': transaction.isActive }">
+        <a class="nav-link" routerLink="/admin/transaction" routerLinkActive #transaction="routerLinkActive">
+          <span class="menu-icon">
+            <i class="mdi mdi-cash"></i> 
+          </span>
+          <span class="menu-title" translate>subscribtions</span>
+        </a>
+      </li>
+    </div>
+
+    </ng-container>
+
+    <li class="nav-item menu-items" [ngClass]="{ 'active': accesslist.isActive }">
+      <a class="nav-link" routerLink="/admin/accesslist" routerLinkActive #accesslist="routerLinkActive">
+        <span class="menu-icon">
+          <i class="mdi mdi-settings"></i> 
+        </span>
+        <span class="menu-title" translate>Access List</span>
+      </a>
+    </li>
+    <li class="nav-item menu-items" [ngClass]="{ 'active': packages.isActive }">
+      <a class="nav-link" routerLink="/admin/packages" routerLinkActive #packages="routerLinkActive">
+        <span class="menu-icon">
+          <i class="mdi mdi-settings"></i> 
+        </span>
+        <span class="menu-title" translate>Packages</span>
+      </a>
+    </li>
+    <li class="nav-item menu-items" [ngClass]="{ 'active': activitylog.isActive }">
+      <a class="nav-link" routerLink="/admin/activitylog" routerLinkActive #activitylog="routerLinkActive">
+        <span class="menu-icon">
+          <i class="mdi mdi-settings"></i> 
+        </span>
+        <span class="menu-title" translate>Activity Logs</span>
+      </a>
+    </li>
+
+    <li class="nav-item menu-items" [ngClass]="{ 'active': setting.isActive }">
+      <a class="nav-link" routerLink="/admin/setting" routerLinkActive #setting="routerLinkActive">
+        <span class="menu-icon">
+          <i class="mdi mdi-settings"></i> 
+        </span>
+        <span class="menu-title" translate>Settings</span>
+      </a>
+    </li>
+    <li class="nav-item menu-items" [ngClass]="{ 'active': metatags.isActive }">
+      <a class="nav-link" routerLink="/admin/metatags" routerLinkActive #metatags="routerLinkActive">
+        <span class="menu-icon">
+          <i class="mdi mdi-settings"></i> 
+        </span>
+        <span class="menu-title" translate>Meta Tags</span>
+      </a>
+    </li>
+
+    <li class="nav-item menu-items" [ngClass]="{ 'active': customers.isActive }">
+      <a class="nav-link" routerLink="/admin/customers" routerLinkActive #customers="routerLinkActive">
+        <span class="menu-icon">
+          <i class="mdi mdi-account"></i> 
+        </span>
+        <span class="menu-title" translate>Subscribers</span>
+      </a>
+    </li>
+    
+
+  </ul>
+</nav>

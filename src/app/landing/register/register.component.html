@@ -1,0 +1,39 @@
+<div class="container-scroller">
+    <div class="main-panel mt-0">
+        <div class="d-flex align-items-center auth px-0">
+            
+            <div class="row w-100 mx-0">
+                <img src="/assets/images/banners/slider1.webp" alt="location" class="signupFormBanner">
+
+                <div class="col-lg-6 mx-auto  signupContainer">
+                    <div class="auth-form-dark text-left py-5 px-4 px-sm-5">
+                        <div class="brand-logo text-center">
+                            <!-- <img src="assets/images/logo2.png" alt="logo"> -->
+                            <h1 class="poppins_regular">Sign <label class="poppins_extrabold">Up</label></h1>
+                            <p class="poppins_regular">Already have an account? <a routerLink="/login" class="text-primary"> <label class="loginText">Log in</label> </a> </p>
+                        </div>
+
+                        <!-- <h2 *ngIf="isVendor">Vendor</h2>
+                        <h2 *ngIf="isCustomer">Customer</h2>
+
+                        <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6> -->
+
+                        <app-customer *ngIf="isCustomer"></app-customer>
+
+                        <app-restaurant *ngIf="isVendor"></app-restaurant>
+
+                        <div class="text-center mt-3">
+                            <p *ngIf="isCustomer" class="bottomText">If you are a restaurant  <a routerLink="/login" class="text-primary"> <label class="bottomLabel" >Log in</label> </a> or <label class="bottomLabel"  (click)="isVendorClick(true)">Sign up</label>  here </p>
+                            <p *ngIf="isVendor"   class="bottomText">If you are a customer    <a routerLink="/login" class="text-primary"> <label class="bottomLabel" >Log in</label> </a>  or <label class="bottomLabel"  (click)="isVendorClick(false)">Sign up</label>  here </p>
+
+                            <!-- <span class="btn font-italic text-primary" (click)="isVendorClick(true)"
+                                *ngIf="isCustomer">I'm a Vendor</span>
+                            <span class="btn font-italic text-primary" (click)="isVendorClick(false)"
+                                *ngIf="isVendor">I'm a Customer</span> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

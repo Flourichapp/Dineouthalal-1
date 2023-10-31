@@ -1,0 +1,185 @@
+<div class="row w-100 mx-0">
+  <div class="col-lg-12 mx-auto bg-light p-3">
+    <div>
+
+      <h3>Meta Tags</h3>
+      <button class="btn btn-primary btn-icon btn-rounded float-right" (click)="openAddMeta(AddMeta)"><i
+          class="mdi mdi-plus"></i></button>
+    </div>
+
+    <table class="table">
+      <thead>
+        <th>Route</th>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Image</th>
+        <th>Url</th>
+        <th>Actions</th>
+
+      </thead>
+      <tbody>
+        <tr *ngFor="let r of metaTags; let i = index;">
+          <td>{{r.route_name}}</td>
+          <td>{{r.title}}</td>
+          <td>{{ parseMeta(r.meta).description }}</td>
+          <td>{{ parseMeta(r.meta).image }}</td>
+          <td>{{ parseMeta(r.meta).url }}</td>
+
+          <td> <span class="pe-auto"><i class="mdi mdi-pencil icon" (click)="openEditModal(AddMeta, i)"></i></span>
+
+            <span class="pe-auto" (click)="openDeleteModal(cancelModal ,r.id)"><i
+                class="mdi mdi-delete icon "></i></span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+
+
+    <div class="pull-right">
+      <mat-paginator (page)="handlePageEvent($event)" [length]="total" [pageSize]="params.all_pageSize"
+        [pageSizeOptions]="[5, 10, 25, 100]">
+      </mat-paginator>
+    </div>
+
+  </div>
+
+</div>
+<ng-template #AddMeta let-modal>
+  <div class="modal-header">
+    <!-- <button type="button" class="close" aria-label="Close" (click)="cancelBtn()"> -->
+    <!-- <span aria-hidden="true">&times;</span>
+    </button> -->
+    <h3 *ngIf="isAdd" class="m-2">Add Meta Tags</h3>
+    <h3 *ngIf="isEdit" class="m-2">Add Meta Tags</h3>
+
+  </div>
+  <div class="modal-body w-100 p-3 mx-auto">
+    <div class="col-md-12">
+      <div class="row">
+        <div class="col-md-6">
+          
+              <label class="poppins_regular">Page Route</label>
+              <input type="text" [(ngModel)]="formData.routename" />
+              <p class="poppins_light mt-2">add the page absolute url eg. absolute url /about-us from url https://www.dineouthalal.com/about-us  </p>
+
+        </div>
+        <div class="col-md-6">
+          <div class="col-md-12">
+            <h4>Open Graph Fields</h4>
+          </div>
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-3 mt-2">
+                <label class="poppins_regular">Type:</label>
+                <input type="text" [(ngModel)]="formData.meta.type" />
+  
+              </div>
+              <div class="col-9 mt-2">
+                <label class="poppins_regular">Url:</label>
+                <input type="text" [(ngModel)]="formData.meta.url" />
+  
+              </div>
+              <div class="col-12 mt-2">
+                <label class="poppins_regular">Image Url:</label>
+                <input type="text" [(ngModel)]="formData.meta.image" />
+  
+              </div>
+  
+            </div>
+         
+          
+          </div>
+        </div>
+       
+      </div>
+      <div class="col-md-12">
+        <hr>
+        <h4>Meta Fields</h4>
+        <hr>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+             <label class="poppins_regular">Meta Title:</label>
+              <input type="text" [(ngModel)]="formData.title" />
+        </div>
+        <div class="col-md-6">
+        
+              <label class="poppins_regular">Description:</label>
+              <textarea type="text" [(ngModel)]="formData.meta.description"></textarea>
+           
+        </div>
+    
+        <div class="col-md-6">
+          <!-- <div class="row m-2">
+            <div class="col-4">
+              <label class="poppins_regular">Image Url:</label>
+            </div>
+            <div class="col-8">
+              <input type="text" [(ngModel)]="formData.meta.image" />
+            </div>
+          </div> -->
+          <!-- <div class="row m-2">
+            <div class="col-4">
+              <label class="poppins_regular">Keywords:</label>
+            </div>
+            <div class="col-8">
+              <mat-form-field class="keywords-form-field">
+                <mat-label>Keywords</mat-label>
+                <mat-chip-list class="keywords-chip-list" #chipList>
+                  <mat-chip *ngFor="let keyword of formData.meta.keywords" [selectable]="true" [removable]="true"
+                    (removed)="removeKeyword(keyword)">
+                    {{ keyword }}
+                    <mat-icon matChipRemove>x</mat-icon>
+                  </mat-chip>
+                  <input matInput [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                    [matChipInputAddOnBlur]="true" (matChipInputTokenEnd)="addKeyword($event)">
+                </mat-chip-list>
+              </mat-form-field>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+  </div>
+  <div class="modal-footer">
+    <div class="text-right m-2">
+       <button type="button" class="btn btn-ligh*t" (click)="cancelBtn()">Cancel</button>
+      <button class="btn btn-primary " *ngIf="isAdd"  (click)="AddMetaTags()">Submit</button>
+      <button class="btn btn-primary " *ngIf="isEdit" (click)="updateMetaTags()">Update</button>
+
+    </div>
+    <!-- <button type="button" class="btn btn-ligh*t" (click)="modal.close('Close click')">No</button> -->
+    <!-- <button type="button" class="btn btn-light"  (click)="cancelBtn()">Yes</button> -->
+  </div>
+</ng-template>
+<ng-template #cancelModal let-modal>
+  <div class="modal-header">
+    <h3>Delete meta tags and keywords</h3>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body w-100 mx-auto">
+    <div class="text-center">
+      <h2 class="mb-4">Do you want to delete this </h2>
+      <p>Do you realy want to delete these? This process cannot be undone</p>
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" [disabled]="isLoading" class="btn btn-light" (click)="modal.close('Close click')">No</button>
+    <button type="button" [disabled]="isLoading" class="btn  btn-primary" (click)="deleteMetaTags()">
+      <div *ngIf="isLoading" class="spinner"></div>
+      <div *ngIf="!isLoading">Yes</div>
+    </button>
+
+
+  </div>
+</ng-template>

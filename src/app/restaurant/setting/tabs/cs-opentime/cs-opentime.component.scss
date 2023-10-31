@@ -1,0 +1,19 @@
+button{
+    margin: 10px;
+}
+.calendar-section {
+    display       : flex;
+    flex-direction: row;
+
+    .navigator {
+        width: 190px;
+    }
+
+    .content {
+        flex-grow: 1;
+    }
+    .date-section{
+        max-height: 200px;
+        overflow-y: overlay;
+    }
+}

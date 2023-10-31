@@ -1,0 +1,27 @@
+<div class="row w-100 mx-0">
+    <div class="col-lg-12 mx-auto bg-light p-3">
+        <nav ngbNav #nav="ngbNav" class="nav-tabs">
+            <ng-container [ngbNavItem]="0">
+                <a ngbNavLink class="user_type" >General Setting</a>
+                <ng-template ngbNavContent>
+                    <app-generic-setting></app-generic-setting>
+                </ng-template>
+            </ng-container>
+
+            <!-- <ng-container [ngbNavItem]="1">
+                <a ngbNavLink class="user_type" >Slider Setting</a>
+                <ng-template ngbNavContent>
+                    <app-slider-setting></app-slider-setting>
+                </ng-template>
+            </ng-container> -->
+
+            <ng-container [ngbNavItem]="1">
+                <a ngbNavLink class="user_type" >Cuisine Setting</a>
+                <ng-template ngbNavContent>
+                    <app-admin-cuisine-category></app-admin-cuisine-category>
+                </ng-template>
+            </ng-container>
+        </nav>
+        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+    </div>
+</div>

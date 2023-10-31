@@ -1,0 +1,29 @@
+button {
+  margin: 10px;
+}
+
+.calendar-section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+
+.calendar-section .navigator {
+  width: 190px;
+}
+
+.calendar-section .content {
+  -webkit-box-flex: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.calendar-section .date-section {
+  max-height: 200px;
+  overflow-y: overlay;
+}
+/*# sourceMappingURL=cs-opentime.component.css.map */

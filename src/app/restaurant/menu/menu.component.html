@@ -1,0 +1,124 @@
+<div class="row w-100 mx-0">
+    <div class="col-lg-12 mx-auto bg-light p-3">
+        <h3>Menus In Restaurant
+            <button class="btn btn-primary btn-icon btn-rounded float-right" (click)="onNew()"
+                *ngIf="!isNew && !isEdit"><i class="mdi mdi-plus"></i></button>
+             
+        </h3>
+        <div class="row">
+            <div class="col-lg-8" [ngClass]="{'col-lg-8':isNew || isEdit, 'col-lg-12':!isNew && !isEdit}">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Thumbnail</th>
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="dataList?.length != 0">
+                        <tr *ngFor="let item of dataList; let i = index;">
+                            <td>{{ i + 1 }}</td>
+                            <td>
+                                <img class="" src="{{item.thumbnail ? (imageURL + '/' + item.thumbnail) : 'assets/images/logo2.png'}}" />
+                            </td>
+                            <td>{{ item.name }}</td>
+                            <td >
+                                <p [innerHtml]="item.description" class="description"></p></td>
+                            <td>&pound; {{ item.price }}</td>
+                            <td>
+                                <p class="btn btn-success" *ngIf="item.status == 1">Active</p>
+                                <p class="btn btn-danger" *ngIf="item.status == 0">Inactive</p>
+                            </td>
+                            <td>
+                                <div class="d-flex">
+                                    <button class="btn btn-primary btn-icon" (click)="onEdit(item)"><i
+                                            class="mdi mdi-lead-pencil"></i></button>
+                                    <button class="btn btn-danger btn-icon" (click)="onDelete(item.id)"><i
+                                            class="mdi mdi-window-close"></i></button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-4">
+              
+
+                <form [formGroup]="dataForm" *ngIf="isNew || isEdit">
+                    <h3>Upload as a pdf</h3>
+                    <input type="file" (change)="onFileSelected($event)" accept="application/pdf">
+                    <button type="button" class="btn btn-primary" (click)="onUpload()" >Add
+                        pdf</button>
+    
+                        <h1>--- OR ---</h1>
+
+                    <div class="card p-3">
+                        <div class="form-group">
+                            <label for="title">Title</label>
+                            <input type="text" formControlName="title" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.title.errors }" placeholder="Title"
+                                id="title">
+                            <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                                <div *ngIf="f.title.errors.required">Title is Required</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="title">Price</label>
+                            <input type="text" formControlName="price" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.price.errors }" placeholder="10" id="price">
+                            <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+                                <div *ngIf="f.price.errors.required">Price is Required</div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <textarea formControlName="description" class="form-control"
+                                [ngClass]="{ 'is-invalid': submitted && f.description.errors }"
+                                placeholder="Type Summary ..." rows="5" id="description"></textarea>
+                            <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                                <div *ngIf="f.description.errors.required">Description is Required</div>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group">
+                            <input hidden type="file" accept="image/*" (change)="uploadFile($event)" #file>
+                            <button class="btn btn-outline-primary" (click)="file.click()">Upload Image</button>
+                        </div>
+
+                        <!-- preview image -->
+                        <div class="column" *ngIf="imageUrl">
+                            <figure class="image is-128x128">
+                                <img [src]="imageUrl" />
+                            </figure>
+                        </div>
+                        <!-- preview image -->
+                        <!-- Progress Bar -->
+                        <div class="progress form-group" *ngIf="progress > 0">
+                            <div class="progress-bar progress-bar-striped bg-success" role="progressbar"
+                                [style.width.%]="progress">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary" (click)="onAdd()" *ngIf="isNew">Add
+                                Item</button>
+                            <button type="button" class="btn btn-primary" (click)="onUpdate()" *ngIf="isEdit">Update
+                                Item</button>
+
+                            <button type="button" class="btn btn-danger pull-right"
+                                (click)="isNew = false; isEdit= false;">Cancel</button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+         
+        </div>
+    </div>
+</div>

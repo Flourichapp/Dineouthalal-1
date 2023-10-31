@@ -1,0 +1,72 @@
+<div id="myDIV" class="ambassadorContainer  mb-5">
+    <div class="col-md-12 mb-5">
+        <div class="text-center">
+            <h2 class="poppins_regular">Become an <label class="poppins_bold ambassadorText">ambassador</label> </h2>
+            <hr>
+        </div>
+        <div class="row">
+            <div class="col-md-5 ">
+                <img  src="/assets/images/about/ambassador.jpeg" alt="location"
+                    class="h-100 w-100 ambassadorImg ">
+
+            </div>
+            <div class="col-md-7 ambassadorCard">
+                <div class="text-center">
+                    <h3 class="poppins_regular">Ambassador Program</h3>
+                    <p>We are thrilled to extend an exclusive invitation to you to become an Ambassador with DineOut
+                        Halal, a community that celebrates the wonderful world of halal cuisine. For every restaurant
+                        you sign up and successfully convert by getting them to sign a contract with us, you'll earn an
+                        impressive £25!</p>
+                    <form [formGroup]="dataForm">
+
+                        <div class="errorContainer"
+                            *ngIf="dataForm.get('name').hasError('required') && dataForm.get('name').touched">
+                            Name is required.
+                        </div>
+                        <input formControlName="name" placeholder="Full Name" [(ngModel)]="name" />
+
+                        <div class="errorContainer"
+                            *ngIf="dataForm.get('email').hasError('required') && dataForm.get('email').touched">
+                            Email is required.
+                        </div>
+                        <div class="errorContainer"
+                            *ngIf="dataForm.get('email').hasError('email') && dataForm.get('email').touched">
+                            Please enter a valid email.
+                        </div>
+                        <input formControlName="email" placeholder="Email Address" [(ngModel)]="email" />
+                        <div class="errorContainer"
+                            *ngIf="dataForm.get('socialurl').hasError('required') && dataForm.get('socialurl').touched">
+                            Social url is required.
+                        </div>
+                        <input formControlName="socialurl" placeholder="Link of your primary social media platform"
+                            [(ngModel)]="socialurl" />
+                        <div class="errorContainer"
+                            *ngIf="dataForm.get('description').hasError('required') && dataForm.get('description').touched">
+                            Description is required.
+                        </div>
+                        <textarea id="myTextArea" formControlName="description" [(ngModel)]="description"
+                            placeholder="Write a paragraph on why you are interested in becoming an ambassador with us"></textarea>
+
+
+                        <div class="row ">
+                            <div class="col-6 text-left">
+
+                                <input hidden type="file" accept="image/*" (change)="uploadFile($event)" #file>
+
+                                <label (click)="file.click()">Attach a <br> screenshot of your<br> analytics
+                                    here.</label> <br>
+                                <h6 class="poppins_regular">{{fileName}}</h6>
+
+                            </div>
+                            <div class="col-6 text-right">
+                                <button (click)="onSubmit()" [disabled]="dataForm.invalid">Join now</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>

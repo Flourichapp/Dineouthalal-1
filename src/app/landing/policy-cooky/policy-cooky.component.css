@@ -1,0 +1,23 @@
+h2 {
+  font-size: 38px;
+}
+
+p {
+  font-size: 16px;
+  font-family: poppins;
+  font-weight: 400;
+}
+
+h3 {
+  font-size: 30px;
+  text-decoration: underline;
+  margin: 25px 0px;
+}
+
+li {
+  font-size: 16px;
+  font-family: poppins;
+  font-weight: 400;
+  margin-bottom: 1rem;
+}
+/*# sourceMappingURL=policy-cooky.component.css.map */

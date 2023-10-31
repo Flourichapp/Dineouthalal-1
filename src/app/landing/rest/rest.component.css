@@ -1,0 +1,335 @@
+.sebm-google-map-container {
+  height: 300px;
+}
+
+.GallerySlider img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.inner-tab {
+  padding: 5px;
+  min-height: 500px;
+}
+
+.rating-pricing {
+  margin-top: 10px;
+}
+
+.rest-desc {
+  font-size: 15px;
+  font-weight: 500;
+  margin-top: 10px;
+}
+
+.offer-menu {
+  margin: 10px;
+  -webkit-box-shadow: 0 0 10px 8px #44444459;
+          box-shadow: 0 0 10px 8px #44444459;
+  border-radius: 5px;
+}
+
+.menu-section {
+  width: 100%;
+}
+
+.menu-section .menu-items .menu-item .menu-price {
+  float: right;
+}
+
+.index-icon {
+  padding-left: 10px;
+}
+
+.index-icon .fa {
+  font-size: 20px !important;
+  color: gray !important;
+}
+
+.pack {
+  margin-top: 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.pack input, .pack mat-select {
+  width: 90px;
+  text-align: center;
+}
+
+.pack mat-radio-group {
+  padding: 15px;
+}
+
+.pack mat-radio-group mat-radio-button {
+  margin-right: 5px;
+}
+
+.review-card {
+  -webkit-box-shadow: 2px 2px 8px 0px #00000054;
+          box-shadow: 2px 2px 8px 0px #00000054;
+  margin: 5px;
+}
+
+.review-card .mat-card-header-text {
+  width: 100%;
+}
+
+.review-card .user-avatar {
+  background: #bad4f5b5;
+  padding: 5px;
+  border-radius: 25px;
+  font-size: 30px;
+  width: 40px;
+  color: #5e659a;
+  height: 40px;
+  text-align: center;
+  -webkit-box-shadow: 2px 2px 8px 1px #00000073;
+          box-shadow: 2px 2px 8px 1px #00000073;
+}
+
+.review-card .date-star {
+  font-size: 14px;
+  margin: 5px;
+}
+
+.review-card .fa-star {
+  color: orangered;
+}
+
+.review-card .review-desc {
+  background: url("/assets/images/comment.png");
+  background-size: 100% 100%;
+  padding: 45px 50px !important;
+  margin-top: -30px;
+  width: 100%;
+  white-space: pre;
+  word-break: break-all;
+}
+
+.content {
+  margin-top: -100px;
+}
+
+.ng-image-fullscreen-view .lightbox-wrapper .lightbox-div .lightbox-image-main .lightbox-image .custom-image-main img {
+  height: calc( 100vh) !important;
+}
+
+.menu-img {
+  width: 100px !important;
+  height: 80px;
+  -o-object-fit: cover;
+     object-fit: cover;
+  float: right;
+}
+
+.restThumbnail {
+  position: relative;
+}
+
+.restThumbnail img {
+  width: 100%;
+  height: 300px;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.restContainer h1 {
+  font-size: 38px;
+  text-transform: capitalize;
+}
+
+.restContainer p {
+  font-size: 13px;
+}
+
+.restContainer p .foodCategory {
+  color: #C23616;
+  font-size: 13px;
+}
+
+.restContainer .aboutSection {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 90%;
+  margin: 10px auto;
+  font-size: 15px;
+  color: #727272;
+  font-family: 'Poppins';
+  font-weight: 400;
+  margin-bottom: 30px;
+}
+
+.restContainer .sum {
+  height: 24px;
+  width: 40px;
+  background-color: #5BB638;
+  margin: 0px;
+  text-align: center;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.restContainer .sum span {
+  color: white;
+}
+
+.restContainer label {
+  margin-left: 5px;
+  margin-bottom: 0px;
+}
+
+.galryImg {
+  margin-bottom: 18px;
+}
+
+.bookingText {
+  font-size: 16px !important;
+  margin: 24px 0px;
+}
+
+.openText {
+  color: #5BB638;
+}
+
+h2 {
+  font-size: 15px;
+  color: #727272;
+}
+
+.bookingContainer {
+  width: 80%;
+  margin: auto;
+}
+
+.bookNowBtn {
+  height: 56px;
+  background: #EF2F24;
+  border: none;
+  font-size: 1.2rem;
+  font-family: 'Poppins';
+  font-weight: 700;
+  color: white;
+  border-radius: 50px;
+  width: 90%;
+  margin-top: 20px;
+}
+
+.bookingCard {
+  -webkit-box-shadow: 0px 1px 1px 1px #e3e3e3;
+          box-shadow: 0px 1px 1px 1px #e3e3e3;
+  padding: 20px 16px 30px !important;
+  margin: 0px 0px 30px !important;
+}
+
+.galleryContainer {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 2fr 1fr 1fr;
+      grid-template-columns: 2fr 1fr 1fr;
+  -ms-grid-rows: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+  gap: 15px 15px;
+  grid-auto-flow: row;
+      grid-template-areas: "box1 box2 box3" "box1 box4 box5";
+}
+
+.galleryContainer img {
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.box1 {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  -ms-grid-column: 1;
+  grid-area: box1;
+}
+
+.box2 {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: box2;
+}
+
+.box3 {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: box3;
+}
+
+.box4 {
+  -ms-grid-row: 2;
+  -ms-grid-column: 2;
+  grid-area: box4;
+}
+
+.box5 {
+  -ms-grid-row: 2;
+  -ms-grid-column: 3;
+  grid-area: box5;
+}
+
+.arrow {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+}
+
+.dateInput {
+  border-bottom: 1px solid #707070 !important;
+  cursor: pointer;
+}
+
+.foodcategory {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  /* flex-direction: row; */
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.foodCategoryBtn {
+  height: 40px;
+  background: #E8E8E8;
+  padding: 0px 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-family: 'Poppins';
+  font-weight: 500;
+  font-size: 12px;
+  color: #727272;
+  margin: 10px 10px 10px 0px;
+}
+
+.foodCategoryBtn p {
+  margin: 0px;
+}
+/*# sourceMappingURL=rest.component.css.map */

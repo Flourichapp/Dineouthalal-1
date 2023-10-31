@@ -1,0 +1,190 @@
+<div *ngIf="loading">
+  <div class="loading-spinner-overlay">
+    <span class="spinner-border"></span>
+  </div>
+</div>
+<div class="row w-100 mx-0">
+  <div class="col-lg-12 mx-auto bg-light p-3">
+
+
+
+    <ng-template #detailModal let-modal>
+
+      <div class="modal-body">
+        <mat-card>
+          <h4 class="modal-title">Detail
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </h4>
+
+          <mat-card-content>
+            <mat-tab-group mat-align-tabs="start">
+              <mat-tab label="Overview">
+                <!-- overview part -->
+                <section class="inner-tab">
+                  <div class="p-3">
+                    <h3>{{selectedRest?.rest?.title}}</h3>
+                    <h5>{{selectedRest?.rest?.address1 + ' ' + selectedRest?.rest?.address2 + ', ' + selectedRest?.rest?.city}}
+                    </h5>
+                    <p [innerHtml]="selectedRest?.rest?.fulldescription"></p>
+                    <h5>{{selectedRest?.rest?.foodTypes}}</h5>
+                  </div>
+                 
+                </section>
+
+              </mat-tab>
+              <mat-tab label="Gallery">
+                <!-- menu part -->
+                <section class="inner-tab">
+
+                  <ngx-slick-carousel class="carousel" [config]="slideConfig">
+                    <div ngxSlickItem *ngFor="let image of selectedRest.images" class="blog-slide">
+                      <div class="carselLink">
+                        <img src="{{imageURL}}/{{image.image}}" alt="" width="200" height="auto" style="object-fit: cover;">
+                      </div>
+                    </div>
+                  </ngx-slick-carousel>
+
+                </section>
+              </mat-tab>
+              <mat-tab label="Menus">
+                <section class="inner-tab">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Thumbnail</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of selectedRest.menus; let i = index;">
+                        <td>{{ i + 1 }}</td>
+                        <td>
+                          <img class="" src="{{imageURL}}/{{ item.thumbnail?item.thumbnail:'/assets/images/logo2.png' }}" />
+                        </td>
+                        <td>{{ item.name }}</td>
+                        <td>
+                          <p [innerHtml]="item.description" class="description"></p>
+                        </td>
+                        <td>&pound; {{ item.price }}</td>
+
+                      </tr>
+                    </tbody>
+                  </table>
+                </section>
+              </mat-tab>
+              <mat-tab label="Transactions">
+                <!-- review part -->
+                <section class="inner-tab">
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th>ID</th>
+                        <th>Amount</th>
+                        <th>Paid at</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let r of selectedRest.transactions; let i = index;">
+                        <td><span>{{i + 1}}</span></td>
+                        <td>{{r.amount}}</td>
+                        <td>{{r.paid_at | date}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                </section>
+              </mat-tab>
+            </mat-tab-group>
+          </mat-card-content>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-light" (click)="modal.close('Close click')">OK</button>
+          </div>
+        </mat-card>
+      </div>
+    </ng-template>
+    <h3>All Restaurant</h3>
+    <div>
+      <table class="table" id="dt1">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th></th>
+            <th>Owner</th>
+            <th>Restaurant Name</th>
+            <th>Subscription</th>
+            <th>Created Date</th>
+            <th>Status</th>
+            <th>Full Access</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let r of AllRest; let i = index;">
+            <td class="position-relative">
+              <div class="my-ribbon" *ngIf="r.new_flag == 1"><span>NEW</span></div>
+              <span>{{i + 1}}</span>
+            </td>
+
+            <td>
+              <img src="{{imageURL}}/{{r.main_logo}}" alt="image" />
+            </td>
+
+            <td>{{r.first_name}}&nbsp;{{r.last_name}}<br>({{r.email}})</td>
+
+            <td>
+              <span>{{r.title}}</span>
+            </td>
+            <td *ngIf="r.package_name && r.package_plan && r.subscription_type && r.expire_date; else noDataFound">
+                <span><strong>{{r.package_name}}</strong></span>
+                <br/>
+                <span>Plan: {{r.package_plan}}</span>
+                <br/>
+                <span>{{r.subscription_type}}</span>
+                <br/>
+                <span>Expire on: {{r.expire_date | date}}</span>
+
+            </td>
+            <ng-template #noDataFound>
+                <td >N/A</td>
+            </ng-template>
+            <!-- <td>{{r.package_plan}}</td> -->
+            <!-- <td>{{r.subscription_type}}</td> -->
+
+            <!-- <td>{{r.expire_date | date}}</td> -->
+
+
+            <td>{{r.created_at | date}}</td>
+
+            <td>
+              <select  #mySelect  (change)="changeStatus(mySelect.value, r.restaurant_id)"  [(ngModel)]="r.status">
+                <option *ngFor="let status of statusOptions" [value]="status">{{status}}</option>
+              </select>
+            </td>
+
+              <td>
+                <mat-slide-toggle color="primary" [checked]="r.full_access === 1"
+                (change)="changeAccess($event , r.restaurant_id,r.status)"></mat-slide-toggle>
+              </td>
+            
+            <td>
+              <button type="button" class="btn btn-primary" (click)="openDetailModal(detailModal, r)"><i
+                  class="fa fa-eye"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <mat-paginator (page)="handlePageEvent2($event)" [length]="all_total" [pageSize]="params.all_pageSize"
+      [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+    </div>
+
+   
+
+
+  </div>
+</div>

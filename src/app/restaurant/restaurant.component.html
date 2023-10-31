@@ -1,0 +1,20 @@
+<div class="container-scroller">
+    <app-sidebar (packageIdUpdated)="updatePackageId($event)" *ngIf="showSidebar"></app-sidebar>
+    
+    <div class="container-fluid page-body-wrapper">
+        <app-navbar *ngIf="showNavbar"></app-navbar>
+        <div class="main-panel" [ngClass]="{ 'main-panel-only' : !showSidebar }">
+            <div class="content-wrapper">
+                <div *ngIf="disableScreen" class="subscriptionContainer">
+                    <p>Subscribe to any package to enable the functionality.  <a  routerLink="/rest/subscription"><b>click here</b></a> </p>
+
+                </div>
+                <app-spinner *ngIf="isLoading"></app-spinner>
+                <div contentAnimate *ngIf="!isLoading" class="h-100" >
+                    <router-outlet (packageIdUpdated)="updatePackageId($event)" ></router-outlet>
+                </div>
+            </div>
+            <!-- <app-footer *ngIf="showFooter"></app-footer> -->
+        </div>
+    </div>
+</div>

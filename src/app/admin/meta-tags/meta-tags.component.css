@@ -1,0 +1,39 @@
+a:focus, input:focus {
+  border: 1px solid black;
+}
+
+textarea {
+  height: 150px;
+  width: 100%;
+}
+
+input {
+  width: 100%;
+}
+
+td {
+  overflow-wrap: anywhere;
+}
+
+.keywords-form-field {
+  width: 100%;
+}
+
+.keywords-chip-list {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.keyword-chip {
+  margin-right: 10px;
+  margin-bottom: 10px;
+  background-color: #e0e0e0;
+  border-radius: 4px;
+  padding: 4px 8px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=meta-tags.component.css.map */

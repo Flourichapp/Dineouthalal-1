@@ -1,0 +1,66 @@
+<div class="p-5">
+    <form [formGroup]="dataForm">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label for="title">Restaurant Name</label>
+                    <input type="text" formControlName="title" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.title.errors }"
+                    placeholder="Restaurant Name" id="title" placeholder="Restaurant Name">
+                    <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                        <div *ngIf="f.title.errors.required">Title is Required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="shortdescription">Short Description</label>
+                    <textarea formControlName="shortdescription" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.shortdescription.errors }"
+                    id="shortdescription" rows="4"></textarea>
+                    <div *ngIf="submitted && f.shortdescription.errors" class="invalid-feedback">
+                        <div *ngIf="f.shortdescription.errors.required">Description is Required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="cuisine">Cuisine</label>
+                    <select formControlName="cuisine" id="cuisine" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.cuisine.errors }">
+                        <option value="0">--select--</option>
+                        <option [value]="item.id" *ngFor="let item of cuisineArr;" >{{item.title}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.cuisine.errors" class="invalid-feedback">
+                        <div *ngIf="f.cuisine.errors.required">Cuisine is Required</div>
+                        <div *ngIf="f.cuisine.errors.min">Cuisine is Required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="average_price">Average Price (&pound;)</label>
+                    <input type="text" formControlName="average_price" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.average_price.errors }"
+                    placeholder="12" id="average_price">
+                    <div *ngIf="submitted && f.average_price.errors" class="invalid-feedback">
+                        <div *ngIf="f.average_price.errors.required">Price is Required</div>
+                        <div *ngIf="f.average_price.errors.min">Price should be greator than 1</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Food Options:</label>
+                    <div *ngFor="let fo of foodTypes; let i=index" class="col-md-2">
+                        <mat-checkbox color="primary" [value]="fo.value" [checked]="fo.checked" (change)="onCheckChange($event)">{{fo.name}}</mat-checkbox>
+                      </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label for="fulldescription">Full Description</label>
+                    <div [ngxSummernote]="config" formControlName="fulldescription" id="fulldescription"></div>
+                    <div *ngIf="submitted && f.fulldescription.errors" class="invalid-feedback">
+                        <div *ngIf="f.fulldescription.errors.required">Description is Required</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="p-5">
+            <button [disabled]="loading" class="float-right btn btn-primary rounded-pill" (click)="onSubmit()" type="button">Save</button>
+        </div>
+    </form>
+</div>

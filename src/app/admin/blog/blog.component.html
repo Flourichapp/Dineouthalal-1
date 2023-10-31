@@ -1,0 +1,265 @@
+<div class="row w-100 mx-0">
+  <div class="col-lg-12 mx-auto bg-light p-3">
+
+    <div class="row">
+
+      <!-- <div id="posted-blog" [ngClass]="{ 'col-sm-6': addNew || isEdit ,'col-sm-12': !addNew && !isEdit }"> -->
+      <div id="posted-blog" class="col-sm-12">
+
+        <h3>Posted Blog Lists
+
+          <!-- <button class="btn btn-primary btn-icon btn-rounded float-right" (click)="addNew = true" *ngIf="!addNew"><i
+              class="mdi mdi-plus"></i></button> -->
+          <button class="btn btn-primary btn-icon btn-rounded float-right" (click)="openAddEditBlog(AddEditBlog)"
+            (click)="addNew = true"><i class="mdi mdi-plus"></i></button>
+
+        </h3>
+
+        <table class="table" id="dt1">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th></th>
+              <th>Blog Title</th>
+              <th>Posted At</th>
+              <th>Featured</th>
+
+              <th>Like/Dislike</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr *ngFor="let blog of postedblogs; let i = index;">
+              <td>
+                <span>{{i + 1}}</span>
+              </td>
+              <td>
+                <!-- <div [innerHtml]="blog.thumbnail" *ngIf="blog.thumbnail" class="blog-item-pre"></div> -->
+                <img src="{{imageURL}}/{{blog.thumbnail}}" alt="" class="blog-item-pre">
+              </td>
+              <td>{{blog.title}}</td>
+              <td>{{blog.created_at | date}}</td>
+              <td>{{ blog.featured ? 'Featured' : 'N/A' }}</td>
+
+              <td>
+                <span><i class="mdi mdi-hand-pointing-up"></i>: <b>{{blog.like_vote}}</b></span>&nbsp;
+                <span><i class="mdi mdi-hand-pointing-down"></i>: <b>{{blog.dislike_vote}}</b></span>
+              </td>
+              <td *ngIf="!isEdit"> <span  (click)="openAddEditBlog(AddEditBlog)" (click)="onEdit(blog)" ><i
+                    class="mdi mdi-pencil icon"></i></span> 
+                    <span (click)="onDelete(blog.id)"><i class="mdi mdi-delete icon"></i></span></td>
+
+              <!-- <td (click)="onDelete(blog)"*ngIf="!isEdit">delete</td> -->
+
+              <td></td>
+            </tr>
+
+          </tbody>
+        </table>
+
+
+        <mat-paginator (page)="handlePageEvent($event)" [length]="total" [pageSize]="pageSize"
+          [pageSizeOptions]="[5, 10, 25, 100]">
+        </mat-paginator>
+
+      </div>
+      <div class="col-sm-12 addBlogContainer " id="new-blog" *ngIf="addNew || isEdit">
+        <canvas #canvas style="display: none;"></canvas>
+        <canvas #canvasCover style="display: none;"></canvas>
+      </div>
+      <!-- <div class="col-sm-6 addBlogContainer" id="new-blog" *ngIf="addNew || isEdit">
+        <div><p>{{errorMessege}}</p></div>
+
+        <form [formGroup]="dataForm">
+          <div class="d-flex justify-content-between p-3">
+            <h3 *ngIf="addNew">Add New Blog</h3>
+            <h3 *ngIf="isEdit">Edit Existing Blog</h3>
+            <button *ngIf="addNew" class="float-right btn btn-primary rounded-pill" (click)="onSubmit()" type="button">Publish</button>
+            <button *ngIf="isEdit" class="float-right btn btn-primary rounded-pill" (click)="onEditBlog()" type="button">Edit Blog</button>
+
+          </div>
+
+          <div class="form-group">
+            <input type="title" formControlName="title" class="form-control"
+              [ngClass]="{ 'is-invalid': submitted && f.title.errors }" placeholder="Blog title" />
+            <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+              <div *ngIf="f.title.errors.required">Title Required</div>
+            </div>
+          </div>
+
+          <div *ngIf="submitted && f.blog.errors" class="invalid-feedback d-block">
+            <div *ngIf="f.blog.errors.required">Content is Required</div>
+          </div>
+
+
+          <div class="form-group">
+            <div [ngxSummernote]="summernoteConfig" formControlName="blog" id="blog"
+              class="blog-summernote"></div>
+          </div>
+
+          <div class="form-group">
+            <label class="FeatureLabel">Is Feature</label>
+            <mat-slide-toggle color="primary" value="f.featured" [checked]="featuredBlog"
+              (change)="changeFeatureBlog($event)"></mat-slide-toggle>
+          </div>
+          <div class="form-group">
+            <input hidden type="file" accept="image/*" (change)="uploadFile($event)" #file>
+            <button class="btn btn-outline-primary" (click)="file.click()">Upload thumbnail</button>
+          </div>
+          <div class="column" *ngIf="imageUrl">
+            <figure class="image is-128x128">
+              <img [src]="imageUrl" />
+            </figure>
+          </div>
+          <canvas #canvas style="display: none;"  ></canvas>
+
+          <div class="form-group">
+            <input hidden type="file" accept="image/*" (change)="uploadCover($event)" #filess>
+            <button class="btn btn-outline-primary" (click)="filess.click()">Upload cover</button>
+          </div>
+          <div class="column" *ngIf="coverUrl">
+            <figure class="image is-128x128">
+              <img [src]="coverUrl" />
+            </figure>
+          </div>
+          <canvas #canvasCover style="display: none;" ></canvas>
+
+         
+
+   
+        </form>
+        <button class="float-right btn btn-danger rounded-pill" (click)="cancelBtn()" type="button">Cancel</button>
+
+      </div> -->
+
+    </div>
+
+  </div>
+</div>
+<div class="BlogsContainer">
+  <ng-template class="BlogsContainer" #AddEditBlog let-modal>
+    <div class="modal-header">
+      <h3 *ngIf="addNew">Add New Blog</h3>
+      <h3 *ngIf="isEdit">Edit Existing Blog</h3>
+      <button type="button" class="close" aria-label="Close"    (click)="cancelBtn()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body w-100 mx-auto">
+      <div class="col-sm-12 addBlogContainer" id="new-blog" *ngIf="addNew || isEdit">
+        <div *ngIf="errorMessege" class="errorContainer">
+          <p class="poppins_medium m-0">{{errorMessege}}</p>
+        </div>
+
+
+
+        <form [formGroup]="dataForm">
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="d-flex justify-content-between p-3">
+
+                  <!-- <button *ngIf="addNew" class="float-right btn btn-primary rounded-pill" (click)="onSubmit()"
+                    type="button">Publish</button>
+                  <button *ngIf="isEdit" class="float-right btn btn-primary rounded-pill" (click)="onEditBlog()"
+                    type="button">Edit Blog</button> -->
+
+                </div>
+
+                <div class="form-group">
+                  <input type="title" formControlName="title" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.title.errors }" placeholder="Blog title" />
+                  <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                    <div *ngIf="f.title.errors.required">Title Required</div>
+                  </div>
+                </div>
+
+                <div *ngIf="submitted && f.blog.errors" class="invalid-feedback d-block">
+                  <div *ngIf="f.blog.errors.required">Content is Required</div>
+                </div>
+
+
+                <div class="form-group">
+                  <div [ngxSummernote]="summernoteConfig" formControlName="blog" id="blog" class="blog-summernote">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="FeatureLabel">Is Feature</label>
+                  <mat-slide-toggle color="primary" value="f.featured" [checked]="featuredBlog"
+                    (change)="changeFeatureBlog($event)"></mat-slide-toggle>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group">
+                  <div class="ThumbnailContainer col-12" (click)="file.click()">
+                    <input hidden type="file" accept="image/*" (change)="uploadFile($event)" #file>
+                    <p>upload thumbnail</p>
+                    <div class="column m-0" *ngIf="imageUrl">
+                      <figure class="image is-128x128">
+                        <img [src]="imageUrl" />
+                      </figure>
+                    </div>
+                  </div>
+                  <canvas #canvas style="display: none;"></canvas>
+                </div>
+
+                <div class="form-group">
+                  <div class="CoverContainer col-12" (click)="filess.click()">
+                    <input hidden type="file" accept="image/*" (change)="uploadCover($event)" #filess>
+                    <p>upload cover</p>
+                    <div class="column m-0" *ngIf="coverUrl">
+                      <figure class="image is-500x250">
+                        <img [src]="coverUrl" />
+                      </figure>
+                    </div>
+                  </div>
+                  <canvas #canvasCover style="display: none;"></canvas>
+                </div>
+
+
+
+
+              </div>
+            </div>
+          </div>
+
+
+        </form>
+
+
+        <!-- <button class="float-right btn btn-danger rounded-pill" (click)="cancelBtn()" type="button">Cancel</button> -->
+
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" 
+        (click)="cancelBtn()">Cancel</button>
+      <button type="button" class="btn btn-primary " *ngIf="addNew" (click)="onSubmit()"><div *ngIf="loading" class="spinner"></div><div *ngIf="!loading">Add Blog</div> </button>
+      <button type="button" class="btn btn-primary " *ngIf="isEdit"  (click)="onEditBlog()"><div *ngIf="loading" class="spinner"></div><div *ngIf="!loading">Edit Blog</div></button>
+    
+
+
+    </div>
+  </ng-template>
+</div>
+
+<ng-template #AddEdit let-modal>
+  <div class="modal-header">
+    <button type="button" class="close" aria-label="Close"  (click)="cancelBtn()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body w-75 mx-auto">
+    <div class="text-center">
+      <h2 class="mb-4">Are you sure you want to cancel this booking</h2>
+      <p>Do you realy want to cancel these booking? This process cannot be undone</p>
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">No</button>
+    <button type="button" class="btn btn-light"  (click)="cancelBtn()">Yes</button>
+  </div>
+</ng-template>

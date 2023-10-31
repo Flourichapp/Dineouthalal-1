@@ -1,0 +1,125 @@
+<div *ngIf="isLoading">
+    <div class="loading-spinner-overlay">
+        <span class="spinner-border"></span>
+    </div>
+</div>
+<div class="row bg-light p-3">
+    <div class="col-lg-4 col-md-4 col-sm-12">
+
+        <ng-template #mainLogoModal let-modal>
+            <div class="modal-header">
+                <h4 class="modal-title">Main Logo</h4>
+                <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p> this images is for the main logo for the restaurant summary, image size will be (375&times;300)</p>
+                <button mat-raised-button color="primary" (click)="fileInput.click()" class="mb-2"><i
+                        class="fa fa-upload"></i>Upload
+                    <input #fileInput type="file" (change)="fileChangeEvent($event);" style="display:none;" />
+                </button>
+
+                <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="1/1"
+                    [resizeToHeight]="300" format="png" (imageCropped)="imageCropped($event)" [roundCropper]="true"
+                    (imageLoaded)="imageLoaded()" (cropperReady)="cropperReady()"
+                    class="img-cropper">
+                </image-cropper>
+                <div class="mt-2">
+                    cropped image
+                </div>
+                <img [src]="croppedImage" height="100" class="img-border-dotted" />
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Close</button>
+                <button type="button" class="btn btn-light" (click)="uploadImage()">OK</button>
+            </div>
+        </ng-template>
+
+        <div class="position-relative avatar-div">
+
+            <button class="btn btn-info image-picker mb-2 mr-2"
+            (click)="openCropModal(mainLogoModal)">
+               <i class="mdi mdi-camera"></i>
+           </button>
+   
+           <div class="slide image-container">
+               <img class="avatar" src="{{mainlogo}}" alt="avatar" width="250" height="250">
+              
+           </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-4 col-sm-12">
+        <form class="pt-3" [formGroup]="signinForm">
+            <div class="form-group">
+                <input type="text" formControlName="firstname" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }"
+                    placeholder="First Name" />
+                <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                    <div *ngIf="f.firstname.errors.required">First name is Required</div>
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <input type="text" formControlName="lastname" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }"
+                    placeholder="Last Name" />
+                <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                    <div *ngIf="f.lastname.errors.required">Last name is Required</div>
+                </div>
+            </div>
+        
+            <div class="form-group">
+                <input type="email" formControlName="email" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                    placeholder="Email Address" />
+                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">Email Required</div>
+                    <div *ngIf="f.email.errors.email">Email is Invalid</div>
+                </div>
+            </div>
+
+            <div class="mb-4">
+                <div class="form-check">
+                    <label class="form-check-label text-muted">
+                        <input type="checkbox" class="form-check-input" formControlName="changepwd" >
+                        <i class="input-helper"></i>
+                        change Password
+                    </label>
+                    
+                </div>
+            </div>
+        
+            <div class="form-group" *ngIf="_changepwd">
+                <input type="password" formControlName="password" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                    placeholder="Password" />
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                </div>
+            </div>
+        
+            <div class="form-group" *ngIf="_changepwd">
+                <input type="password" formControlName="confirm_password" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.confirm_password.errors }"
+                    placeholder="Confirm Password" />
+                <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
+                    <div *ngIf="f.confirm_password.errors.required">Confirm Password is required</div>
+                    <div *ngIf="f.confirm_password.errors.confirmedValidator">Password and Confirm Password must be match.</div>
+                </div>
+            </div>                
+          
+        
+            <div class="mt-3">
+                <button
+                    class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn"
+                    [disabled]="loading" (click)="onSubmit()" type="button">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Update
+                </button>
+            </div>
+           
+        </form>
+    </div>
+</div>

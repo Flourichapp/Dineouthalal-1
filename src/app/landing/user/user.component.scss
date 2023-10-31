@@ -1,0 +1,472 @@
+::ng-deep .mat-datepicker-panel {
+    z-index: 10000 !important;
+  }
+  .avatar-div{
+    width: 250px;
+    height: 250px;
+    margin-left: auto;
+
+}
+.avatar{
+    border-radius: 50%;
+    border: 1px solid gray;
+    object-fit: cover;
+
+}
+.image-picker{
+    border-radius: 50%;
+    padding: 8px 10px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+.img-cropper{
+    min-height: 300px !important;
+}
+  .proBtn{
+    background: linear-gradient(rgba(79, 37, 133, 0.98) 0%, rgba(203, 29, 35, 0.99) 100%);
+    height: 56px;
+    position: absolute;
+    top: 264px;
+    border: navajowhite;
+    font-family: 'Poppins';
+    font-weight: 500;
+    font-size: 12px;
+    padding: 0px 30px;
+    color:white;
+    z-index: 2;
+  }
+
+  .md-datepicker-calendar-pane{
+    z-index: 1200}
+.passed-booking{
+    background: #fdff8e;
+}
+a.restaurant-item__horizontal{
+    color: gray;
+    transition: all 0.3 ease-in-out;
+    &:hover{
+        color: rebeccapurple;
+        text-decoration: none;
+    }
+}
+.delete-btn{
+    position: absolute;
+    z-index: 123;
+    top: 0;
+    right:0;
+}
+.all-bookings{
+    max-height: calc(100vh - 400px);
+    overflow: scroll;
+}
+.myProfile{
+    padding: 20px 20px 85px;
+}
+.profileHeader{
+    text-align: center;
+    padding: 20px 0px;
+    border-bottom: 1px solid #707070;
+    h1{
+        font-size: 38px;
+        margin: 0px;
+    }
+    p{
+        font-size: 28px;
+        margin: 0px;
+    }
+    label{
+        color: #EF2F24;
+        margin: 0;
+        text-transform: capitalize;
+    }
+}
+.bookingCard{
+    h1{
+        font-size: 25px;
+    }
+}
+.bookingCard{
+    
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    padding: 20px 30px !important;
+    margin: 10px !important;
+}
+.myBookingCard{
+    
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    margin: 25px !important;
+    .restImg{
+        height: 176px;
+
+    }
+    .circle{
+        height: 20px;
+        width: 20px;
+    }
+    .guest{
+        height: 22px;
+        width: 17px;
+    }
+    h2{
+        color: #EF2F24;
+        font-size: 16px;
+    }
+    p{
+        font-size: 16px;
+
+    }
+    .calendar{
+        margin-left: 26px;
+        height: 22px;
+        width: 21px;
+    }
+    h3{
+        font-size: 16px;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    h4{
+        font-size: 16px;
+        cursor: pointer;
+        color: #EF2F24;
+    }
+    .compeltedclr{
+        color: #EF2F24;
+    }
+    .confirmclr{
+        color: #42B210;
+    }
+    .pendingClr{
+        color: #B2B912;
+    }
+}
+.paymentCard{
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+    margin: 20px auto !important;
+    padding: 30px;
+    width: 80%;
+    text-align: center;
+    h1{
+        font-size: 25px;
+    }
+    p{
+        font-size: 16px;
+    }
+    button{
+        background: #EF2F24;
+        color: white;
+        font-size: 16px;
+        height: 50px;
+        width: 250px;
+        border: none;
+        border-radius: 12px;
+        margin: 24px 0px;
+    }
+}
+.mybookingDetail{
+    
+    margin: 25px !important;
+    .restImg{
+        height: 176px;
+
+    }
+    .circle{
+        height: 20px;
+        width: 20px;
+    }
+    .guest{
+        height: 22px;
+        width: 17px;
+    }
+    h2{
+        color: #EF2F24;
+        font-size: 16px;
+    }
+    p{
+        font-size: 16px;
+
+    }
+    .calendar{
+        margin-left: 26px;
+        height: 22px;
+        width: 21px;
+    }
+    h3{
+        font-size: 16px;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+    h4{
+        font-size: 16px;
+        cursor: pointer;
+        color: #EF2F24;
+    }
+    .compeltedclr{
+        color: #EF2F24;
+    }
+    .confirmclr{
+        color: #42B210;
+    }
+    .pendingClr{
+        color: #B2B912;
+    }
+    .profileName{
+        height: 60px;
+        width: 60px;
+        border-radius: 50%;
+        background: #EF2F24;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        font-size: 32px;
+        font-family: 'Poppins';
+        font-weight: 900;
+        color: white;
+        margin: auto;
+
+    }
+    button{
+        height: 60px;
+        padding: 0px 45px;
+        background: none;
+        border: none;
+        box-shadow: 1px;
+        box-shadow: 0px 0px 2px 2px #e3e3e3;
+        font-size: 16px;
+        font-family: 'Poppins';
+        font-weight: 300;
+    }
+    .peopleIcon{
+        margin-right: 10px;
+        width: 20px;
+    }
+    .innerContainer{
+        width: 80%;
+    }
+    textarea{
+        height: 170px;
+        width: 100%;
+        padding: 20px;
+
+    }
+    .sendbutton{
+        background: #EF2F24;
+        color: white;
+        font-size: 16px;
+        height: 50px;
+        width: 250px;
+        border: none;
+        border-radius: 12px;
+        margin: 24px 0px;
+    }
+}
+
+
+//resturatnt
+.topRatedResturantCard{
+    box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.07);
+    margin: 20px 10px;
+
+}
+.saveicon{
+    position: absolute;
+    bottom: 20px;
+    left: 10px;
+    cursor: pointer;
+}
+.saveiconText{
+    position: absolute;
+    bottom: 15px;
+    left: 30px;
+    color: white;
+    font-size: 14px;
+    margin: 0px;
+}
+.photosicon{
+    position: absolute;
+    bottom: 20px;
+    right: 86px;
+}
+.photosiconText{
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+    color: white;
+    font-size: 14px;
+    margin: 0px;
+}
+.resturantName{
+    font-size: 18px;
+
+}
+.RestaurantDetails{
+    padding: 10px;
+    height: 185px;
+    overflow: hidden;
+
+    .ratingbadge{
+        height: 24px;
+    width: 40px;
+    background-color: #5BB638;
+    margin: 0px;
+    text-align: center;
+    display: inline-flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+    
+    }
+    span{
+      
+        color: white;
+        font-size: 11px;
+    }
+    .totalRating{
+        font-size: 11px;
+        color: #727272;
+        margin: 0px 10px;
+    }
+    p{
+        font-size: 13px;
+        color: #727272;
+    }
+  
+}
+.booknowBtn{
+    background: #F9F9F9;
+    height: 55px;
+    border: none;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    
+
+}
+
+.buttonText{
+    font-size: 11px;
+    color:#C23616;
+    margin: 0px;
+    display: flex;
+    width: 71%;
+
+
+
+}
+.booknow{
+    font-size: 13px;
+    color:#4A9F29;
+    margin: 0px;
+    cursor: pointer;
+}
+.markConatiner{
+    display: flex;
+    width: 35%;
+    justify-content: space-between;
+}
+.profileDetailContainer{
+    width: 90%;
+    margin: auto;
+    label{
+        display: block;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        font-size: 15px;
+        font-family: 'Poppins';
+        font-weight: 400;    }
+    input{
+
+        height: 42px;
+        display: block;
+    }
+    span{
+        color: #EF2F24;
+        text-decoration: underline;
+    }
+}
+@media(max-width : 992px){
+    .proBtn{
+        display: none;
+    }
+    .myProfile{
+        padding: 20px 0px 85px;
+
+    }
+    .profileHeader h1 {
+        font-size: 23px;
+        margin: 0px;
+    }
+    .profileHeader p {
+        font-size: 22px;
+        margin: 0px;
+    }
+    .myProfile .mat-tab-body-wrapper {
+        margin-left: 0px;
+        width: 100%;
+    }
+    .bookingCard {
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+        padding: 0px 0px !important;
+        margin: 0px 0px !important;
+    }
+    .bookingCard h1 {
+        font-size: 18px;
+        font-weight: 600;
+        text-transform: capitalize;
+    }
+    .myBookingCard .circle {
+        height: 15px;
+        width: 15px;
+    }
+    .myBookingCard h2 {
+        font-size: 13px;
+    }
+    .myBookingCard p {
+        font-size: 13px;
+        margin: 5px 0px;
+
+    }
+    .myBookingCard .guest {
+        height: 13px;
+        width: 10px;
+    }
+    .myBookingCard .calendar {
+        margin-left: 9px;
+        height: 16px;
+        width: 14px;
+    }
+    .myBookingCard {
+        box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+        margin: 25px 5px !important;
+    }
+    .myBookingCard .restImg {
+        height: 100%;
+    }
+    .myBookingCard h4 {
+        font-size: 13px;
+        cursor: pointer;
+        color: #EF2F24;
+    }
+    .myBookingCard h3 {
+        font-size: 12px;
+        text-decoration: underline;
+        cursor: pointer;
+        margin-top: 10px !important;
+
+    }
+    .profileDetailRow{
+        flex-direction: column-reverse;
+
+    }
+    .avatar-div {
+        width: 250px;
+        height: 250px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}

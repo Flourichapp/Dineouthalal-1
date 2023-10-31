@@ -1,0 +1,119 @@
+.footerContainer{
+    ul{
+        padding-left : 0px;
+        div{
+            height: 14px;
+            width: 9px;
+            border: 1px solid #EF2F24;
+            position: absolute;
+            left: 11px;
+            margin-top: 5px;
+        }
+        li{
+            color: white;
+
+            list-style: none;
+        }
+    }
+    background: #1b1b25;
+    color: #fff;
+   
+    padding: 100px 0px;
+    .text-container{
+        width: 80%;
+    }
+    p{
+        font-size: 14px;
+        font-family: poppins;
+        font-weight: 400;
+        line-height: 2;
+        margin: 0px;
+    }
+    h2{
+        font-size: 16px;
+        padding-bottom: 15px;
+
+    }
+    input{
+        height: 40px;
+        width: 93%;
+        margin: 30px 0px 10px;
+        border-radius: 51px;
+        font-size: 14px;
+        text-align: center;
+        border: none;
+    }
+    button{
+        background-color: #EF2F24;
+        height: 40px;
+        width: 93%;
+        margin: 10px 0px;
+        border-radius: 51px;
+        font-size: 14px;
+        text-align: center;
+        border: none;
+        font-family: poppins;
+        font-weight: 600;
+        color: white;
+    }
+}
+.socialmediaContainer{
+
+    display: flex;
+    height: 38px;
+    width: 38px;
+    margin: 5px;
+    border-radius: 50%;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+}
+.fb{
+    background: #45629F;
+
+}
+.google{
+    background: #DF5443;
+
+}
+.twitter{
+    background: #5EB2EF;
+
+}
+.youtube{
+    background: #C61D23
+}
+.tiktok{
+    background: #000
+}
+.insta{
+    background: #125D8F
+}
+.footerbottom{
+    background: #0F0F0F;
+    background: #0F0F0F;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    height: 30px;
+    p{
+        color: #CFCFCF;
+        font-size: 12px;
+        margin: 0px;
+    }
+    label{
+        color: #ffffff;
+        margin: 0px;
+
+    }
+    
+    
+}
+@media(max-width:992px){
+    .footerbottom{
+        text-align: center;
+    }
+}

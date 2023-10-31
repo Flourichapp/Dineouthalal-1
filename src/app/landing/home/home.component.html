@@ -1,0 +1,271 @@
+<!-- banner slides part -->
+<div>
+  <div>
+    <div class="slider-div">
+      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfig"
+        (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
+        (beforeChange)="beforeChange($event)">
+        <div ngxSlickItem *ngFor="let slide of slides" class="slide">
+          <img class="slick-img" src="{{ slide.img }}" alt="" width="100%">
+        </div>
+    
+      </ngx-slick-carousel>
+      <div class="row text-center search-div">
+        <div class="col-md-12 heading--search">
+          <h1 class="heading heading--center margin-none hidden-xs f-2-5rem">
+            Discover the best Halal friendly restaurants
+          </h1>
+          <h3
+            class="heading heading--center heading--sub margin-top-none margin-bottom-60 hidden-xs bannertext poppins_medium">
+            Choose between 100% halal and halal friendly places
+          </h3>
+        </div>
+        <div class="m-auto W-50">
+          <section>
+            <div class="headerinputsection">
+              <div class="col-md-12">
+                <div class="row m-0">
+                  <div class="cuisinestypeinputContainer">
+                    <input type="text" class="border-0  cuisinestypeinput " placeholder="Search by Cuisine, restaurant name or location" [(ngModel)]="search" >
+                  </div>
+                  <div>
+                    <button mat-raised-button (click)="searchHotels()">EXPLORE NOW</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      
+     
+      </div>
+      <div class="socialMediaContainer">
+        <div>
+          <img src="/assets/images/socialmedia/fb.png" alt="fb" class="">
+        </div>
+      
+        <div>
+          <img src="/assets/images/socialmedia/twitter.png" alt="twitter" class="">
+        </div>
+        <div>
+          <img src="/assets/images/socialmedia/insta.png" alt="insta" class="">
+        </div>
+        <div>
+          <img src="/assets/images/socialmedia/google.png" alt="google" class="">
+        </div>
+      </div>
+    </div>
+    <!-- banner slides part end-->
+    <!-- top restaurants part -->
+  </div>
+  <div class="text-center mt-3" *ngIf="!myCurrentLocation">
+    <p class="poppins_medium f16" >it looks like you're in London. Not correct?<span class="locationText" (click)="getLocation()"> Turn on your location.</span></p>
+  </div>
+  <div class="text-center mt-3" *ngIf="myCurrentLocation">
+    <p class="poppins_medium f16" >Your location has now been set to {{myCurrentLocation}}.<span class="locationText" (click)="getLocation()"> Update location</span></p>
+  </div>
+
+  <section class="topRatedResturant">
+    <div class="text-center">
+      <h1 class="text-center poppins_regular">Top Rated <span class="poppins_semibold">Restaurants</span> </h1>
+      <p class="text-center  poppins_regular">Highest rated restaurants this week</p>
+      <img src="/assets/images/dashboard/Stroke Effect.png" alt="line" class="">
+    </div>
+    <div class="text-right">
+      <a  routerLink="/search" >
+        <button class="viewAllBtn">View all</button>
+      </a>
+    </div>
+    <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="resturantSlide"
+      (init)="slickInit($event)" (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)"
+      (beforeChange)="beforeChange($event)">
+      <div ngxSlickItem *ngFor="let r of toprests|slice:0:8 let i = index" class="">
+        <div class="topRatedResturantCard">
+          <a [routerLink]="'/restaurant/' + r.slug">
+          <div class="col-md-12 p-0">
+            <img  src="{{r.main_logo ? (imageUrl + '/' + r.main_logo) : 'assets/images/dashboard/resturant1.png'}}"
+            alt="logo" class="w-100 objectfit" style="height:200px">
+            <img src="assets/images/dashboard/saveicon.png" alt="line" class="saveicon">
+            <p class="saveiconText poppins_regular">Save</p>
+            <!-- <img src="/assets/images/dashboard/photosicon.png" alt="line" class="photosicon">
+            <p class="photosiconText poppins_regular">4 photos</p> -->
+          </div>
+          </a>
+          <div class="RestaurantDetails">
+            <p class="poppins_semibold resturantName">{{r.title}} </p>
+            <p  >
+              <label *ngIf="r.review_count" class="ratingbadge"><span >{{(r.ratings/r.review_count).toFixed(2) || '0.00'}}</span> </label> 
+              <label *ngIf="!r.review_count" class="ratingbadge"><span >0.00</span> </label> 
+
+              <label *ngIf="r.review_count" class="totalRating">{{r.review_count}} Ratings</label>
+            </p>
+            <p>{{r.address1}}&nbsp;{{r.address2}},&nbsp;{{r.city}}</p>
+            <p>{{r.shortdescription}}</p>
+          </div>
+          <div class="booknowBtn"><label class="buttonText poppins_regular"> <img
+                src="/assets/images/dashboard/Icon-wine.png" alt="line" style="height:15px" class="mr-1">
+                {{r.food_types}}</label>
+            <a [routerLink]="'/restaurant/' + r.slug">
+              <label class="poppins_regular booknow">Book Now</label>
+            </a>
+          </div>
+        </div>
+      </div>
+    </ngx-slick-carousel>
+
+
+
+  </section>
+  <!-- top restaurrants part end -->
+
+  <!-- static banner 1 -->
+  <section  class="allResturant col-md-12 p-0">
+    <img src="/assets/images/banners/slider2.webp" alt="" class="w-100 allResturantBanner">
+    <div class="Description">
+      <h1 class="poppins_regular">More than 3000 halal <label class="poppins_semibold">Restaurants</label> </h1>
+      <p>Book a table Easily in a few steps</p>
+      <img src="/assets/images/dashboard/Stroke Effect.png" alt="line" class=""><br>
+
+      <img src="/assets/images/dashboard/Arrow.png" alt="line" class="arrowImg">
+
+    </div>
+
+  </section>
+  <!-- static banner 1 end -->
+
+  <!-- popular in london restuarants start -->
+  <section class="popularinlondon container-fluid mt-3">
+    <div class="text-center">
+      <h1>Popular in London</h1>
+      <img src="/assets/images/dashboard/Stroke Effect.png" alt="line" class=""><br>
+
+    </div>
+    <div class="row">
+      <div class="col-md-6" *ngFor="let r of popularRests">
+        <div class="restuarantsCard">
+          <div class="row restuarantsCardrow ">
+            <div class="col-sm-6 col-6  col-md-5">
+              
+              <!-- <img src="{{imageUrl}}/{{r.main_logo}}" alt="line" class="w-100 restuarantsCardImg"> -->
+              <a [routerLink]="'/restaurant/' + r.slug">
+
+              <img src="{{r.main_logo ? (imageUrl + '/' + r.main_logo) : 'assets/images/dashboard/resturant1.png'}}"
+              alt="logo" class="w-100 restuarantsCardImg objectfit" >
+              </a>
+
+            </div>
+            <div class="col-md-7 col-sm-6 col-6 my-auto">
+              <div class="row">
+                <div class="col-12  col-md-7 my-auto">
+                  <h2 class="poppins_semibold resturantName">{{r.title}} </h2>
+                </div>
+                <div class="col-12  col-md-5 my-auto">
+                  <h3 class="poppins_regular">{{r.cusine_title}}</h3>
+                </div>
+                <div class="col-12  col-md-7 my-auto">
+                  <p>
+                    <label *ngIf="r.review_count"  class="ratingbadge"><span>{{(r.ratings/r.review_count).toFixed(2) || '0.00'}}</span> </label>
+                    <label *ngIf="!r.review_count"  class="ratingbadge"><span>0.00</span> </label>
+
+                     <label
+                    *ngIf="r.review_count"    class="totalRating">{{r.review_count}} Ratings</label>
+                  </p>
+                  <p>{{r.address1}}&nbsp;{{r.address2}},&nbsp;{{r.city}}</p>
+                </div>
+                <div class="col-12  col-md-5 my-auto">
+                </div>
+                <div class="col-12  col-md-7 my-auto">
+                  <label class="buttonText poppins_regular"> {{r.food_types}}</label>
+                </div>
+                <div class="col-12  col-md-5 my-auto">
+                  <a [routerLink]="'/restaurant/' + r.slug">
+
+                  <h4 class="poppins_regular">Book Now</h4>
+                  </a>
+                  
+                </div>
+              </div>
+
+
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+
+  </section>
+  <!-- popular in london restuarants end -->
+
+  <!-- static banner 2 -->
+  <section class="favResutrant col-md-12  p-0"   *ngFor="let featureblogs of featureblogs">
+    <div class="text-center mt-3 mb-3">
+
+      <h1 class="poppins_regular">Dine out halal’s <label class="poppins_semibold">Favourite</label> </h1>
+      <img src="/assets/images/dashboard/Stroke Effect.png" alt="line" class=""><br>
+
+      
+    </div>
+    <img src="{{imageUrl}}/{{featureblogs.cover_image}}" alt="" class="w-100 allResturantBanner objectfit">
+    <div class="Description">
+      <h1 class="poppins_regular">{{featureblogs.title}}
+      </h1>
+      <p class="featuredParagraph" [innerHtml]="featureblogs.content | safeHtmlPipe"></p>
+
+
+
+    </div>
+
+  </section>
+  <!-- static banner 2 end -->
+
+  <!-- blog part -->
+ 
+
+  <section class="blogContainer col-md-12 p-0">
+    <div class="text-center mt-3 mb-3">
+      <h1 class="poppins_regular">Blog &
+        <label class="poppins_semibold">News</label>
+      </h1>
+      <p class="poppins_regular">Our Headline Entertainment</p>
+      <img src="/assets/images/dashboard/Stroke Effect.png" alt="line" class=""><br>
+      <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="blogSlides" (init)="slickInit($event)"
+        (breakpoint)="breakpoint($event)" (afterChange)="afterChange($event)" (beforeChange)="beforeChange($event)">
+
+        <div ngxSlickItem *ngFor="let blog of blogs" class="">
+          <div class="blogCard">
+            <div class="col-md-12 p-0">
+              <div class="blogimgContainer">
+                <img src="{{imageUrl}}/{{ blog.thumbnail?blog.thumbnail:'/assets/images/about/image.png' }}" alt="blog" class="w-100 blogimg">
+                
+                <!-- <img src="{{blog.thumbnail?blog.thumbnail}}:assets/images/about/image.png" alt="line" class="w-100 blogimg"> -->
+                <div class="overlayy">
+                  <a [routerLink]="'/blog/' + blog.slug">
+                    <div class="text poppins_semibold">READ THIS ARTICLE</div>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="p-3">
+              <h2 class="poppins_medium resturantName">In {{blog.created_at | date}}</h2>
+              <h4 class="poppins_semibold resturantName">{{blog.title}} </h4>
+
+            </div>
+
+
+          </div>
+
+        </div>
+      </ngx-slick-carousel>
+
+
+
+    </div>
+
+
+  </section>
+
+</div>

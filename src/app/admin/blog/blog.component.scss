@@ -1,0 +1,146 @@
+.errorContainer{
+    color: black;
+    text-align: center;
+    background: #fbd0d0;
+    padding: 5px;
+}
+.blog-item-pre {
+    width: 100px;
+    height: 70px;
+    overflow: hidden;
+    border: 1px solid gray;
+    img {
+        object-fit   : cover;
+        border-radius: 5px;
+        width        : 100px;
+        height       : 70px;
+    }
+
+    video {
+        object-fit   : cover;
+        border-radius: 5px;
+        width        : 100px;
+        height       : 70px;
+    }
+
+}
+
+a.blog-item-cont {
+    text-decoration: none !important;
+    transition     : all 0.3s ease-in-out;
+    color          : gray;
+
+    &:hover {
+        color: blueviolet;
+    }
+}
+.table th img, .table td img {
+    width: 100px !important;
+    height: 70px !important;
+    overflow: hidden !important;
+    object-fit: cover !important;
+    border-radius: 0 !important;
+}
+.is-128x128 img{
+  
+    width: 100%;
+    margin-left: 0%;
+    margin-bottom: 0px;
+    position: relative;
+    z-index: 2;
+    -o-object-fit: cover;
+    object-fit: cover;
+    position: absolute;
+    top: 0px;
+    left: 0;
+    height: 250px;
+
+}
+.FeatureLabel{
+    
+    /* margin-bottom: 0px !important; */
+    margin-top: 6px;
+    margin-right: 23px;
+
+}
+figure {
+    margin: 0px !important;
+}
+.icon{
+    color:black;
+    margin: 0px 5px;
+    font-size: 15px;
+
+}
+.icon:hover{
+    cursor:pointer;
+    opacity: 0.7;
+}
+.addBlogContainer{
+    background-color: white;
+
+}
+.ThumbnailContainer{
+    overflow: hidden;
+
+    height: 250px;
+    width: 250px;
+    border: 1px solid;
+    margin-left: auto;
+    margin-top: 20px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    p{
+        position: absolute;
+        z-index: 1;
+    }
+}
+.CoverContainer{
+    overflow: hidden;
+    height: 225px;
+    width: 95%;
+    border: 1px solid;
+    margin-left: auto;
+    margin-top: 20px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    p{
+        position: absolute;
+        z-index: 1;
+    }
+    .is-500x250 img{
+  
+    
+        width: 100%;
+        margin-left: 0%;
+        margin-bottom: 0px;
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: 0;
+        height: 225px;
+    }
+
+    
+    }
+    .spinner{
+        height: 10px;
+        width: 10px;
+        border: 2px solid;
+        border-color: white transparent white transparent;
+        border-radius: 50%;
+        animation: spin 1.4s linear infinite;
+      }
+      
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      

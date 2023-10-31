@@ -1,0 +1,54 @@
+table {
+  width: 100%;
+  text-align: center;
+}
+
+table tr {
+  border-bottom: 1px solid #80808066;
+}
+
+table input, table select {
+  text-align: center;
+}
+
+.seat {
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
+.seat-status-empty {
+  background: green;
+}
+
+.seat-status-dinning {
+  background: red;
+}
+
+.seat-status-cleaning {
+  background: yellow;
+}
+
+.seat-status-disagble {
+  background: gray;
+}
+
+.seat-opt-bar {
+  background: brown;
+}
+
+.seat-opt-counter {
+  background: pink;
+}
+
+.seat-opt-hightop {
+  background: rebeccapurple;
+}
+
+.seat-opt-standard {
+  background-color: green;
+}
+
+.seat-opt-outdoor {
+  background-color: blue;
+}
+/*# sourceMappingURL=seats.component.css.map */

@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,MAAM,CAAA;EACF,MAAM,EAAE,IAAI;CACf;;AACD,AAAA,iBAAiB,CAAC;EACd,OAAO,EAAS,IAAI;EACpB,cAAc,EAAE,GAAG;CAatB;;AAfD,AAII,iBAJa,CAIb,UAAU,CAAC;EACP,KAAK,EAAE,KAAK;CACf;;AANL,AAQI,iBARa,CAQb,QAAQ,CAAC;EACL,SAAS,EAAE,CAAC;CACf;;AAVL,AAWI,iBAXa,CAWb,aAAa,CAAA;EACT,UAAU,EAAE,KAAK;EACjB,UAAU,EAAE,OAAO;CACtB",
+    "sources": [
+        "cs-opentime.component.scss"
+    ],
+    "names": [],
+    "file": "cs-opentime.component.css"
+}

@@ -1,0 +1,414 @@
+<!-- <div class="map-view">
+    <agm-map #AgmMap [(latitude)]="location.lat" [(longitude)]="location.lng" [(zoom)]="location.zoom"
+    [zoomControl]="true"
+               [fitBounds]="bounds"
+        [disableDefaultUI]="true" [(fitBounds)]='location.viewport' [fullscreenControl]='true' [mapTypeControl]='true'>
+
+        <agm-marker [(latitude)]="r.lat" [(longitude)]="r.lng" [markerDraggable]="false"
+            (dragEnd)='markerDragEnd($event)' *ngFor="let r of rests" [iconUrl]="'/assets/images/marker.png'">
+            <agm-info-window #infoWindow>
+                <div class="marker-window d-flex">
+                    <img src="{{r.main_logo?r.main_logo:'/assets/images/no-img.png'}}" data-src="img/location_4.jpg"
+                        class="owl-lazy" alt="" width="80">
+                    <div class="marker-window__description">
+                        <h5>{{r.title}}</h5>
+                        <span>
+                            <i class="fa fa-map-marker"></i>&nbsp;
+                            <span>{{r.address1}}&nbsp;{{r.address2}}&nbsp;{{r.city}}</span>
+                        </span><br>
+                        <span>
+                            <i class="fa fa-road"></i>&nbsp;
+                            <span>{{r.distance_in_km.toFixed(2)}}&nbsp;Km from YOU</span>
+                        </span>
+                    </div>
+                </div>
+            </agm-info-window>
+        </agm-marker>
+
+        <agm-marker [(latitude)]="mypos.lat" [(longitude)]="mypos.lng" [markerDraggable]="false"  [iconUrl]="'/assets/images/mypos.png'"
+            (dragEnd)='markerDragEnd($event)'>
+            <agm-info-window #infoWindow>
+                My Position
+            </agm-info-window>
+        </agm-marker>
+
+        <agm-circle [latitude]="mypos.lat" [longitude]="mypos.lng" [(radius)]="circleRadius" [fillColor]="'blue'"
+            [circleDraggable]="false" [editable]="false"></agm-circle>
+    </agm-map>
+</div> -->
+<div class="headerNav">
+    <div>
+        <p class="poppins_medium"><label class="m-0">Home</label> - <label class="m-0">explore</label> </p>
+    </div>
+    <div>
+        <input placeholder="search in explore" [(ngModel)]="searchParms" (keyup.enter)="onEnter()">
+        <img src="assets/images/about/Icon.png" alt="search" class="pointer" (click)="toggleSearch()">
+    </div>
+    
+</div>
+<div class="col-md-12">
+    <!-- <section class="filter-section">
+        <div class="main-filter">
+            <div class="row search-group mt-3">
+                <div class="border-0 form-control w-25">
+                    <label>Main Filters:</label>
+                </div>
+                <section class="position-relative w-25 ">
+
+                    <i class="fa fa-map-marker marker-location"></i>
+                    <input type="text" class="border-0 form-control" placeholder="city" aria-label="city" matInput
+                        [(ngModel)]="searchVar.area" [matAutocomplete]="auto" [formControl]="cityAutocompleteCtrl">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+
+                </section>
+
+                <div class="w-25 border-0 form-control position-relative">
+                    <i class="fa fa-sliders marker-location"></i>
+                    <mat-select [(ngModel)]="searchVar.category">
+                        <mat-option value="">All</mat-option>
+                        <mat-option value="halal_certified">Halal Certified</mat-option>
+                        <mat-option value="halal_friendly">Halal Friendly</mat-option>
+                        <mat-option value="no_alcohol">No alcohol</mat-option>
+                    </mat-select>
+                </div>
+                <div class="w-25">
+                    <button mat-raised-button color="primary" (click)="search()" [disabled]="isSearching"><i
+                            class="fa fa-fw fa-search" aria-hidden="true"></i></button>
+                </div>
+            </div>
+        </div>
+        <div class="main-filter">
+            <div class="row search-group mt-3">
+                <div class="col-sm-12 d-flex">
+                    <label class="form-control border-0 col-sm-4">Date/Time:</label>
+                    <section class="position-relative col-sm-4 ">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                        <input matInput [matDatepicker]="picker" type="text" class="border-0 form-control"
+                            placeholder="Type/Click Icon" (click)="picker.open()" (keydown)="false"
+                            [(ngModel)]="searchVar.date" [min]="_today">
+
+                    </section>
+
+                    <div class="col-sm-4 form-control border-0">
+                        <i class="fa fa-clock-o marker-location"></i>
+                        <mat-select [(ngModel)]="searchVar.time">
+                            <mat-option *ngFor="let v of pickTimes" value="{{v}}">{{v}}</mat-option>
+                        </mat-select>
+                    </div>
+                </div>
+                <div class="col-sm-12 d-flex">
+                    <label class="form-control border-0 col-sm-4">Persons:</label>
+                    <mat-select [(ngModel)]="searchVar.seatNum" class="col-sm-4">
+                        <mat-option value="1">for 1</mat-option>
+                        <mat-option value="2">for 2</mat-option>
+                        <mat-option value="3">for 3</mat-option>
+                        <mat-option value="4">for 4</mat-option>
+                        <mat-option value="5">for 5</mat-option>
+                        <mat-option value="6">for 6</mat-option>
+                        <mat-option value="7">for 7</mat-option>
+                        <mat-option value="8">for 8</mat-option>
+                        <mat-option value="9">for 9</mat-option>
+                        <mat-option value="10">for 10</mat-option>
+                        <mat-option value="11">more</mat-option>
+                    </mat-select>
+                </div>
+                <div class="col-sm-12 d-flex">
+                    <label class="form-control border-0 col-sm-4">Seat Options:</label>
+                    <div class="col-sm-8 text-left">
+                        <mat-checkbox color="primary" [(ngModel)]="seatOptions.bar.checked">{{seatOptions.bar.name}}
+                        </mat-checkbox>
+                        <mat-checkbox color="primary" [(ngModel)]="seatOptions.counter.checked">
+                            {{seatOptions.counter.name}}</mat-checkbox>
+                        <mat-checkbox color="primary" [(ngModel)]="seatOptions.standard.checked">
+                            {{seatOptions.standard.name}}</mat-checkbox>
+                        <mat-checkbox color="primary" [(ngModel)]="seatOptions.hightop.checked">
+                            {{seatOptions.hightop.name}}</mat-checkbox>
+                        <mat-checkbox color="primary" [(ngModel)]="seatOptions.outdoor.checked">
+                            {{seatOptions.outdoor.name}}</mat-checkbox>
+                    </div>
+                </div>
+                <div class="col-sm-12 d-flex">
+                    <label class="form-control border-0 col-sm-4">Prices:</label>
+                    <div class="col-sm-8 text-left">
+                        <mat-checkbox color="primary" [(ngModel)]="priceOpts.low.checked">&hearts;( ~ &pound;15)
+                        </mat-checkbox>
+                        <mat-checkbox color="primary" [(ngModel)]="priceOpts.medium.checked">&hearts;&hearts; (
+                            &pound;15 ~ &pound;40)</mat-checkbox>
+                        <mat-checkbox color="primary" [(ngModel)]="priceOpts.high.checked">&hearts;&hearts;&hearts; (
+                            &pound;40 ~ )</mat-checkbox>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <section class="result-section row">
+        <!-- <div class="col-sm-12">
+            <div class="form-control border-0 col-sm-4 pull-right mt-3 d-flex">
+                <label class="font-weight-bold">Sort:&nbsp;&nbsp;</label>
+                <mat-select [(ngModel)]="searchVar.sort" (selectionChange)="sort()">
+                    <mat-option value="">Featured</mat-option>
+                    <mat-option value="rating">Highest Rating</mat-option>
+                    <mat-option value="review">Highest Review</mat-option>
+                    <mat-option value="pricing">Highest Pricing</mat-option>
+                </mat-select>
+            </div>
+
+
+        </div> -->
+        <div *ngIf="isSearching">
+            <div class="loading-spinner-overlay">
+                <span class="spinner-border"></span>
+            </div>
+        </div>
+        <div class="col-md-12 allRestContainer">
+            <button class="toggleBtn" (click)="toggleFilterSection()"><i class="fa fa-filter" aria-hidden="true"></i>
+                Filter</button>
+
+            <div class=" row ">
+
+                <div class="col-md-3 ">
+                    <div class="filterSection" [class.hide]="!isFilterSectionVisible">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card mt-4 mb-4">
+                                <div class="card-header">
+                                    <span class="title">Sort by popularity </span>
+                                    <span class="accicon">
+                                        <img src="/assets/images/icon/sorticon.png" alt="line" class="rotate-icon"
+                                            style="height: 9px;">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header" data-toggle="collapse" data-target="#collapseOne"
+                                    aria-expanded="true">
+                                    <span class="title">Categories </span>
+                                    <span class="accicon">
+                                        <img src="/assets/images/icon/arrow-down.png" alt="line" class="rotate-icon"
+                                            style="height: 9px;">
+                                    </span>
+                                </div>
+                                <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div>
+                                            <mat-checkbox [(ngModel)]="categoryOpts.HalalCertified.checked">Halal
+                                                Certified
+                                            </mat-checkbox> <br>
+                                            <mat-checkbox [(ngModel)]="categoryOpts.HalalFriendly.checked">Halal
+                                                Friendly
+                                            </mat-checkbox><br>
+                                            <mat-checkbox [(ngModel)]="categoryOpts.NoAlcohol.checked">No Alcohol
+                                            </mat-checkbox><br>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                                    aria-expanded="false" aria-controls="collapseTwo">
+                                    <span class="title">Rating</span>
+                                    <span class="accicon">
+                                        <img src="/assets/images/icon/arrow-down.png" alt="line" class="rotate-icon"
+                                            style="height: 9px;">
+                                    </span>
+                                </div>
+                                <div id="collapseTwo" class="collapse" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <mat-checkbox [(ngModel)]="priceOpts.low.checked">1 star </mat-checkbox><br>
+                                        <mat-checkbox [(ngModel)]="priceOpts.medium.checked">2 star </mat-checkbox> <br>
+                                        <mat-checkbox [(ngModel)]="priceOpts.high.checked">3 star</mat-checkbox><br>
+                                        <mat-checkbox>4 star</mat-checkbox><br>
+                                        <mat-checkbox>5 star</mat-checkbox><br>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="card">
+                                <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseThree"
+                                    aria-expanded="false" aria-controls="collapseThree">
+                                    <span class="title">Seat Option</span>
+                                    <span class="accicon">
+                                        <img src="/assets/images/icon/arrow-down.png" alt="line" class="rotate-icon"
+                                            style="height: 9px;">
+                                    </span>
+                                </div>
+                                <div id="collapseThree" class="collapse" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <mat-checkbox [(ngModel)]="seatOptions.tablebooking.checked">
+                                            {{seatOptions.tablebooking.name}}</mat-checkbox><br>
+                                        <mat-checkbox [(ngModel)]="seatOptions.corporatebooking.checked">
+                                            {{seatOptions.corporatebooking.name}}</mat-checkbox><br>
+                                        <mat-checkbox [(ngModel)]="seatOptions.privatebooking.checked">
+                                            {{seatOptions.privatebooking.name}}</mat-checkbox><br>
+                             
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="card">
+                                <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseFour"
+                                    aria-expanded="false" aria-controls="collapseFour">
+                                    <span class="title">Distance</span>
+                                    <span class="accicon">
+                                        <img src="/assets/images/icon/arrow-down.png" alt="line" class="rotate-icon"
+                                            style="height: 9px;">
+                                    </span>
+                                </div>
+                                <div id="collapseFour" class="collapse" data-parent="#accordionExample">
+                                    <div class="card-body distanceCard">
+                                        <!-- <input type="text" class="border-0 form-control" placeholder="city"
+                                            aria-label="city" matInput [(ngModel)]="searchVar.area" [matAutocomplete]="auto"
+                                            [formControl]="cityAutocompleteCtrl">
+                                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                                {{option}}
+                                            </mat-option>
+                                        </mat-autocomplete> -->
+                                        <mat-radio-group [(ngModel)]="searchVar.area">
+                                            <mat-radio-button class="locationRadio" color="primary" [value]="option"
+                                                *ngFor="let option of filteredOptions | async">{{option}}</mat-radio-button>
+                                        </mat-radio-group>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header collapsed" data-toggle="collapse" data-target="#collapseFive"
+                                    aria-expanded="false" aria-controls="collapseFive">
+                                    <span class="title">Price</span>
+                                    <span class="accicon">
+                                        <img src="/assets/images/icon/arrow-down.png" alt="line" class="rotate-icon"
+                                            style="height: 9px;">
+                                    </span>
+                                </div>
+                                <div id="collapseFive" class="collapse" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <mat-checkbox [(ngModel)]="priceOpts.low.checked">&hearts;( ~ &pound;15)
+                                        </mat-checkbox><br>
+                                        <mat-checkbox [(ngModel)]="priceOpts.medium.checked">&hearts;&hearts; (&pound;15
+                                            ~
+                                            &pound;40)</mat-checkbox><br>
+                                        <mat-checkbox [(ngModel)]="priceOpts.high.checked">&hearts;&hearts;&hearts;
+                                            (&pound;40 ~ )</mat-checkbox><br>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="card-header collapsed">
+                                    <button (click)="search()" [disabled]="isSearching">FILTER</button>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+
+
+
+                </div>
+                <div *ngIf="length == 0 && isSearching == false"
+                    class="col-md-9 d-flex justify-content-center align-items-center">
+                    <h3 class="poppins_semibold">No Data</h3>
+                </div>
+
+                <div class="col-md-9">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12" *ngFor="let r of rests">
+
+                            <div class="topRatedResturantCard">
+                                <div class="col-md-12 col-5 p-0">
+                                    <img [routerLink]="'/restaurant/' + r.slug"
+                                        src="{{r.main_logo ? (imageURL + '/' + r.main_logo) : 'assets/images/dashboard/resturant1.png'}}"
+                                        alt="logo" class="w-100 objectfit restImg" >
+                                    <img src="assets/images/dashboard/saveicon.png" alt="line" class="saveicon">
+                                    <p class="saveiconText poppins_regular">Save</p>
+                                </div>
+                                <div class="col-md-12 col-7 p-0">
+
+                                    <div class="RestaurantDetails ">
+                                        <p class="poppins_semibold resturantName">{{r.title}} </p>
+                                        <p>
+                                            <label *ngIf="r.review_count"
+                                                class="ratingbadge"><span>{{(r.ratings/r.review_count).toFixed(2) ||
+                                                    '0.00'}}</span> </label>
+                                            <label *ngIf="!r.review_count" class="ratingbadge"><span>0.00</span>
+                                            </label>
+                                            <label class="totalRating" *ngIf="r.review_count">{{r.review_count}}
+                                                Ratings</label>
+                                        </p>
+                                        <p>{{r.address1}}&nbsp;{{r.address2}},&nbsp;{{r.city}}</p>
+                                        <p class="descriptionText">{{r.shortdescription}}</p>
+                                    </div>
+                                    <div class="booknowBtn">
+                                        <label class="buttonText poppins_regular">
+                                            <img class="wineImg mr-1" src="/assets/images/dashboard/Icon-wine.png" alt="line"
+                                               >
+                                            {{r.food_types}}</label> <label class="poppins_regular booknow"
+                                            [routerLink]="'/restaurant/' + r.slug"> Book Now</label>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+
+                <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" *ngFor="let r of rests">
+
+                    <a class="restaurant-item__horizontal row"
+                        [routerLink]="'/rest/' + r.title + '?'+ r.restaurant_id + '&d=' + searchVar.date + '&t='+ searchVar.time+'&s='+searchVar.seatNum">
+                        <div class="col-sm-4">
+                            <div class="strip">
+                                <figure class="sm-figure">
+                                    <img src="{{r.main_logo?r.main_logo:'/assets/images/no-img.png'}}"
+                                        data-src="img/location_4.jpg" class="owl-lazy" alt="" style="opacity: 1;">
+                                </figure>
+                                <span class="bottom-ribbon sm-bottom-ribbon">
+                                    <i class="fa fa-star"></i>
+                                    {{r.sum_mark?r.sum_mark.toFixed(2):0}}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-8 p-2">
+                            <h4>{{r.title}}</h4>
+                            <span><i class="fa fa-money"></i>&nbsp;Average
+                                Price&nbsp;<span>&pound;{{r.average_price}}</span></span><br>
+                            <span><i
+                                    class="fa fa-map-marker"></i>&nbsp;<span>{{r.address1}}&nbsp;{{r.address2}}&nbsp;{{r.city}}</span></span><br>
+                            <span><i
+                                    class="fa fa-road"></i>&nbsp;<span>{{r.distance_in_km.toFixed(2)}}&nbsp;Km</span></span><br>
+                            <span><i class="fa fa-heart"></i>&nbsp;{{r.count_review}} reviews</span>
+                        </div>
+                    </a>
+                </div> -->
+            </div>
+            <div class="pull-right">
+                <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                    (page)="changePage($event)">
+                </mat-paginator>
+            </div>
+
+            <!-- <div class="pull-right">
+                <mat-paginator [length]="length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+                    (page)="changePage($event)">
+                </mat-paginator>
+            </div> -->
+
+        </div>
+
+
+    </section>
+
+
+</div>

@@ -1,0 +1,80 @@
+.filter {
+  margin   : 10px 0px;
+  font-size: 14px;
+}
+
+.filter select {
+  padding  : 5px;
+  font-size: 14px;
+}
+
+.timefilter {
+  display         : inline-block;
+  background-color: #6aa84f;
+  color           : white;
+  border-radius   : 5px;
+  padding         : 5px 10px;
+  margin-left     : 10px;
+}
+
+.timefilter a.remove {
+  display        : inline-block;
+  margin-left    : 15px;
+  font-weight    : bold;
+  text-decoration: none;
+  color          : white;
+}
+
+.calendar-section {
+  display       : flex;
+  flex-direction: row;
+
+  .navigator {
+    width: 190px;
+  }
+
+  .content {
+    flex-grow: 1;
+  }
+}
+
+.booking-status {
+  padding      : 3px 10px;
+  margin       : 2px;
+  border-radius: 4px;
+  color        : white;
+  font-weight  : 700;
+}
+
+.booking_status-pending {
+  background-color: #ef7b7b;
+}
+
+.booking_status-approved {
+  background-color: #5b59ff;
+}
+
+.booking_status-closed {
+  background-color: gray;
+}
+.filterRow{
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+}
+.spinner{
+  height: 10px;
+  width: 10px;
+  border: 2px solid;
+  border-color: white transparent white transparent;
+  border-radius: 50%;
+  animation: spin 1.4s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

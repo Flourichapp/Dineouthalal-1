@@ -1,0 +1,38 @@
+a:focus, input:focus{
+    border: 1px solid black;
+}
+textarea{
+    height: 150px;
+    width: 100%;
+}
+input{
+    width: 100%;
+}
+td{
+    overflow-wrap: anywhere;
+
+}
+.keywords-form-field {
+    width: 100%;
+  }
+  
+  .keywords-chip-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  
+  .keyword-chip {
+    margin-right: 10px;
+    margin-bottom: 10px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    padding: 4px 8px;
+    font-size: 14px;
+  }
+  hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 2px solid rgb(0 0 0 / 10%);
+}

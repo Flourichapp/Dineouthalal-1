@@ -1,0 +1,63 @@
+<div *ngIf="loading">
+    <div class="loading-spinner-overlay">
+        <!-- <i class="fa fa-spinner fa-spin" aria-hidden="true"></i> -->
+        <span class="spinner-border"></span>
+    </div>
+</div>
+<div class="p-5">
+    <form [formGroup]="dataForm">
+        <div class="row">
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label for="title">Address</label>
+                    <input type="text" formControlName="address" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.address.errors }" placeholder="Address">
+                    <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                        <div *ngIf="f.address.errors.required">Address is Required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title">City</label>
+                    <input type="text" formControlName="city" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.city.errors }" placeholder="City">
+                    <div *ngIf="submitted && f.city.errors" class="invalid-feedback">
+                        <div *ngIf="f.city.errors.required">City is Required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title">Postal Code</label>
+                    <input type="text" formControlName="postal_code" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.postal_code.errors }" placeholder="Postal Code">
+                    <div *ngIf="submitted && f.postal_code.errors" class="invalid-feedback">
+                        <div *ngIf="f.postal_code.errors.required">Postal Code is Required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6">
+                <div class="form-group">
+                    <label for="title">Facebook</label>
+                    <input type="text" formControlName="facebook" class="form-control" placeholder="https://www.facebook.com/">
+                </div>
+                <div class="form-group">
+                    <label for="title">Twitter</label>
+                    <input type="text" formControlName="twitter" class="form-control" placeholder="https://www.twitter.com/">
+                </div>
+                <div class="form-group">
+                    <label for="title">Instagram</label>
+                    <input type="text" formControlName="instagram" class="form-control" placeholder="https://instagram.com/">
+                </div>
+                <div class="form-group">
+                    <label for="title">UK Pinterest</label>
+                    <input type="text" formControlName="pinterest" class="form-control" placeholder="https://uk.pinterest.com/">
+                </div>
+                <div class="form-group">
+                    <label for="title">Youtube</label>
+                    <input type="text" formControlName="youtube" class="form-control" placeholder="https://www.youtube.com/">
+                </div>
+            </div>
+        </div>
+        <div class="p-5">
+            <button [disabled]="loading" class="float-right btn btn-primary rounded-pill" (click)="onSubmit()" type="button">Save</button>
+        </div>
+    </form>
+</div>

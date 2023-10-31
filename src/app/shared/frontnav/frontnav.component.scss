@@ -1,0 +1,289 @@
+.w-150px{
+    width: 150px !important;
+}
+.restaurantSignupBtn{
+    background: #EF2F24;
+    border: navajowhite;
+    margin: 0px 0px 0px 10px;
+    padding: 0px 20px !important;
+    border-radius: 40px;
+    font-size: 12px !important;
+    height: 40px;
+    color: white !important;
+    font-family: 'Poppins';
+    font-weight: 600;
+}
+.homeheader{
+    background-color: transparent !important;
+    position: absolute;
+    z-index: 1;
+    color: white;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    margin-top: 15px;
+    padding: 0.5rem 2rem;
+
+
+}
+.homebar{
+    font-size: 28px;
+    color: white;
+
+}
+.bar{
+    font-size: 28px;
+    color: black;
+
+}
+.navbar-light .navbar-toggler{
+    border: none;
+    margin-right: 50px;
+
+}
+
+.header{
+    background-color: white !important;
+    color: black;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    margin-top: 15px;
+    padding: 0.5rem 2rem;
+
+
+}
+.navbar-light .navbar-nav .nav-link {
+    color: #000;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+}
+.navbar-light .navbar-nav .home-nav-link {
+    color: white;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    padding-right: 0.5rem;
+    padding-left: 0.5rem;
+}
+.navbar-light .navbar-nav .nav-link:hover {
+
+    cursor: pointer;
+    opacity: 0.6;
+}
+.home-nav-link {
+    color: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    display: block;
+    padding: 0.5rem 1rem;
+
+}
+.home-nav-link:hover {
+
+    cursor: pointer;
+    opacity: 0.6;
+}
+.nav-link {
+    color: #000;
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+
+}
+.nav-link:hover {
+
+    cursor: pointer;
+    opacity: 0.6;
+}
+
+
+.navbar-nav {
+    display: flex;
+    flex-direction: row;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    align-items: center;
+    justify-content: end;
+    /* position: absolute; */
+    width: 137%;
+}
+.navbar-nav1 {
+    display: flex;
+    flex-direction: row;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+    align-items: center;
+    justify-content: end;
+    width: 100%;
+    left: 0px;
+}
+.nav-item1{
+    flex-direction: row;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+.nav-item{
+    flex-direction: row;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+.signupBtn{
+    background: transparent;
+    border: 1px solid;
+    border-radius: 44px;
+    padding-left: 40px;
+    padding-right: 40px;
+    font-size: 12px;
+    height: 40px;
+
+}
+.plusicon{
+    margin: 0px;
+    font-size: 17px;
+    position: absolute;
+    margin-left: -17px;
+    margin-top: -5px;
+}
+.mobileview{
+    display: none;
+}
+.dropdown .dropdown-toggle:after {
+    border-top: 0;
+    border-right: 0;
+    border-left: 0;
+    border-bottom: 0;
+    font: normal normal normal 24px/1 "Material Design Icons";
+    content: "\f140";
+    width: auto;
+    height: auto;
+    vertical-align: baseline;
+    font-size: .75rem;
+    color: white;
+}
+.home_user_name{
+    color: white;
+}
+.user_name{
+    color: #000;
+}
+@media(max-width:992px){
+    .header{
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 0px;
+        padding: 0;
+    }
+    .navbar-nav{
+        display: block;
+        width: 100%;
+    }
+    .nav-item{
+        display: block;
+        border-bottom: 1px solid #000;
+        padding: 6px 0px;
+    }
+    .mobileview{
+        display: inherit;
+    }
+    .navbar-nav1{
+        display: none;
+    }
+    .navbar-light .navbar-nav .nav-link{
+        padding-left: 15px;
+
+    }
+    .homeheader {
+      
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 0px;
+        padding: 0px;
+    }
+    .navbar-collapse{
+        background-color: white;
+    }
+    .navbar-light .navbar-nav .home-nav-link{
+        color: black;
+        /* margin: 40px 0px; */
+        padding: 0.5rem 1rem;
+        display: block;
+      
+    }
+    .mobileToggler{
+        width: 33%;
+        text-align: left;
+        margin: 0px !important;
+
+    }
+    .mobileLogo{
+        width: 33%;
+        text-align: center;
+        margin: 0px  !important;
+    }
+    .customerName{
+        text-align: right;
+        margin-left: auto;
+        padding: 0.25rem 0.75rem;
+    }
+    .siderbarContainer{
+        width: 33%;
+    }
+    .sidebar {
+        position: fixed;
+    top: 0;
+    right: 0;
+    width: 200px;
+    height: 100vh;
+    background-color: white;
+    transition: transform 0.3s ease-in-out;
+    transform: translateX(200px);
+    color: black;
+    padding: 20px 15px;
+    z-index: 2;
+    .crossBtn{
+        
+    font-size: 20px;
+    font-family: 'Poppins';
+    font-weight: 900;
+
+    }
+    P{
+        font-size: 16px;
+        font-weight: 500;
+        font-family: poppins;
+
+    }
+    label{
+        color: #e94941;
+        font-size: 14px;
+    }
+    .signoutText{
+        color: #EF2F24;
+        font-size: 13px;
+    }
+    a{
+        color: #a9a1a1;
+        cursor: pointer;
+    }
+      }
+      
+      .sidebar.open {
+        transform: translateX(0);
+      }
+}

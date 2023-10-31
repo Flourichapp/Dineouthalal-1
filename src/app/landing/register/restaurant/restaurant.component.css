@@ -1,0 +1,43 @@
+.auth form .form-group label {
+  font-size: 1rem;
+  color: #161616;
+  font-family: 'Poppins';
+  font-weight: 400;
+  line-height: 1;
+  vertical-align: top;
+  margin-bottom: 0.5rem;
+}
+
+.form-check .form-check-label input[type="checkbox"] + .input-helper:before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  border-radius: 2px;
+  border: solid #707070;
+  border-width: 1px;
+  -webkit-transition: all;
+  transition: all;
+  -webkit-transition-duration: 0s;
+          transition-duration: 0s;
+  -webkit-transition-duration: 250ms;
+          transition-duration: 250ms;
+  margin-top: 2px;
+}
+
+.termsandConditon {
+  color: #EF2F24;
+}
+
+.signupBtn {
+  background: #EF2F24;
+  width: 80%;
+  margin: auto;
+  border-radius: 41px;
+  border: none;
+  font-size: 15px;
+  font-family: 'Poppins';
+  font-weight: 600;
+  height: 57px;
+  color: white;
+}
+/*# sourceMappingURL=restaurant.component.css.map */

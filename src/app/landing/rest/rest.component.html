@@ -1,0 +1,391 @@
+<div class="">
+    <div class="restThumbnail">
+        <!-- <img src="{{imageURL}}/{{rest.thumbnail}}" alt=""> -->
+        <img src="{{imageURL}}/{{thumbnail}}" alt="">
+
+        <!-- <div class="slogan">{{rest.title}}</div> -->
+    </div>
+    <div class="container restContainer">
+        <div class="row content">
+
+            <div class="col-lg-8 col-xs-12" #restTab>
+
+                <mat-card class="bookingCard">
+                    <mat-card-content>
+                        <div class="text-center">
+                            <h1 class="poppins_regular">{{title}}</h1>
+                            <p class="mb-0">
+                                <img src="/assets/images/restaurants/Icon ionic-md-wine.png">
+                                <label class="foodCategory">{{food_types }}</label>
+                                <label> {{rest.cuisine}} </label>
+                                <label> cuisine, price starting around: </label>
+                                <label> {{rest.average_price}}</label>
+
+                            </p>
+
+                        </div>
+
+                        <mat-tab-group mat-align-tabs="start">
+                            <mat-tab label="About">
+                                <!-- overview part -->
+                                <section class="inner-tab">
+                                    <div class="aboutSection">
+                                        <div>
+                                            <label *ngIf="rest.review_count"
+                                                class="sum"><span>{{avgRating?avgRating.toFixed(2):0.00}}</span></label>
+                                            <!-- <label>16</label> <label>Ratings</label> -->
+                                        </div>
+                                        <div><label *ngIf="rest.review_count"><img
+                                                    src="/assets/images/restaurants/Icon awesome-comment-alt.png"></label><label>
+                                                {{rest.review_count ? rest.review_count : 0}}
+                                            </label><label> Reviews</label></div>
+                                        <div><label><img
+                                                    src="/assets/images/restaurants/Icon material-location-on.png"></label><label><span>{{rest.address1}}&nbsp;{{rest.address2}}&nbsp;{{rest.city}}</span>
+                                            </label></div>
+
+                                    </div>
+
+                                    <div class="rest-desc" [innerHtml]="rest.fulldescription | safeHtmlPipe"></div>
+                                    <div class="mt-3">
+                                        <div class="galleryContainer" *ngIf="images">
+                                            <div class="box{{i+1}}" *ngFor="let r of images|slice:0:5 let i = index">
+                                                <img class="w-100 h-100" src="{{r?.image}}" (click)="openModal(content, i)"
+                                                >
+
+                                            </div>
+
+                                        </div>
+                                        <!-- <div class="col-md-12" *ngIf="images">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <img class="w-100" src="{{images[0]?.image}}">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <img class="w-100 galryImg" src="{{images[1]?.image}}">
+                                                            <img class="w-100" src="{{images[2]?.image}}">
+
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <img class="w-100 galryImg" src="{{images[3]?.image}}">
+                                                            <img class="w-100" src="{{images[4]?.image}}">
+
+                                                        </div>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+
+
+                                    <div class="mt-4" *ngIf="rest?.lat">
+                                        <agm-map #AgmMap [(latitude)]="rest.lat" [(longitude)]="rest.lng" [zoom]="17"
+                                            [zoomControl]="true" [disableDefaultUI]="true" [fullscreenControl]='true'
+                                            [mapTypeControl]='true'>
+
+                                            <agm-marker [(latitude)]="rest.lat" [(longitude)]="rest.lng"
+                                                [markerDraggable]="false" [iconUrl]="'/assets/images/marker.png'">
+                                            </agm-marker>
+                                        </agm-map>
+                                    </div>
+                                    <!-- (dragEnd)='markerDragEnd($event)'> -->
+
+
+
+                                </section>
+
+                            </mat-tab>
+                            <mat-tab label="Menu">
+                                <!-- menu part -->
+                                <section class="inner-tab">
+
+                                    <div *ngIf="filePath">
+                                        <!-- <p>Open a PDF file <a target="_blank" href="{{imageURL}}/{{filePath}}">example</a>.
+                                        </p>
+                                    -->
+                                    <div class="text-center mt-4">
+                                        <a target="_blank" href="{{fullFilePath}}"><button class="btn btn-primary">View Menu</button></a>.
+
+                                    </div>
+
+                                        <!-- <pdf-viewer
+                                            [src]="fullFilePath"
+                                            [show-all]="true"></pdf-viewer> -->
+                                    </div>
+                           <div *ngIf="!filePath">
+                            <mat-card class="example-card m-2" *ngFor="let m of menus">
+
+                                <mat-card-content>
+                                    <div class="row">
+                                        <div class="col-sm-10">
+                                            <h5>{{m.name}}</h5>
+                                            <p>{{m.description}}</p>
+                                            <h5>&pound; {{m.price}}</h5>
+                                        </div>
+                                        <img *ngIf="m.thumbnail" src="{{imageURL}}/{{m.thumbnail}}" alt="menu"
+                                            class="menu-img col-sm-2">
+                                    </div>
+
+                                </mat-card-content>
+                            </mat-card>
+                           </div>
+
+                                 
+
+                                </section>
+                            </mat-tab>
+                            <mat-tab label="Reviews">
+                                <!-- review part -->
+                                <section class="inner-tab">
+
+                                    <mat-card class="review-card" *ngFor="let r of reviews">
+                                        <mat-card-header>
+                                            <mat-card-title>
+                                                <i class="fa fa-user user-avatar"></i>
+                                                <span>&nbsp;
+                                                    <!-- {{r.first_name}}.{{r.last_name.substring(0,1)}} -->
+                                                </span>
+                                                <span style="font-size: 12px;">({{r.customer_reviews}} times
+                                                    Reviewed)</span>
+                                                <div class="date-star">
+                                                    <i class="fa fa-calendar"></i>&nbsp;{{r.created_at | date }}&nbsp;
+                                                    <i class="fa fa-star"></i>&nbsp;{{r.mark}}&nbsp;
+                                                    <span>Food&nbsp;{{r.food_mark}},&nbsp;Service&nbsp;{{r.service_mark}},&nbsp;Ambience&nbsp;{{r.ambience_mark}}</span>
+                                                </div>
+                                            </mat-card-title>
+                                        </mat-card-header>
+                                        <mat-card-content class="d-flex">
+                                            <p class="p-2 review-desc">{{r.content}}
+                                            </p>
+                                        </mat-card-content>
+                                        <mat-card-actions>
+                                        </mat-card-actions>
+                                    </mat-card>
+                                </section>
+                            </mat-tab>
+                            <mat-tab label="Gallery">
+                                <!-- overview part -->
+                                <section class="inner-tab">
+                                    <div class="mt-3 GallerySlider">
+                                        <ng-image-slider [images]="images"
+                                            [imageSize]="{width: '200', height: 200, space: 15}" [animationSpeed]="0.1">
+                                        </ng-image-slider>
+                                    </div>
+                                </section>
+
+                            </mat-tab>
+                        </mat-tab-group>
+                    </mat-card-content>
+                </mat-card>
+
+            </div>
+            <div class="col-lg-4 col-xs-12" #bookingTab [style]="">
+
+                <mat-card class="bookingCard" *ngIf="showTable">
+                    <mat-card-content>
+                        <div *ngIf="success" class="alert alert-success">{{success}}</div>
+                        <div class="text-center">
+                            <h1 class="poppins_regular">Book a <label class="poppins_extrabold">table</label></h1>
+                            <p class="bookingText"><label class="poppins_bold openText">Open </label><label
+                                    class="poppins_regular"> ⋅ Closes {{rest.close_time}} </label></p>
+                        </div>
+                        <hr>
+
+
+                        <div *ngIf="!bookingStarted">
+                            <div class="bookingContainer">
+                                <div class="row ">
+
+
+
+                                    <div class="col-12 mt-3">
+                                        <h2 class="poppins_regular">No. of guests </h2>
+                                        <mat-select [(ngModel)]="bookvar.seat" (selectionChange)="changeVariable()">
+                                            <mat-option value="1">1</mat-option>
+                                            <mat-option value="2">2</mat-option>
+                                            <mat-option value="3">3</mat-option>
+                                            <mat-option value="4">4</mat-option>
+                                            <mat-option value="5">5</mat-option>
+                                            <mat-option value="6">6</mat-option>
+                                            <mat-option value="7">7</mat-option>
+                                            <mat-option value="8">8</mat-option>
+                                            <mat-option value="9">9</mat-option>
+                                            <mat-option value="10">10</mat-option>
+                                            <mat-option value="11">more</mat-option>
+                                        </mat-select>
+                                    </div>
+                                    <!-- <div class="col-6 mt-3">
+                                        <h2 class="poppins_regular">Seats </h2>
+
+                                        <mat-select [(ngModel)]="bookvar.seatopt" placeholder="select"
+                                            (selectionChange)="changeRadioVariable($event)">
+                                            <mat-option *ngFor="let o of seatOptions"
+                                                value="{{o.value}}">{{o.name}}</mat-option>
+                                        </mat-select>
+                                    </div> -->
+
+                                    <div class="col-6 mt-3">
+                                        <h2 class="poppins_regular">Date </h2>
+
+                                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                        <mat-datepicker #picker></mat-datepicker>
+                                        <input matInput [matDatepicker]="picker" type="text" class="border-0 dateInput"
+                                            placeholder="Type/Click Icon" (click)="picker.open()" (keydown)="false"
+                                            [(ngModel)]="bookvar.date" (dateChange)="changeVariable()" [min]="_today">
+                                        <div class="mat-select-arrow-wrapper arrow">
+                                            <div class="mat-select-arrow"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6 mt-3">
+                                        <h2 class="poppins_regular">Time </h2>
+
+                                        <mat-select [(ngModel)]="bookvar.time" (selectionChange)="changeVariable()">
+                                            <mat-option *ngFor="let v of pickTimesConst"
+                                                value="{{v}}">{{v}}</mat-option>
+                                        </mat-select>
+                                    </div>
+
+                                </div>
+
+
+                                <!-- <div class="pack">
+
+                                <mat-radio-group [(ngModel)]="bookvar.seatopt">
+                                    <mat-radio-button 
+                                    class="example-margin"
+                                     color="primary" 
+                                     [value]="o.value"
+                                        *ngFor="let o of seatOptions" 
+                                        [disabled]="o.disabled"
+                                        (change)="changeRadioVariable($event)">{{o.name}}</mat-radio-button>
+                                </mat-radio-group>
+                            </div> -->
+                            </div>
+
+                            <div class="text-center">
+                                <span class="spinner-border" *ngIf="isSearching"></span>
+                            </div>
+                            <!-- <div class="alert alert-danger mt-3" *ngIf="!enableBooking">
+                                <span>Sorry, there's no matched table, please try again with other condtions.
+                                    thanks</span>
+                            </div> -->
+                            <div class="mt-3 text-center">
+                                <!-- <button mat-raised-button color="primary" (click)="book()" class="w-100">Book</button> -->
+                                <button (click)="book()" class="bookNowBtn">Book
+                                    Now</button>
+                            </div>
+
+                        </div>
+
+                        <div *ngIf="bookingStarted">
+
+                            <form form [formGroup]="bookingForm" class="pt-3">
+                                <div class="mb-2">
+                                    <mat-radio-group formControlName="customerCategory" *ngIf="!isUser">
+                                        <mat-radio-button class="ml-2" color="primary" value="ever"
+                                            [disabled]="onSubmitting" (change)="changeCustomerCategory($event)">Log In
+                                            </mat-radio-button>
+                                        <mat-radio-button class="ml-2" color="primary" value="first"
+                                            [disabled]="onSubmitting" (change)="changeCustomerCategory($event)">New User</mat-radio-button>
+                                    </mat-radio-group>
+                                </div>
+                                <div class="form-group" *ngIf="f.customerCategory.value == 'first'">
+                                    <input type="text" formControlName="firstname" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.firstname.errors }"
+                                        placeholder="First Name" />
+                                    <div *ngIf="submitted && f.firstname.errors" class="invalid-feedback">
+                                        <div *ngIf="f.firstname.errors.required">First Name Required</div>
+                                    </div>
+                                </div>
+                                <div class="form-group" *ngIf="f.customerCategory.value == 'first'">
+                                    <input type="text" formControlName="lastname" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.lastname.errors }"
+                                        placeholder="Last Name" />
+                                    <div *ngIf="submitted && f.lastname.errors" class="invalid-feedback">
+                                        <div *ngIf="f.lastname.errors.required">Last Name Required</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" formControlName="email" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
+                                        placeholder="Email Address" />
+                                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                        <div *ngIf="f.email.errors.required">Email Required</div>
+                                        <div *ngIf="f.email.errors.email">Email is Invalid</div>
+                                    </div>
+                                </div>
+                                <div class="form-group" *ngIf="f.customerCategory.value == 'first'">
+                                    This password will be used for your account
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" formControlName="password" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }"
+                                        placeholder="Password" />
+                                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                        <div *ngIf="f.password.errors.required">Password is required</div>
+                                        <div *ngIf="f.password.errors.minlength">Password must be equal or greater than
+                                            6</div>
+                                    </div>
+                                </div>
+                                <div class="form-group" *ngIf="f.customerCategory.value == 'first'">
+                                    <input type="password" formControlName="confirm_password" class="form-control"
+                                        [ngClass]="{ 'is-invalid': submitted && f.confirm_password.errors }"
+                                        placeholder="Confirm Password" />
+                                    <div *ngIf="submitted && f.confirm_password.errors" class="invalid-feedback">
+                                        <div *ngIf="f.confirm_password.errors.required">Confirm Password is required
+                                        </div>
+                                        <div *ngIf="f.confirm_password.errors.notSame">Password and Confirm Password
+                                            must be match.</div>
+                                    </div>
+                                </div>
+                                <div class="mt-3 text-center">
+                                    <button type="button" class="btn btn-outline-primary" (click)="onSubmit()"
+                                        [disabled]="onSubmitting">
+                                        <span *ngIf="onSubmitting" class="spinner-border spinner-border-sm mr-1"></span>
+                                        Submit
+                                    </button>
+                                    <button type="button" class="btn btn-outline-danger"
+                                        (click)="bookingStarted = !bookingStarted"
+                                        [disabled]="onSubmitting">Back</button>
+                                </div>
+                                <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+                            </form>
+                        </div>
+                    </mat-card-content>
+                </mat-card>
+
+                <div class="foodcategory">
+                    <div class="foodCategoryBtn" *ngFor="let f of food_types">
+                        <p>{{f}} </p>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<ng-template #content let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Image Modal</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <img class="w-100 h-100" src="{{ images[currentIndex]?.image }}">
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary" (click)="previous()" *ngIf="currentIndex > 0">
+        Previous
+      </button>
+      <button type="button" class="btn btn-primary" (click)="next()" *ngIf="currentIndex < images.length - 1">
+        Next
+      </button>
+    </div>
+  </ng-template>

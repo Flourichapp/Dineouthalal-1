@@ -1,0 +1,84 @@
+<div class="row w-100 mx-0">
+    <div class="col-lg-12 mx-auto bg-light p-3">
+        <h3>All Subscribers
+        </h3>
+        <div class="text-right">
+            <input type="submit" [value]="btnText" (click)="downloadFile(filterUser)" />
+
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>first Name</th>
+                    <th>last Name</th>
+                    <th>email</th>
+                    <th>status</th>
+                    <th>created at</th>
+                    <th>Type</th>
+                    <th>actions</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let r of pagiDate; let i = index;">
+                    <td><span>{{i + 1}}</span></td>
+                    <td>{{r.first_name}}</td>
+                    <td>{{r.last_name}}</td>
+                    <td>{{r.email}}</td>
+                    <td><mat-slide-toggle color="primary" [checked]="r.status=='enable'"
+                            (change)="changeStatus($event, r.type, r.id)"></mat-slide-toggle></td>
+                    <td>{{r.created_at | date:'short'}}</td>
+                    <td>{{r.type}}</td>
+                    <!-- <td class="text-center">
+                        <div class="accordion" id="accordionExample">
+                            <div class="">
+                                <div class=" collapsed" data-toggle="collapse" data-target="#collapse{{i}}" aria-expanded="false"
+                                    aria-controls="collapse{{i}}">
+                                    <span class="title"><i class="fa fa-ellipsis-v"></i>
+                                    </span>
+                               
+                                </div>
+                                <div id="collapse{{i}}" class="collapse" data-parent="#accordionExample">
+                                    <div class="card-body moreDiv">
+                                        <p class="m-0 pointered" (click)="openDeleteModal(deleteModal, r)">Delete</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                      
+
+                    </td> -->
+                    <td class="text-center">
+                        <span class="pointered" (click)="openDeleteModal(deleteModal, r)">
+                            <i class="mdi mdi-delete icon"></i>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <mat-paginator (page)="handlePageEvent($event)" [length]="all_total" [pageSize]="params.all_pageSize"
+            [pageSizeOptions]="[5, 10, 25, 100]">
+        </mat-paginator>
+    </div>
+</div>
+<ng-template #deleteModal let-modal>
+    <div class="modal-header">
+        <h3>Remove User</h3>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body w-100 mx-auto">
+        <div class="text-center">
+            <h2 class="mb-4">Do you want to remove <label>{{userName}}</label>  from the system ?</h2>
+            <p>Do you realy want to cancel these User? This process cannot be undone</p>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" [disabled]="isLoading" class="btn btn-light" (click)="modal.close('Close click')">No</button>
+        <button type="button" [disabled]="isLoading" class="btn btn-light closeBtn" (click)="deleteUser()"><div *ngIf="isLoading" class="spinner"></div><div *ngIf="!isLoading">Yes</div></button>
+    </div>
+</ng-template>
